@@ -1,0 +1,17 @@
+
+# intellij
+*.iml
+.idea/
+
+# java
+target/
+
+# app
+logs/
+
+# js
+client/node_modules
+npm-debug.log
+
+# git mirror
+git_mirror/
