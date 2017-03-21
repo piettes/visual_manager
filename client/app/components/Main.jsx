@@ -3,15 +3,23 @@ import * as PIXI from "pixi.js";
 
 const FACTOR = 2;
 const PIXEL_SIZE = 1 * FACTOR;
-const LED_PER_METER = 30 / FACTOR;
-const LINE_SIZE = 400 * FACTOR;
-const L_LED_NUMBER = LINE_SIZE * LED_PER_METER / 100;
+const LED_PER_METER_1 = 30;
+const LED_PER_METER_2 = 60;
+const L_LED_NUMBER_1 = 120;
+const L_LED_NUMBER_2 = 100;
 const LINE_SPACE = 65 * FACTOR;
 const ROOM_LENGTH = 520 * FACTOR;
 const ROOM_HEIGHT = 390 * FACTOR;
-const MARGIN_LEFT = 60 * FACTOR;
-const MARGIN_TOP = 60 * FACTOR;
+const MARGIN_LEFT = 10 * FACTOR;
+const MARGIN_TOP = 67 * FACTOR;
 const LED_OFF = 0xFFFFFF;
+
+// TODO HSV to hexa
+// TODO param for ax
+// TODO random rain
+// TODO strobo
+// TODO
+// TODO
 
 class Main extends React.Component {
 
@@ -25,64 +33,90 @@ class Main extends React.Component {
     super(props);
 
     this.initDisplay();
-    this.initDraw();
 
     this.initDraw = this.initDraw.bind(this);
     this.ax = this.ax.bind(this);
-    this.clearGrid = this.clearGrid.bind(this);
     this.renderFrame = this.renderFrame.bind(this);
-    this.drawPixel = this.drawPixel.bind(this);
+    this.clicked = this.clicked.bind(this);
   }
 
   initDisplay() {
     let l1 = [], l2 = [], l3 = [], l4 = [], l5 = [];
-    this.roof = [];
-    this.roof.push(l1);
-    this.roof.push(l2);
-    this.roof.push(l3);
-    this.roof.push(l4);
-    this.roof.push(l5);
-    this.roof.forEach(l => {
-      for (let i = 0; i < L_LED_NUMBER; i++) {
+    this.roof = [l1, l2, l3, l4, l5];
+
+    [l2, l3, l4].forEach(l => {
+      for (let i = 0; i < L_LED_NUMBER_1; i++) {
+        l.push(LED_OFF);
+      }
+    });
+
+    [l1, l5].forEach(l => {
+      for (let i = 0; i < L_LED_NUMBER_1 + L_LED_NUMBER_2; i++) {
         l.push(LED_OFF);
       }
     });
 
     this.nextFrameList = [];
     this.lastFrameList = [];
+
+    this.ticker = 130;
+  }
+
+  componentDidMount() {
+    this.initDraw();
   }
 
   initDraw() {
-    var app = new PIXI.Application(ROOM_LENGTH, ROOM_HEIGHT, {antialias: true});
-    document.body.appendChild(app.view);
+    let app = new PIXI.Application(ROOM_LENGTH + 300, ROOM_HEIGHT, {antialias: true});
+    this.refs.myCanvas.appendChild(app.view);
 
-    var graphics = new PIXI.Graphics();
+    let graphics = new PIXI.Graphics();
 
     app.stage.addChild(graphics);
     this.drawGrid(graphics);
 
+    graphics.lineStyle(1, 0xffd900);
+    graphics.moveTo(MARGIN_LEFT + L_LED_NUMBER_1 * (100 * FACTOR / LED_PER_METER_1), 50);
+    graphics.lineTo(MARGIN_LEFT + L_LED_NUMBER_1 * (100 * FACTOR / LED_PER_METER_1), ROOM_HEIGHT);
+    graphics.lineStyle(0);
+
     let accDelta = 0;
     let _that = this;
-    let tick = 0;
     let theta = 0;
+    let lastTick = this.ticker;
     app.ticker.add(function (delta) {
+      // if (lastTick !== _that.ticker) {
+      //   lastTick = _that.ticker;
+      //   _that.ax(lastTick);
+      //   _that.renderFrame(graphics);
+      // }
       accDelta += delta;
-      if (accDelta > 10) {
+      if (accDelta > 2) {
         accDelta = 0;
-        theta += 5;
+        _that.ax(theta);
+        _that.renderFrame(graphics);
+        theta += 1;
         if (theta > 360) {
           theta = 0;
         }
-        _that.ax(theta);
-        _that.renderFrame(graphics);
       }
     });
   }
 
+  isInFrame(x, y) {
+    if (0 < y && y < 4) {
+      return -1 < x  &&  x < L_LED_NUMBER_1 * 2 && x % 2 == 0;
+    } else if (y === 0 || y === 4) {
+      if (y === 4) {
+      }
+      return -1 < x && x < L_LED_NUMBER_1 * 2 && x % 2 == 0 || L_LED_NUMBER_1 * 2 - 1 < x  && x < L_LED_NUMBER_1 * 2 + L_LED_NUMBER_2;
+    }
+  }
+
   renderFrame(graphics) {
     this.nextFrameMap = new Map();
+    this.nextFrameList = this.nextFrameList.filter(p => this.isInFrame(p.x, p.y))
     this.nextFrameList.forEach(p => {
-      // this.roof[p.y][p.x] = p.c;
       this.drawPixel(graphics, p.x, p.y, p.c);
       this.nextFrameMap.set(p.x * 10 + p.y, p.c);
     });
@@ -96,34 +130,7 @@ class Main extends React.Component {
     this.nextFrameList = [];
   }
 
-  ax(theta) {
-    if (theta === 0 || theta === 180) {
-      for (let i = 0; i < this.roof[2].length; i++) {
-        this.nextFrameList.push({x : i, y: 2, c: 0xff0000});
-      }
-      return;
-    }
-    let ys = [0, 1, 2, 3, 4];
-    ys.forEach(y => {
-      // x = (y / sin theta) * cos theta = y / tan theta
-      let x = Math.round((y - 2) / Math.tan(theta / 180 * Math.PI) * 30) + L_LED_NUMBER / 2;
-      if (x > -1 && x < L_LED_NUMBER + 1) {
-        this.nextFrameList.push({x : x, y: y, c: 0xff0000});
-        if (x < L_LED_NUMBER) {
-          this.nextFrameList.push({x : x + 1, y: y, c: 0x00ff00});
-          if (x < L_LED_NUMBER - 1) {
-            this.nextFrameList.push({x : x + 2, y: y, c: 0x00ff00});
-          }
-        }
-        if (x > -2) {
-          this.nextFrameList.push({x : x - 1, y: y, c: 0x00ff00});
-          if (x > -3) {
-            this.nextFrameList.push({x : x - 2, y: y, c: 0x00ff00});
-          }
-        }
-      }
-    });
-  }
+
 
   // circle() {
   //   let angle = 0;
@@ -156,26 +163,77 @@ class Main extends React.Component {
   //   }
   // }
 
+  clicked() {
+    this.ticker++;
+  }
+
+  ax(theta) {
+    if (theta === 0 || theta === 180) {
+      for (let i = 0; i < L_LED_NUMBER_1; i++) {
+        this.nextFrameList.push({x: i * 2, y: 2, c: 0xff0000});
+      }
+      return;
+    }
+
+    let x = Math.round(0.1 / Math.tan(theta / 360 * Math.PI * 2) * 30) + L_LED_NUMBER_1;
+    this.axAddPixels(x, 2);
+    this.axAddPixels(L_LED_NUMBER_1 * 2 - x, 2);
+
+    [0, 1, 3, 4].forEach(y => {
+      // x = (y / sin theta) * cos theta = y / tan theta
+      let x = Math.round((y - 2) / Math.tan(theta / 360 * Math.PI * 2) * 30) + L_LED_NUMBER_1;
+      this.axAddPixels(x, y);
+    });
+  }
+
+  axAddPixels (x, y) {
+    this.nextFrameList.push({x: x, y: y, c: 0xff0000});
+    this.nextFrameList.push({x: x - 1, y: y, c: 0xff0000});
+    this.nextFrameList.push({x: x + 1, y: y, c: 0xff0000});
+    this.nextFrameList.push({x: x + 2, y: y, c: 0xff0000});
+    this.nextFrameList.push({x: x - 2, y: y, c: 0xff0000});
+    this.nextFrameList.push({x: x + 3, y: y, c: 0x00ff00});
+    this.nextFrameList.push({x: x - 3, y: y, c: 0x00ff00});
+    this.nextFrameList.push({x: x + 4, y: y, c: 0x00ff00});
+    this.nextFrameList.push({x: x - 4, y: y, c: 0x00ff00});
+    this.nextFrameList.push({x: x + 5, y: y, c: 0x00ff00});
+    this.nextFrameList.push({x: x - 5, y: y, c: 0x00ff00});
+    this.nextFrameList.push({x: x + 6, y: y, c: 0x00ff00});
+    this.nextFrameList.push({x: x - 6, y: y, c: 0x00ff00});
+  }
+
+
   drawPixel(graphics, x, y, color) {
+
     graphics.beginFill(color);
-    graphics.drawRect(MARGIN_LEFT + x * (100 / LED_PER_METER),
+    let px;
+    if (x < L_LED_NUMBER_1 * 2 - 1) {
+      px = x * 100 * FACTOR / LED_PER_METER_1 / 2;
+    } else {
+      px = (x - L_LED_NUMBER_1) * 100 * FACTOR / LED_PER_METER_2 + L_LED_NUMBER_1 * 100 * FACTOR / LED_PER_METER_1 / 2;
+    }
+
+    graphics.drawRect(MARGIN_LEFT + px,
         ROOM_HEIGHT - (MARGIN_TOP + y * (LINE_SPACE - PIXEL_SIZE)),
         PIXEL_SIZE, PIXEL_SIZE);
     graphics.endFill();
   }
 
   drawGrid(graphics) {
-    let column = 0;
-    this.roof.forEach(l => {
-      let row = 0;
-      l.forEach(p => {
-        graphics.beginFill(p);
-        graphics.drawRect(MARGIN_LEFT + row * (100 / LED_PER_METER),
-            ROOM_HEIGHT - (MARGIN_TOP + column * (LINE_SPACE - PIXEL_SIZE)),
+    this.roof.forEach((l, row) => {
+      l.forEach((p, column) => {
+        graphics.beginFill(LED_OFF);
+        let x = 0;
+        if (column < L_LED_NUMBER_1) {
+          x = column * 100 * FACTOR / LED_PER_METER_1;
+        } else {
+          x = (column - L_LED_NUMBER_1) * 100 * FACTOR / LED_PER_METER_2 + L_LED_NUMBER_1 * 100 * FACTOR
+              / LED_PER_METER_1;
+        }
+        graphics.drawRect(MARGIN_LEFT + x,
+            ROOM_HEIGHT - (MARGIN_TOP + row * (LINE_SPACE - PIXEL_SIZE)),
             PIXEL_SIZE, PIXEL_SIZE);
-        row++;
       });
-      column++;
     });
 
     graphics.endFill();
@@ -184,7 +242,9 @@ class Main extends React.Component {
 
   render() {
     return (
-        <div>
+        <div ref="myCanvas">
+
+          <button onClick={this.clicked}>Step</button>
 
         </div>
     )
