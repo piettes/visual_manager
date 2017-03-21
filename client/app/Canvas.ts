@@ -15,12 +15,14 @@ const LED_OFF = 0xFFFFFF;
 
 class Canvas {
 
-  nextFrameList;
-  lastFrameList;
-  nextFrameMap;
-  view;
-  ticker;
-  manualMode;
+  nextFrameList: any;
+  lastFrameList: any;
+  nextFrameMap: any;
+  view: any;
+  ticker: any;
+  manualMode: any;
+  animation: any;
+  roof: any;
 
   constructor() {
     this.initDisplay();
@@ -37,11 +39,11 @@ class Canvas {
     this.ticker++;
   }
 
-  add(point) {
+  add(point: any) {
     this.nextFrameList.push(point);
   }
 
-  setAnimation(animation) {
+  setAnimation(animation: any) {
     this.animation = animation;
   }
 
@@ -67,7 +69,7 @@ class Canvas {
     let accDelta = 0;
     let _that = this;
     let lastTick = this.ticker;
-    app.ticker.add(function (delta) {
+    app.ticker.add(function (delta: any) {
       if (_that.animation) {
         if (_that.manualMode) {
           lastTick = _that.ticker;
@@ -89,7 +91,7 @@ class Canvas {
   }
 
   initDisplay() {
-    let l1 = [], l2 = [], l3 = [], l4 = [], l5 = [];
+    let l1: Array<any> = [], l2: Array<any> = [], l3: Array<any> = [], l4: Array<any> = [], l5: Array<any> = [];
     this.roof = [l1, l2, l3, l4, l5];
 
     [l2, l3, l4].forEach(l => {
@@ -110,7 +112,7 @@ class Canvas {
     this.ticker = 130;
   }
 
-  isInFrame(x, y) {
+  isInFrame(x: any, y: any) {
     if (0 < y && y < 4) {
       return -1 < x && x < L_LED_NUMBER_1 * 2 && x % 2 == 0;
     } else if (y === 0 || y === 4) {
@@ -121,14 +123,14 @@ class Canvas {
     }
   }
 
-  renderFrame(graphics) {
+  renderFrame(graphics: any) {
     this.nextFrameMap = new Map();
-    this.nextFrameList = this.nextFrameList.filter(p => this.isInFrame(p.x, p.y));
-    this.nextFrameList.forEach(p => {
+    this.nextFrameList = this.nextFrameList.filter((p: any) => this.isInFrame(p.x, p.y));
+    this.nextFrameList.forEach((p: any) => {
       this.drawPixel(graphics, p.x, p.y, p.c);
       this.nextFrameMap.set(p.x * 10 + p.y, p.c);
     });
-    this.lastFrameList.forEach(p => {
+    this.lastFrameList.forEach((p: any) => {
       if (!this.nextFrameMap.get(p.x * 10 + p.y)) {
         this.drawPixel(graphics, p.x, p.y, LED_OFF);
       }
@@ -138,7 +140,7 @@ class Canvas {
     this.nextFrameList = [];
   }
 
-  drawPixel(graphics, x, y, color) {
+  drawPixel(graphics: any, x: any, y: any, color: any) {
 
     graphics.beginFill(color);
     let px;
@@ -154,9 +156,9 @@ class Canvas {
     graphics.endFill();
   }
 
-  drawGrid(graphics) {
-    this.roof.forEach((l, row) => {
-      l.forEach((p, column) => {
+  drawGrid(graphics: any) {
+    this.roof.forEach((l: any, row: any) => {
+      l.forEach((p: any, column: any) => {
         graphics.beginFill(LED_OFF);
         let x = 0;
         if (column < L_LED_NUMBER_1) {

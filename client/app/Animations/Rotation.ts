@@ -3,9 +3,9 @@ import Animation from "./Animation";
 // TODO Remove that
 const L_LED_NUMBER_1 = 120;
 
-class Rotation extends Animation {
+class Rotation implements Animation {
 
-  animate(frame, theta) {
+  animate(frame: any, theta: any): void {
     if (theta === 0 || theta === 180) {
       for (let i = 0; i < L_LED_NUMBER_1; i++) {
         frame.push({x: i * 2, y: 2, c: 0xff0000});
@@ -24,7 +24,7 @@ class Rotation extends Animation {
     });
   }
 
-  axAddPixels(frame, x, y) {
+  axAddPixels(frame: any, x: any, y: any) {
     frame.push({x: x, y: y, c: 0xff0000});
     frame.push({x: x - 1, y: y, c: 0xff0000});
     frame.push({x: x + 1, y: y, c: 0xff0000});
@@ -40,7 +40,7 @@ class Rotation extends Animation {
     frame.push({x: x - 6, y: y, c: 0x00ff00});
   }
 
-  resetTick(tick) {
+  resetTick(tick: any): number {
     if (tick >= 360) {
       return -1;
     }

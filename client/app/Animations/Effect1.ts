@@ -1,8 +1,8 @@
 import Animation from "./Animation";
 
-class Effect1 extends Animation {
+class Effect1 implements Animation {
 
-  animate(frame, tick) {
+  animate(frame: any, tick: any): void {
     if (tick < 200) {
       frame.push({x: tick, y: 0, c: 0xff0000});
       frame.push({x: tick, y: 4, c: 0xff0000});
@@ -10,7 +10,7 @@ class Effect1 extends Animation {
 
   }
 
-  resetTick(tick) {
+  resetTick(tick: any): number {
     if (tick < 300) {
       return -1;
     }

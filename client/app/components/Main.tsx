@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import Canvas from "../Canvas";
 import Rotation from "../Animations/Rotation";
 
@@ -9,11 +9,11 @@ import Rotation from "../Animations/Rotation";
 // TODO
 // TODO
 
-class Main extends React.Component {
+class Main extends React.Component<any, any> {
 
-  canvas;
+  canvas: any;
 
-  constructor(props) {
+  constructor(props: any) {
     super(props);
 
     this.state = {selectedEffect : "Rotation"};
@@ -26,7 +26,8 @@ class Main extends React.Component {
   }
 
   componentDidMount() {
-    this.refs.myCanvas.appendChild(this.canvas.getView());
+    let canvas:any = this.refs.myCanvas;
+    canvas.appendChild(this.canvas.getView());
 
     this.canvas.setAnimation(new Rotation());
   }
@@ -39,7 +40,7 @@ class Main extends React.Component {
     this.canvas.toggleManual();
   }
 
-  changeEffect(event) {
+  changeEffect(event: any) {
     console.log(event.target.value);
     this.setState({selectedEffect: event.target.value});
   }
