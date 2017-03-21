@@ -1,6 +1,6 @@
 import React from "react";
 import Canvas from "../Canvas";
-import Ax from "../Ax";
+import Rotation from "../Animations/Rotation";
 
 // TODO HSV to hexa
 // TODO param for ax
@@ -16,8 +16,11 @@ class Main extends React.Component {
   constructor(props) {
     super(props);
 
+    this.state = {selectedEffect : "Rotation"};
+
     this.clicked = this.clicked.bind(this);
     this.toggleManual = this.toggleManual.bind(this);
+    this.changeEffect = this.changeEffect.bind(this);
 
     this.canvas = new Canvas();
   }
@@ -25,7 +28,7 @@ class Main extends React.Component {
   componentDidMount() {
     this.refs.myCanvas.appendChild(this.canvas.getView());
 
-    this.canvas.setAnimation(new Ax());
+    this.canvas.setAnimation(new Rotation());
   }
 
   clicked() {
@@ -36,10 +39,27 @@ class Main extends React.Component {
     this.canvas.toggleManual();
   }
 
+  changeEffect(event) {
+    console.log(event.target.value);
+    this.setState({selectedEffect: event.target.value});
+  }
+
+  applyChange() {
+
+  }
 
   render() {
+    console.log("rerender");
     return (
         <div>
+
+          <select onChange={this.changeEffect} value={this.state.selectedEffect}>
+            <option value="Effect1">Effect1</option>
+            <option value="Rotation">Rotation</option>
+          </select>
+
+          <button onClick={this.applyChange}>Apply</button>
+          <br/>
 
           <button onClick={this.toggleManual}>Toggle manual</button>
           <button onClick={this.clicked}>Step</button>

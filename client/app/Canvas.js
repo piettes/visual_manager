@@ -82,9 +82,7 @@ class Canvas {
         }
         _that.animation.animate(_that.nextFrameList, _that.ticker);
         _that.renderFrame(graphics);
-        if (_that.ticker >= 360) {
-          _that.ticker = -1;
-        }
+        _that.ticker = _that.animation.resetTick(_that.ticker);
       }
 
     });

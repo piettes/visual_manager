@@ -3,7 +3,7 @@ import Animation from "./Animation";
 // TODO Remove that
 const L_LED_NUMBER_1 = 120;
 
-class Ax extends Animation {
+class Rotation extends Animation {
 
   animate(frame, theta) {
     if (theta === 0 || theta === 180) {
@@ -40,6 +40,13 @@ class Ax extends Animation {
     frame.push({x: x - 6, y: y, c: 0x00ff00});
   }
 
+  resetTick(tick) {
+    if (tick >= 360) {
+      return -1;
+    }
+    return tick;
+  }
+
 }
 
-export default Ax;
+export default Rotation;
