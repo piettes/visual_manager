@@ -15,3 +15,8 @@ npm-debug.log
 
 # git mirror
 git_mirror/
+
+webclient/node_modules/
+
+animations/lib/
+/webclient/node_modules/
