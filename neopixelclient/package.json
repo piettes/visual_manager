@@ -1,0 +1,25 @@
+{
+  "name": "neopixelclient",
+  "version": "1.0.0",
+  "main": "index.js",
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "start": "npm run build:live",
+    "build:live": "nodemon --exec ./node_modules/.bin/ts-node -- ./src/index.ts"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "animations": "file:///Users/piette/repos/perso/visual_manager/animations",
+    "express": "^4.15.3",
+    "rpi-ws281x-native": "^0.8.2"
+  },
+  "devDependencies": {
+    "@types/express": "^4.0.35",
+    "@types/node": "^7.0.22",
+    "nodemon": "^1.11.0",
+    "ts-node": "^3.0.4",
+    "typescript": "^2.3.3"
+  }
+}

@@ -1,5 +1,6 @@
 import * as React from "react";
-import {Point, Effect1, Animation, Rotation} from "bob";
+import Axios from "axios";
+import {Effect1, Animation, Rotation} from "animations";
 import CanvasComponent from "./CanvasComponent";
 import CanvasHtml from "../CanvasHtml";
 
@@ -25,10 +26,11 @@ class Main extends React.Component<any, any> {
 
     this.state = {selectedEffect: "Rotation"};
 
-    this.clicked = this.clicked.bind(this);
+    this.incTicker = this.incTicker.bind(this);
     this.toggleManual = this.toggleManual.bind(this);
     this.getView = this.getView.bind(this);
     this.changeEffect = this.changeEffect.bind(this);
+    this.applyChange = this.applyChange.bind(this);
 
     this.canvas = new CanvasHtml();
     this.animationParameters = new AnimationParameters();
@@ -37,6 +39,8 @@ class Main extends React.Component<any, any> {
   }
 
   applyChange() {
+    console.log(this.state.selectedEffect);
+    Axios.get("http://localhost:3000/anim/" + this.state.selectedEffect).then(res => console.log(res));
   }
 
   changeEffect(event: any) {
@@ -54,11 +58,7 @@ class Main extends React.Component<any, any> {
     }
   }
 
-  componentDidMount() {
-    this.canvas.setAnimation(this.defaultAnimation);
-  }
-
-  clicked() {
+  incTicker() {
     this.canvas.incTicker();
   }
 
@@ -84,7 +84,7 @@ class Main extends React.Component<any, any> {
           <br/>
 
           <button onClick={this.toggleManual}>Toggle manual</button>
-          <button onClick={this.clicked}>Step</button>
+          <button onClick={this.incTicker}>Step</button>
 
           <CanvasComponent getView={this.getView}/>
 

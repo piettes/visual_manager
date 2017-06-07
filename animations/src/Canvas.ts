@@ -1,5 +1,6 @@
 import {Animation} from "./Animation";
 import {Point} from "./Point";
+import {Effect1} from "./Effect1";
 
 const FACTOR = 2;
 const PIXEL_SIZE = 1 * FACTOR;
@@ -26,19 +27,19 @@ export abstract class Canvas {
 
   constructor() {
     this.initFrameLists();
-    this.initDraw(this.grid);
     this.setTickerFunction(this.tickerFunction(this));
-
     this.manualMode = false;
-  }
 
-  abstract initDraw(grid: Array<Array<number>>): void;
+    this.animation = new Effect1();
+  }
 
   abstract drawPixel(x: number, y: number, color: any): void;
 
   abstract setTickerFunction(tickerFunction: (delta: number) => void): void;
 
-  tickerFunction(_that: any): (delta: number) => void {
+  abstract render(): void;
+
+  private tickerFunction(_that: Canvas): (delta: number) => void {
     return (delta: any) => {
       let accDelta = 0;
       if (_that.animation) {
@@ -49,30 +50,31 @@ export abstract class Canvas {
           }
         }
         _that.animation.animate(_that.nextFrameList, _that.ticker);
-        _that.renderFrame();
+        _that.drawFrameDiff();
+        _that.render();
         _that.ticker = _that.animation.resetTick(_that.ticker);
       }
     };
   }
 
-  incTicker() {
-    this.ticker++;
+  private drawFrameDiff() {
+    this.nextFrameMap = new Map<number, number>();
+    this.nextFrameList = this.nextFrameList.filter((p: Point) => Canvas.isInFrame(p.x, p.y));
+    this.nextFrameList.forEach((p: Point) => {
+      this.drawPixel(p.x, p.y, p.c);
+      this.nextFrameMap.set(p.x * 10 + p.y, p.c);
+    });
+    this.lastFrameList.forEach((p: Point) => {
+      if (!this.nextFrameMap.get(p.x * 10 + p.y)) {
+        this.drawPixel(p.x, p.y, LED_OFF);
+      }
+    });
+
+    this.lastFrameList = this.nextFrameList.concat();
+    this.nextFrameList = [];
   }
 
-  add(point: any) {
-    this.nextFrameList.push(point);
-  }
-
-  setAnimation(animation: any) {
-    this.animation = animation;
-  }
-
-  toggleManual() {
-    this.manualMode = !this.manualMode;
-  }
-
-
-  initFrameLists() {
+  private initFrameLists() {
     let l0: Array<number> = [], l1: Array<number> = [], l2: Array<number> = [], l3: Array<number> = [], l4: Array<number> = [], l5: Array<number> = [];
     this.grid = [l0, l1, l2, l3, l4, l5];
 
@@ -94,7 +96,7 @@ export abstract class Canvas {
     this.ticker = 0;
   }
 
-  static isInFrame(x: number, y: number) {
+  private static isInFrame(x: number, y: number) {
     if (0 < y && y < 5) {
       return -1 < x && x < L_LED_NUMBER_1 * 2 && x % 2 === 0;
     } else if (y === 0 || y === 5) {
@@ -105,21 +107,13 @@ export abstract class Canvas {
     }
   }
 
-  renderFrame() {
-    this.nextFrameMap = new Map<number, number>();
-    this.nextFrameList = this.nextFrameList.filter((p: Point) => Canvas.isInFrame(p.x, p.y));
-    this.nextFrameList.forEach((p: Point) => {
-      this.drawPixel(p.x, p.y, p.c);
-      this.nextFrameMap.set(p.x * 10 + p.y, p.c);
-    });
-    this.lastFrameList.forEach((p: Point) => {
-      if (!this.nextFrameMap.get(p.x * 10 + p.y)) {
-        this.drawPixel(p.x, p.y, LED_OFF);
-      }
-    });
-
-    this.lastFrameList = this.nextFrameList.concat();
-    this.nextFrameList = [];
+  setAnimation(animation: any) {
+    this.animation = animation;
   }
+
+  toggleManual() {
+    this.manualMode = !this.manualMode;
+  }
+
 
 }
