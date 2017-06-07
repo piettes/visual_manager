@@ -11,7 +11,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "animations": "file:///Users/piette/repos/perso/visual_manager/animations",
+    "animations": "../animations",
     "express": "^4.15.3",
     "rpi-ws281x-native": "^0.8.2"
   },
