@@ -42,14 +42,10 @@ export class Rotation implements Animation {
   }
 
   tick(tick: number): number {
+    if (tick === 359) {
+      return 0;
+    }
     return tick + 1;
   };
-
-  resetTick(tick: number): number {
-    if (tick >= 360) {
-      return -1;
-    }
-    return tick;
-  }
 
 }

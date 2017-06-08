@@ -4,10 +4,10 @@ import {Effect1} from "./Effect1";
 
 const FACTOR = 2;
 const PIXEL_SIZE = 1 * FACTOR;
-const LED_PER_METER_1 = 30;
-const LED_PER_METER_2 = 60;
-const L_LED_NUMBER_1 = 120;
-const L_LED_NUMBER_2 = 100;
+const LED_PER_METER_ROOF = 30;
+const LED_PER_METER_WALL = 60;
+const LED_LINE_ROOF = 120;
+const LED_LINE_WALL = 100;
 const LINE_SPACE = 65 * FACTOR;
 const ROOM_LENGTH = 520 * FACTOR;
 const ROOM_HEIGHT = 390 * FACTOR;
@@ -23,41 +23,62 @@ export abstract class Canvas {
   ticker: number;
   manualMode: boolean;
   animation: Animation;
-  grid: Array<Array<number>>;
 
   constructor() {
     this.initFrameLists();
+    this.initDraw();
     this.setTickerFunction(this.tickerFunction(this));
-    this.manualMode = false;
+    this.manualMode = true;
 
     this.animation = new Effect1();
   }
 
   abstract drawPixel(x: number, y: number, color: any): void;
 
+  abstract initDraw(): void;
+
   abstract setTickerFunction(tickerFunction: (delta: number) => void): void;
 
   abstract render(): void;
 
+  abstract toggleTicker(run: boolean): void;
+
+  accDelta: number = 0;
+  tickerCalled: number = 0;
+  lastTickerCalled: number = performance.now();
+
   private tickerFunction(_that: Canvas): (delta: number) => void {
-    return (delta: any) => {
-      let accDelta = 0;
-      if (_that.animation) {
-        if (!_that.manualMode) {
-          accDelta += delta;
-          if (accDelta > 1) {
-            _that.ticker = _that.animation.tick(_that.ticker);
-          }
+    return (delta: number) => {
+
+      this.tickerCalled++;
+      if (performance.now() - this.lastTickerCalled > 1000) {
+        if (this.tickerCalled < 40) {
+          console.error("avg fps: " + this.tickerCalled , performance.now() / 1000);
+        } else {
+          console.log("avg fps: " + this.tickerCalled, performance.now() / 1000);
         }
-        _that.animation.animate(_that.nextFrameList, _that.ticker);
-        _that.drawFrameDiff();
-        _that.render();
-        _that.ticker = _that.animation.resetTick(_that.ticker);
+        this.tickerCalled = 0;
+        this.lastTickerCalled = performance.now();
+      }
+
+      if (_that.animation) {
+        this.accDelta += delta;
+        if (this.accDelta > 1) {
+          this.accDelta = 0;
+          _that.step();
+        }
       }
     };
   }
 
-  private drawFrameDiff() {
+  private step(): void {
+    this.ticker = this.animation.tick(this.ticker);
+    this.animation.animate(this.nextFrameList, this.ticker);
+    this.calculateFrameDiff();
+    this.render();
+  }
+
+  private calculateFrameDiff(): void {
     this.nextFrameMap = new Map<number, number>();
     this.nextFrameList = this.nextFrameList.filter((p: Point) => Canvas.isInFrame(p.x, p.y));
     this.nextFrameList.forEach((p: Point) => {
@@ -74,46 +95,33 @@ export abstract class Canvas {
     this.nextFrameList = [];
   }
 
-  private initFrameLists() {
-    let l0: Array<number> = [], l1: Array<number> = [], l2: Array<number> = [], l3: Array<number> = [], l4: Array<number> = [], l5: Array<number> = [];
-    this.grid = [l0, l1, l2, l3, l4, l5];
-
-    [l1, l2, l3, l4].forEach(l => {
-      for (let i = 0; i < L_LED_NUMBER_1; i++) {
-        l.push(LED_OFF);
-      }
-    });
-
-    [l0, l5].forEach(l => {
-      for (let i = 0; i < L_LED_NUMBER_1 + L_LED_NUMBER_2; i++) {
-        l.push(LED_OFF);
-      }
-    });
-
+  private initFrameLists(): void {
     this.nextFrameList = [];
     this.lastFrameList = [];
 
     this.ticker = 0;
   }
 
-  private static isInFrame(x: number, y: number) {
+  private static isInFrame(x: number, y: number): boolean {
     if (0 < y && y < 5) {
-      return -1 < x && x < L_LED_NUMBER_1 * 2 && x % 2 === 0;
+      return LED_LINE_WALL - 1 < x && x % 2 === 0;
     } else if (y === 0 || y === 5) {
-      if (y === 5) {
-      }
-      return -1 < x && x < L_LED_NUMBER_1 * 2 && x % 2 === 0 || L_LED_NUMBER_1 * 2 - 1 < x && x < L_LED_NUMBER_1 * 2
-          + L_LED_NUMBER_2;
+      return x < LED_LINE_WALL || x % 2 === 0;
     }
   }
 
-  setAnimation(animation: any) {
+  setAnimation(animation: any): void {
     this.animation = animation;
   }
 
-  toggleManual() {
+  toggleManual(): void {
+    console.log("set manual " + !this.manualMode);
     this.manualMode = !this.manualMode;
+    this.toggleTicker(!this.manualMode);
   }
 
+  incTicker(): void {
+    this.step();
+  }
 
 }

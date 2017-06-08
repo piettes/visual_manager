@@ -17,7 +17,7 @@ class AnimationParameters {
 
 class Main extends React.Component<any, any> {
 
-  canvas: any;
+  canvas: CanvasHtml;
   animationParameters: AnimationParameters;
   defaultAnimation: Animation;
 

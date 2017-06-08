@@ -16,7 +16,6 @@ class CanvasComponent extends React.Component<CanvasComponentProps, any> {
   }
 
   render() {
-    console.log("Render CanvasComponent");
     return <div ref="myCanvas"/>
   }
 }
