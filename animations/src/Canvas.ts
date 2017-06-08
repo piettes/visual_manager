@@ -28,7 +28,7 @@ export abstract class Canvas {
     this.initFrameLists();
     this.initDraw();
     this.setTickerFunction(this.tickerFunction(this));
-    this.manualMode = true;
+    this.manualMode = false;
 
     this.animation = new Effect1();
   }
@@ -45,21 +45,21 @@ export abstract class Canvas {
 
   accDelta: number = 0;
   tickerCalled: number = 0;
-  lastTickerCalled: number = performance.now();
+  // lastTickerCalled: number = performance.now();
 
   private tickerFunction(_that: Canvas): (delta: number) => void {
     return (delta: number) => {
 
       this.tickerCalled++;
-      if (performance.now() - this.lastTickerCalled > 1000) {
-        if (this.tickerCalled < 40) {
-          console.error("avg fps: " + this.tickerCalled , performance.now() / 1000);
-        } else {
-          console.log("avg fps: " + this.tickerCalled, performance.now() / 1000);
-        }
-        this.tickerCalled = 0;
-        this.lastTickerCalled = performance.now();
-      }
+      // if (performance.now() - this.lastTickerCalled > 1000) {
+      //   if (this.tickerCalled < 40) {
+      //     console.error("avg fps: " + this.tickerCalled , performance.now() / 1000);
+      //   } else {
+      //     console.log("avg fps: " + this.tickerCalled, performance.now() / 1000);
+      //   }
+      //   this.tickerCalled = 0;
+      //   this.lastTickerCalled = performance.now();
+      // }
 
       if (_that.animation) {
         this.accDelta += delta;
