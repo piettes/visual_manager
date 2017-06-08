@@ -3,6 +3,7 @@ import {Canvas} from "animations";
 
 const LED_LINE_ROOF = 120;
 const LED_LINE_WALL = 100;
+const LED_OFF = 0x000000;
 
 class CanvasNeopixel extends Canvas {
 
@@ -24,11 +25,11 @@ class CanvasNeopixel extends Canvas {
   }
 
   drawPixel(x: number, y: number, color: any): void {
-    if (color === 0x000000) {
-      this.pixelData[x] = rgb2Int(0, 0, 0);
-    } else {
-      this.pixelData[x] = rgb2Int(0, 0, 50);
-    }
+    // if (color === 0x000000) {
+      this.pixelData[x] = color === -1 ? LED_OFF : color;
+    // } else {
+    //   this.pixelData[x] = color;
+    // }
   }
 
   render() {

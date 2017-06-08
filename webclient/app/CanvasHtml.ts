@@ -88,7 +88,7 @@ class CanvasHtml extends Canvas {
     } else {
       gr = this.pixelMap[y][LED_LINE_WALL + (x - LED_LINE_WALL) / 2];
     }
-    gr.beginFill(color);
+    gr.beginFill(color === -1 ? LED_OFF : color);
     gr.drawRect(0, 0, PIXEL_SIZE, PIXEL_SIZE);
     gr.endFill();
   }

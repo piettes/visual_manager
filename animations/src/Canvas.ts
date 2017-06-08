@@ -13,7 +13,7 @@ const ROOM_LENGTH = 520 * FACTOR;
 const ROOM_HEIGHT = 390 * FACTOR;
 const MARGIN_LEFT = 10 * FACTOR;
 const MARGIN_TOP = 67 * FACTOR;
-const LED_OFF = 0xFFFFFF;
+const LED_OFF = -1;
 
 export abstract class Canvas {
 
