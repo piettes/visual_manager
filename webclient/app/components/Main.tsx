@@ -1,15 +1,8 @@
 import * as React from "react";
 import Axios from "axios";
-import {Effect1, Animation, Rotation} from "animations";
+import {Animation, Effect1, Rotation} from "../../../animations/index";
 import CanvasComponent from "./CanvasComponent";
 import CanvasHtml from "../CanvasHtml";
-
-// TODO HSV to hexa
-// TODO param for ax
-// TODO random rain
-// TODO strobo
-// TODO
-// TODO
 
 class AnimationParameters {
   type: string;

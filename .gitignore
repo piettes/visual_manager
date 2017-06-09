@@ -18,5 +18,6 @@ git_mirror/
 
 webclient/node_modules/
 neopixelclient/node_modules/
+animations/node_modules/
 animations/lib/
 

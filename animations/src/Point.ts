@@ -1,5 +1,5 @@
 
-export class Point {
+class Point {
   x: number;
   y: number;
   c: number;
@@ -10,3 +10,5 @@ export class Point {
     this.c = c;
   }
 }
+
+export {Point};

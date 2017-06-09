@@ -4,7 +4,7 @@ import {Point} from "./Point";
 // TODO Remove that
 const L_LED_NUMBER_1 = 120;
 
-export class Rotation implements Animation {
+class Rotation implements Animation {
 
   animate(frame: Array<Point>, theta: number): void {
     if (theta === 0 || theta === 180) {
@@ -49,3 +49,5 @@ export class Rotation implements Animation {
   };
 
 }
+
+export {Rotation};

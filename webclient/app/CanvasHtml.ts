@@ -1,5 +1,5 @@
 import {Application, Graphics} from "pixi.js";
-import {Canvas} from "animations";
+import {Canvas} from "../../animations/index";
 
 const FACTOR = 2;
 const PIXEL_SIZE = 1 * FACTOR;
@@ -25,8 +25,7 @@ class CanvasHtml extends Canvas {
   }
 
   setTickerFunction(tickerFunction: (delta: number) => void): void {
-    this.app.ticker.speed = 1;
-    this.app.ticker.stop();
+    this.app.ticker.speed = 0.3;
     this.app.ticker.add(tickerFunction);
     console.log("minFPS " + this.app.ticker.minFPS);
     console.log("FPS " + this.app.ticker.FPS);
@@ -83,6 +82,7 @@ class CanvasHtml extends Canvas {
 
   drawPixel(x: number, y: number, color: any): void {
     let gr: Graphics;
+    console.log(x, y);
     if (x < LED_LINE_WALL) {
       gr = this.pixelMap[y][x];
     } else {

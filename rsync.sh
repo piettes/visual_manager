@@ -1,1 +1,0 @@
-rsync -r /Users/piette/repos/perso/visual_manager/* pi@pi:/home/pi/repos/visual_manager/

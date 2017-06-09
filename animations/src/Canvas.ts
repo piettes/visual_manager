@@ -15,7 +15,7 @@ const MARGIN_LEFT = 10 * FACTOR;
 const MARGIN_TOP = 67 * FACTOR;
 const LED_OFF = -1;
 
-export abstract class Canvas {
+abstract class Canvas {
 
   nextFrameList: Array<Point>;
   lastFrameList: Array<Point>;
@@ -45,21 +45,21 @@ export abstract class Canvas {
 
   accDelta: number = 0;
   tickerCalled: number = 0;
-  // lastTickerCalled: number = performance.now();
+  lastTickerCalled: number = new Date().getTime();
 
   private tickerFunction(_that: Canvas): (delta: number) => void {
     return (delta: number) => {
 
       this.tickerCalled++;
-      // if (performance.now() - this.lastTickerCalled > 1000) {
-      //   if (this.tickerCalled < 40) {
-      //     console.error("avg fps: " + this.tickerCalled , performance.now() / 1000);
-      //   } else {
-      //     console.log("avg fps: " + this.tickerCalled, performance.now() / 1000);
-      //   }
-      //   this.tickerCalled = 0;
-      //   this.lastTickerCalled = performance.now();
-      // }
+      if (new Date().getTime() - this.lastTickerCalled > 1000) {
+        if (this.tickerCalled < 40) {
+          console.error("avg fps: " + this.tickerCalled , (new Date().getTime() - this.lastTickerCalled) / 1000);
+        } else {
+          console.log("avg fps: " + this.tickerCalled, (new Date().getTime() - this.lastTickerCalled) / 1000);
+        }
+        this.tickerCalled = 0;
+        this.lastTickerCalled = new Date().getTime();
+      }
 
       if (_that.animation) {
         this.accDelta += delta;
@@ -105,7 +105,7 @@ export abstract class Canvas {
   private static isInFrame(x: number, y: number): boolean {
     if (0 < y && y < 5) {
       return LED_LINE_WALL - 1 < x && x % 2 === 0;
-    } else if (y === 0 || y === 5) {
+    } else {
       return x < LED_LINE_WALL || x % 2 === 0;
     }
   }
@@ -125,3 +125,5 @@ export abstract class Canvas {
   }
 
 }
+
+export {Canvas};

@@ -1,5 +1,6 @@
-export * from "./src/Point";
-export * from "./src/Effect1";
-export * from "./src/Rotation";
-export * from "./src/Canvas";
-export * from "./src/Animation";
+export {Point} from "./src/Point";
+export {Effect1} from "./src/Effect1";
+export {Rotation} from "./src/Rotation";
+export {Canvas} from "./src/Canvas";
+export {Animation} from "./src/Animation";
+

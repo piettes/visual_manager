@@ -1,9 +1,11 @@
-import {Ws281x} from "./../ws281x";
-import {Canvas} from "animations";
+import {Ws281x} from "../ws281x";
+import {Canvas} from "../../animations/index";
 
 const LED_LINE_ROOF = 120;
 const LED_LINE_WALL = 100;
 const LED_OFF = 0x000000;
+
+const FPS = 30;
 
 class CanvasNeopixel extends Canvas {
 
@@ -20,16 +22,40 @@ class CanvasNeopixel extends Canvas {
     super();
     let num_led = LED_LINE_ROOF * 6 + LED_LINE_WALL * 2;
     this.pixelData = new Uint32Array(num_led);
-    this.ws281x = require("rpi-ws281x-native")
+    this.ws281x = require("rpi-ws281x-native");
     this.ws281x.init(num_led);
   }
 
-  drawPixel(x: number, y: number, color: any): void {
-    // if (color === 0x000000) {
-      this.pixelData[x] = color === -1 ? LED_OFF : color;
-    // } else {
-    //   this.pixelData[x] = color;
-    // }
+  drawPixel(x: number, y: number, _color: any): void {
+    let color = _color === -1 ? LED_OFF : _color;
+    switch (y) {
+      case 0:
+        if (x < 100) {
+          this.pixelData[x] = color;
+        } else {
+          this.pixelData[LED_LINE_WALL + LED_LINE_ROOF - (x - LED_LINE_WALL) / 2] = color;
+        }
+        break;
+      case 1:
+        this.pixelData[LED_LINE_WALL + LED_LINE_ROOF + (x - LED_LINE_WALL) / 2] = color;
+        break;
+      case 2:
+        this.pixelData[LED_LINE_WALL + LED_LINE_ROOF * 3 - (x - LED_LINE_WALL) / 2] = color;
+        break;
+      case 3:
+        this.pixelData[LED_LINE_WALL + LED_LINE_ROOF * 3 + (x - LED_LINE_WALL) / 2] = color;
+        break;
+      case 4:
+        this.pixelData[LED_LINE_WALL + LED_LINE_ROOF * 5 - (x - LED_LINE_WALL) / 2] = color;
+        break;
+      case 5:
+        if (x < 100) {
+          this.pixelData[LED_LINE_WALL * 2 + LED_LINE_ROOF * 6 - x] = color;
+        } else {
+          this.pixelData[LED_LINE_WALL + LED_LINE_ROOF * 5 + (x - LED_LINE_WALL) / 2] = color;
+        }
+        break;
+    }
   }
 
   render() {
@@ -41,11 +67,12 @@ class CanvasNeopixel extends Canvas {
   }
 
   setTickerFunction(tickerFunction: (delta: number) => void): void {
+    let delta = 1000 / FPS;
+
     setInterval(() => {
-          tickerFunction(1000 / 30);
+          tickerFunction(delta);
         }
-        , 1000 / 30
-    );
+        , delta);
   }
 
 }
