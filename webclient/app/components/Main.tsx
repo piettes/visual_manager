@@ -13,6 +13,8 @@ class Main extends React.Component<any, any> {
   canvas: CanvasHtml;
   animationParameters: AnimationParameters;
   defaultAnimation: Animation;
+  private manualMode: boolean = true;
+  private host: string = "http://localhost:3000/";
 
   constructor(props: any) {
     super(props);
@@ -33,7 +35,7 @@ class Main extends React.Component<any, any> {
 
   applyChange() {
     console.log(this.state.selectedEffect);
-    Axios.get("http://localhost:3000/anim/" + this.state.selectedEffect).then(res => console.log(res));
+    Axios.get(this.host + "anim/" + this.state.selectedEffect).then(res => console.log(res));
   }
 
   changeEffect(event: any) {
@@ -53,10 +55,13 @@ class Main extends React.Component<any, any> {
 
   incTicker() {
     this.canvas.incTicker();
+    Axios.get(this.host + "anim/" + this.manualMode);
   }
 
   toggleManual() {
-    this.canvas.toggleManual();
+    this.manualMode = !this.manualMode;
+    this.canvas.setManual(this.manualMode);
+    Axios.get(this.host + "anim/" + this.manualMode);
   }
 
   getView() {

@@ -21,7 +21,7 @@ abstract class Canvas {
   lastFrameList: Array<Point>;
   nextFrameMap: Map<number, number>;
   ticker: number;
-  manualMode: boolean;
+  private manualMode: boolean;
   animation: Animation;
 
   constructor() {
@@ -43,6 +43,8 @@ abstract class Canvas {
 
   abstract toggleTicker(run: boolean): void;
 
+  abstract reset(): void;
+
   accDelta: number = 0;
   tickerCalled: number = 0;
   lastTickerCalled: number = new Date().getTime();
@@ -51,13 +53,9 @@ abstract class Canvas {
     return (delta: number) => {
 
       this.tickerCalled++;
-      if (new Date().getTime() - this.lastTickerCalled > 1000) {
-        if (this.tickerCalled < 40) {
-          console.error("avg fps: " + this.tickerCalled , (new Date().getTime() - this.lastTickerCalled) / 1000);
-        } else {
-          console.log("avg fps: " + this.tickerCalled, (new Date().getTime() - this.lastTickerCalled) / 1000);
-        }
-        this.tickerCalled = 0;
+      if (new Date().getTime() - this.lastTickerCalled > 10000) {
+        console.log("avg fps: " + this.tickerCalled / 10);
+        this.tickerCalled = 1;
         this.lastTickerCalled = new Date().getTime();
       }
 
@@ -114,10 +112,10 @@ abstract class Canvas {
     this.animation = animation;
   }
 
-  toggleManual(): void {
-    console.log("set manual " + !this.manualMode);
-    this.manualMode = !this.manualMode;
-    this.toggleTicker(!this.manualMode);
+  setManual(manual: boolean): void {
+    console.log("set manual " + manual);
+    this.manualMode = manual;
+    this.toggleTicker(!manual);
   }
 
   incTicker(): void {

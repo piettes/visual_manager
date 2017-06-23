@@ -5,7 +5,7 @@ const LED_LINE_ROOF = 120;
 const LED_LINE_WALL = 100;
 const LED_OFF = 0x000000;
 
-const FPS = 30;
+const FPS = 5;
 
 class CanvasNeopixel extends Canvas {
 
