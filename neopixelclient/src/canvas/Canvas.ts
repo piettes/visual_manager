@@ -1,5 +1,6 @@
 import {Animation} from "./Animation";
 import {Point} from "./Point";
+import {AnimationFactory} from "./AnimationFactory";
 
 const FACTOR = 2;
 const PIXEL_SIZE = 1 * FACTOR;
@@ -107,8 +108,8 @@ abstract class Canvas {
     }
   }
 
-  setAnimation(animation: any): void {
-    this.animation = animation;
+  setAnimation(animationName: string): void {
+    this.animation = AnimationFactory.get(animationName);
   }
 
   setManual(manual: boolean): void {

@@ -16,8 +16,4 @@ npm-debug.log
 # git mirror
 git_mirror/
 
-webclient/node_modules/
-neopixelclient/node_modules/
-animations/node_modules/
-animations/lib/
-
+node_modules/

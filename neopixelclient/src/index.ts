@@ -1,10 +1,12 @@
 import * as express from "express";
 import CanvasNeopixel from "./CanvasNeopixel";
 import {Canvas} from "./canvas/Canvas";
+import {AnimationFactory} from "./canvas/AnimationFactory";
 
 const app = express();
 
 const canvas: Canvas = new CanvasNeopixel();
+canvas.setAnimation(AnimationFactory.getDefault());
 
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");

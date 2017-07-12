@@ -1,24 +1,16 @@
 import * as React from "react";
 import Axios from "axios";
-import {Rotation} from "../../../neopixelclient/Src/canvas/animations/Rotation";
-import {Effect1} from "../../../neopixelclient/Src/canvas/animations/Effect1";
 import {Animation} from "../../../neopixelclient/Src/canvas/Animation";
-import {Random} from "../../../neopixelclient/Src/canvas/animations/Random";
 import CanvasComponent from "./CanvasComponent";
 import CanvasHtml from "../CanvasHtml";
-
-class AnimationParameters {
-  type: string;
-}
+import {AnimationFactory} from "../../../neopixelclient/src/canvas/AnimationFactory";
 
 class Main extends React.Component<any, any> {
 
   canvas: CanvasHtml;
-  animationParameters: AnimationParameters;
-  animationMap: Map<string, Animation> = new Map();
-  defaultAnimation: Animation;
   private manualMode: boolean = false;
   private host: string = "http://pi:3000/";
+  private animationList: Array<string>;
 
   constructor(props: any) {
     super(props);
@@ -27,35 +19,27 @@ class Main extends React.Component<any, any> {
     this.incTicker = this.incTicker.bind(this);
     this.toggleManual = this.toggleManual.bind(this);
     this.getView = this.getView.bind(this);
-    this.changeEffect = this.changeEffect.bind(this);
+    this.changeAnimation = this.changeAnimation.bind(this);
     this.applyChange = this.applyChange.bind(this);
 
     this.canvas = new CanvasHtml();
-    this.animationParameters = new AnimationParameters();
 
-    let animList = [new Random(), new Effect1(), new Rotation()];
-    animList.forEach(anim => {
-      this.animationMap.set(anim.getName(), anim);
-    });
+    this.state = {selectedAnimation: AnimationFactory.getDefault()};
+    this.canvas.setAnimation(AnimationFactory.getDefault());
 
-    this.defaultAnimation = animList[0];
-    this.state = {selectedEffect: this.defaultAnimation.getName()};
-    this.canvas.setAnimation(this.defaultAnimation);
+    this.animationList = Array.from(AnimationFactory.getAll().map(anim => anim.getName()));
+
   }
 
   applyChange() {
-    console.log(this.state.selectedEffect);
-    Axios.get(this.host + "anim/" + this.state.selectedEffect).then(res => console.log(res));
+    console.log(this.state.selectedAnimation);
+    Axios.get(this.host + "anim/" + this.state.selectedAnimation).then(res => console.log(res));
   }
 
-  changeEffect(event: any) {
-    this.animationParameters.type = event.target.value;
-
-    let anim = this.animationMap.get(this.animationParameters.type);
-    if (anim != null) {
-      console.log("set " + anim.getName());
-      this.canvas.setAnimation(anim);
-    }
+  changeAnimation(event: any) {
+    this.setState({selectedAnimation: event.target.value});
+    console.log("set " + event.target.valu);
+    this.canvas.setAnimation(event.target.valu);
   }
 
   incTicker() {
@@ -75,14 +59,14 @@ class Main extends React.Component<any, any> {
 
   render() {
 
-    const animOptions = Array.from(this.animationMap.keys()).map(
-        anim => <option key={anim} value={anim}>{anim}</option>
+    const animOptions = this.animationList.map(anim =>
+        <option key={anim} value={anim}>{anim}</option>
     );
 
     return (
         <div>
 
-          <select onChange={this.changeEffect}>
+          <select onChange={this.changeAnimation}>
             {animOptions}
           </select>
 

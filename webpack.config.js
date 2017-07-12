@@ -3,13 +3,13 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
-  template: __dirname + '/app/index.html',
+  template: __dirname + '/webclient/app/index.html',
   filename: 'index.html',
   inject: 'body'
 });
 
 const config = {
-  entry: './app/index.tsx',
+  entry: './webclient/app/index.tsx',
   output: {
     path: path.resolve(__dirname, 'build'),
     filename: 'bundle.js'
@@ -17,7 +17,7 @@ const config = {
 
   resolve: {
     // Add '.ts' and '.tsx' as resolvable extensions.
-    extensions: ["", ".webpack.js", ".web.js", ".ts", ".tsx", ".js"],
+    extensions: ["", ".webpack.js", ".web.js", ".ts", ".tsx", ".js", ".jsx", ".json"],
   },
   module: {
     loaders: [
