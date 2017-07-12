@@ -39,7 +39,7 @@ class Random extends AnimationBase implements Animation {
   }
 
   tick(tick: number): number {
-    if (tick >= 30) {
+    if (tick >= 60 * 60 / 100) {
       return 0;
     }
     return tick + 1;

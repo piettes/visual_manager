@@ -11,7 +11,7 @@ class Rotation extends AnimationBase implements Animation {
   }
 
   animate(frame: Array<Point>, theta: number): boolean {
-    if (theta === 0 || theta === 180) {
+    if ([0, 1, 359, 179, 180, 181].indexOf(theta) !== -1) {
       for (let i = 0; i < this.LED_LINE_ROOF; i++) {
         frame.push({x: this.LED_LINE_WALL + i * 2, y: 2, c: 0xff0000});
         frame.push({x: this.LED_LINE_WALL + i * 2, y: 3, c: 0xff0000});

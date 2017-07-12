@@ -14,11 +14,12 @@
   "dependencies": {
     "axios": "^0.15.3",
     "bootstrap": "^3.3.7",
+    "express": "^4.15.3",
     "moment": "^2.17.1",
+    "nanotimer": "^0.3.14",
     "pixi.js": "^4.4.1",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
-    "express": "^4.15.3",
     "rpi-ws281x-native": "^0.8.2"
   },
   "devDependencies": {

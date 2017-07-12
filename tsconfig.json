@@ -6,7 +6,6 @@
     "noImplicitAny": true,
     "module": "commonjs",
     "jsx": "react",
-    "tsx": "react",
     "target": "es5",
     "lib": ["dom", "es6"],
     "typeRoots": [ "node_modules/@types" ],

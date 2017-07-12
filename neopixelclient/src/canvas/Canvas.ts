@@ -51,10 +51,11 @@ abstract class Canvas {
     return (delta: number) => {
 
       this.tickerCalled++;
-      if (new Date().getTime() - this.lastTickerCalled > 10000) {
+      let now = new Date().getTime();
+      if (now - this.lastTickerCalled > 10000) {
         console.log("avg fps: " + this.tickerCalled / 10);
-        this.tickerCalled = 1;
-        this.lastTickerCalled = new Date().getTime();
+        this.tickerCalled = 0;
+        this.lastTickerCalled = now;
       }
       if (_that.animation) {
         this.accDelta += delta;

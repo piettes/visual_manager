@@ -6,7 +6,9 @@ const LED_LINE_ROOF = 120;
 const LED_LINE_WALL = 100;
 const LED_OFF = 0x000000;
 
-const FPS = 20;
+const FPS = 50;
+
+let NanoTimer = require("nanotimer");
 
 class CanvasNeopixel extends Canvas {
 
@@ -68,6 +70,9 @@ class CanvasNeopixel extends Canvas {
 
   setTickerFunction(tickerFunction: (delta: number) => void): void {
     let delta = 1000 / FPS;
+
+    let timer = new NanoTimer();
+    console.log("delta " + delta);
     this.isRunning = true;
     this.intervalId = setInterval(() => {
           tickerFunction(delta);
