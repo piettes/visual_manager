@@ -52,7 +52,7 @@ abstract class Canvas {
 
       this.tickerCalled++;
       let now = new Date().getTime();
-      if (now - this.lastTickerCalled > 10000) {
+      if (now - this.lastTickerCalled >= 10000) {
         console.log("avg fps: " + this.tickerCalled / 10);
         this.tickerCalled = 0;
         this.lastTickerCalled = now;

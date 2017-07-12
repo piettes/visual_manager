@@ -3,6 +3,7 @@ import CanvasNeopixel from "./CanvasNeopixel";
 import {Canvas} from "./canvas/Canvas";
 import {AnimationFactory} from "./canvas/AnimationFactory";
 import {Express} from "express";
+import * as bodyParser from "body-parser";
 
 const app: Express = express();
 
@@ -15,6 +16,8 @@ app.use(function (req, res, next) {
   next();
 });
 
+app.use(bodyParser.json())
+
 app.get("/", function (req: any, res: any) {
   res.send("Hello World!");
 });
@@ -23,6 +26,11 @@ app.get("/anim/:anim", function (req: any, res: any) {
   console.log("Changing Animation to " + req.params.anim);
   canvas.setAnimation(req.params.anim);
   res.send("Changing Animation to " + req.params.anim);
+});
+
+app.post("/update", function (req: any, res: any) {
+  console.log(req.params);
+  console.log(req.body);
 });
 
 app.get("/setManual/:bool", function (req: any, res: any) {

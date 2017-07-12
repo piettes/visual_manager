@@ -9,6 +9,7 @@ class Random extends AnimationBase implements Animation {
   scal1: number = (this.LED_LINE_ROOF * 2 + this.LED_LINE_WALL - 5) / 2;
   scal2: number = (this.LED_LINE_ROOF * 2 - 5) / 2;
 
+
   getName(): string {
     return "Random";
   }
@@ -39,7 +40,7 @@ class Random extends AnimationBase implements Animation {
   }
 
   tick(tick: number): number {
-    if (tick >= 60 * 60 / 100) {
+    if (tick >= 3600 / this.bpm) {
       return 0;
     }
     return tick + 1;

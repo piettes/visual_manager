@@ -74,10 +74,11 @@ class CanvasNeopixel extends Canvas {
     let timer = new NanoTimer();
     console.log("delta " + delta);
     this.isRunning = true;
-    this.intervalId = setInterval(() => {
-          tickerFunction(delta);
-        }
-        , delta);
+    timer.setInterval(tickerFunction, [delta], "16666u");
+    // this.intervalId = setInterval(() => {
+    //       tickerFunction(delta);
+    //     }
+    //     , delta);
   }
 
   toggleTicker(run: boolean): void {

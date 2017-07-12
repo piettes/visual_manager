@@ -33,7 +33,8 @@ class Main extends React.Component<any, any> {
 
   applyChange() {
     console.log(this.state.selectedAnimation);
-    Axios.get(this.host + "anim/" + this.state.selectedAnimation).then(res => console.log(res));
+    // Axios.get(this.host + "anim/" + this.state.selectedAnimation).then(res => console.log(res));
+    Axios.post(this.host + "update", {params1: "bob", p2: {caca: "prout"}}).then(res => console.log(res));
   }
 
   changeAnimation(event: any) {

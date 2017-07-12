@@ -7,7 +7,7 @@ interface Animation {
   tick(tick: number): number;
 
   getName(): string;
-}
 
+}
 
 export {Animation};
