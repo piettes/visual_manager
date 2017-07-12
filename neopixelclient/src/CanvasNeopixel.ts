@@ -1,22 +1,19 @@
 import {Ws281x} from "../ws281x";
-import {Canvas} from "../../animations/index";
+import {Canvas} from "./canvas/Canvas";
+import Timer = NodeJS.Timer;
 
 const LED_LINE_ROOF = 120;
 const LED_LINE_WALL = 100;
 const LED_OFF = 0x000000;
 
-const FPS = 5;
+const FPS = 20;
 
 class CanvasNeopixel extends Canvas {
 
-  initDraw(): void {
-  }
-
-  toggleTicker(run: boolean): void {
-  }
-
   ws281x: Ws281x;
   pixelData: Uint32Array;
+  intervalId: any;
+  isRunning: boolean = false;
 
   constructor() {
     super();
@@ -26,6 +23,9 @@ class CanvasNeopixel extends Canvas {
     this.ws281x.init(num_led);
   }
 
+  initDraw(): void {
+  }
+
   drawPixel(x: number, y: number, _color: any): void {
     let color = _color === -1 ? LED_OFF : _color;
     switch (y) {
@@ -33,24 +33,24 @@ class CanvasNeopixel extends Canvas {
         if (x < 100) {
           this.pixelData[x] = color;
         } else {
-          this.pixelData[LED_LINE_WALL + LED_LINE_ROOF - (x - LED_LINE_WALL) / 2] = color;
+          this.pixelData[LED_LINE_WALL + LED_LINE_ROOF - (x - LED_LINE_WALL) / 2 - 1] = color;
         }
         break;
       case 1:
         this.pixelData[LED_LINE_WALL + LED_LINE_ROOF + (x - LED_LINE_WALL) / 2] = color;
         break;
       case 2:
-        this.pixelData[LED_LINE_WALL + LED_LINE_ROOF * 3 - (x - LED_LINE_WALL) / 2] = color;
+        this.pixelData[LED_LINE_WALL + LED_LINE_ROOF * 3 - (x - LED_LINE_WALL) / 2 - 1] = color;
         break;
       case 3:
         this.pixelData[LED_LINE_WALL + LED_LINE_ROOF * 3 + (x - LED_LINE_WALL) / 2] = color;
         break;
       case 4:
-        this.pixelData[LED_LINE_WALL + LED_LINE_ROOF * 5 - (x - LED_LINE_WALL) / 2] = color;
+        this.pixelData[LED_LINE_WALL + LED_LINE_ROOF * 5 - (x - LED_LINE_WALL) / 2 - 1] = color;
         break;
       case 5:
         if (x < 100) {
-          this.pixelData[LED_LINE_WALL * 2 + LED_LINE_ROOF * 6 - x] = color;
+          this.pixelData[LED_LINE_WALL * 2 + LED_LINE_ROOF * 6 - x - 1] = color;
         } else {
           this.pixelData[LED_LINE_WALL + LED_LINE_ROOF * 5 + (x - LED_LINE_WALL) / 2] = color;
         }
@@ -68,17 +68,22 @@ class CanvasNeopixel extends Canvas {
 
   setTickerFunction(tickerFunction: (delta: number) => void): void {
     let delta = 1000 / FPS;
-
-    setInterval(() => {
+    this.isRunning = true;
+    this.intervalId = setInterval(() => {
           tickerFunction(delta);
         }
         , delta);
   }
 
-}
+  toggleTicker(run: boolean): void {
+    if (!run && this.intervalId) {
+      clearInterval(this.intervalId);
+      this.isRunning = false;
+    } else if (!this.isRunning) {
+      this.setTickerFunction(this.tickerFunction(this));
+    }
+  }
 
-function rgb2Int(r: number, g: number, b: number) {
-  return ((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff);
 }
 
 export default CanvasNeopixel;

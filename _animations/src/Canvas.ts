@@ -49,7 +49,7 @@ abstract class Canvas {
   tickerCalled: number = 0;
   lastTickerCalled: number = new Date().getTime();
 
-  private tickerFunction(_that: Canvas): (delta: number) => void {
+  tickerFunction(_that: Canvas): (delta: number) => void {
     return (delta: number) => {
 
       this.tickerCalled++;

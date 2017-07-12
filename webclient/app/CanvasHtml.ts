@@ -1,5 +1,5 @@
 import {Application, Graphics} from "pixi.js";
-import {Canvas} from "../../animations/index";
+import {Canvas} from "../../neopixelclient/src/canvas/Canvas";
 
 const FACTOR = 2;
 const PIXEL_SIZE = 1 * FACTOR;
@@ -29,7 +29,6 @@ class CanvasHtml extends Canvas {
     this.app.ticker.add(tickerFunction);
     console.log("minFPS " + this.app.ticker.minFPS);
     console.log("FPS " + this.app.ticker.FPS);
-    console.log("rendererPIXI ", this.app.renderer);
   }
 
   initDraw(): void {
@@ -82,7 +81,6 @@ class CanvasHtml extends Canvas {
 
   drawPixel(x: number, y: number, color: any): void {
     let gr: Graphics;
-    console.log(x, y);
     if (x < LED_LINE_WALL) {
       gr = this.pixelMap[y][x];
     } else {
@@ -91,6 +89,9 @@ class CanvasHtml extends Canvas {
     gr.beginFill(color === -1 ? LED_OFF : color);
     gr.drawRect(0, 0, PIXEL_SIZE, PIXEL_SIZE);
     gr.endFill();
+  }
+
+  reset(): void {
   }
 
   render(): void {
