@@ -1,9 +1,9 @@
 import "jest";
-import {Effect1} from "../../src/canvas/animations/Effect1";
-import {Random} from "../../src/canvas/animations/Random";
-import {Rotation} from "../../src/canvas/animations/Rotation";
-import {Animation} from "../../src/canvas/Animation";
-import {Point} from "../../src/canvas/Point";
+import {Effect1} from "../../neopixelclient/src/canvas/animations/Effect1";
+import {Random} from "../../neopixelclient/src/canvas/animations/Random";
+import {Rotation} from "../../neopixelclient/src/canvas/animations/Rotation";
+import {Animation} from "../../neopixelclient/src/canvas/Animation";
+import {Point} from "../../neopixelclient/src/canvas/Point";
 
 describe("Anim test", () => {
 

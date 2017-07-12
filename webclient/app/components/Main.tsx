@@ -38,8 +38,8 @@ class Main extends React.Component<any, any> {
 
   changeAnimation(event: any) {
     this.setState({selectedAnimation: event.target.value});
-    console.log("set " + event.target.valu);
-    this.canvas.setAnimation(event.target.valu);
+    console.log("set " + event.target.value);
+    this.canvas.setAnimation(event.target.value);
   }
 
   incTicker() {

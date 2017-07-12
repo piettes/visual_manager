@@ -2,8 +2,9 @@ import * as express from "express";
 import CanvasNeopixel from "./CanvasNeopixel";
 import {Canvas} from "./canvas/Canvas";
 import {AnimationFactory} from "./canvas/AnimationFactory";
+import {Express} from "express";
 
-const app = express();
+const app: Express = express();
 
 const canvas: Canvas = new CanvasNeopixel();
 canvas.setAnimation(AnimationFactory.getDefault());
@@ -19,22 +20,23 @@ app.get("/", function (req: any, res: any) {
 });
 
 app.get("/anim/:anim", function (req: any, res: any) {
-  console.log("Hello World! " + req.params.anim);
-  res.send("Hello World! " + req.params.anim);
+  console.log("Changing Animation to " + req.params.anim);
+  canvas.setAnimation(req.params.anim);
+  res.send("Changing Animation to " + req.params.anim);
 });
 
 app.get("/setManual/:bool", function (req: any, res: any) {
   canvas.setManual(req.params.bool === "true");
-  res.send("OK");
+  res.send("Set manual " + req.params.bool);
 });
 
 app.get("/tick", function (req: any, res: any) {
   canvas.incTicker();
-  res.send("OK");
+  res.send("Ticked");
 });
 
 app.listen(3000, function () {
-  console.log("Example app listening on port 3000!");
+  console.log("Listening on port 3000!");
 });
 
 process.on("SIGINT", function () {
