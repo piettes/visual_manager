@@ -10,11 +10,18 @@ class Rotation extends AnimationBase implements Animation {
     return "Rotation";
   }
 
-  animate(frame: Array<Point>, theta: number): boolean {
+  tick(): void {
+    if (this.ticker === 359) {
+      this.ticker = 0;
+    }
+    this.ticker++;
+  };
+
+  nextframe(frame: Array<Point>, theta: number): boolean {
     if ([0, 1, 359, 179, 180, 181].indexOf(theta) !== -1) {
       for (let i = 0; i < this.LED_LINE_ROOF; i++) {
-        frame.push({x: this.LED_LINE_WALL + i * 2, y: 2, c: 0xff0000});
-        frame.push({x: this.LED_LINE_WALL + i * 2, y: 3, c: 0xff0000});
+        frame.push({x: this.LED_LINE_WALL + i * 2, y: 2, c: this.color1});
+        frame.push({x: this.LED_LINE_WALL + i * 2, y: 3, c: this.color1});
       }
       return true;
     }
@@ -30,23 +37,16 @@ class Rotation extends AnimationBase implements Animation {
   }
 
   axAddPixels(frame: any, x: number, y: number) {
-    frame.push({x: x, y: y, c: 0xff0000});
+    frame.push({x: x, y: y, c: this.color1});
     [1, 2].forEach(i => {
-      x + i < this.xlim ? frame.push({x: x + i, y: y, c: 0xff0000}) : "";
-      x - i > 0 ? frame.push({x: x - i, y: y, c: 0xff0000}) : "";
+      x + i < this.xlim ? frame.push({x: x + i, y: y, c: this.color1}) : "";
+      x - i > 0 ? frame.push({x: x - i, y: y, c: this.color1}) : "";
     });
     [3, 4, 5, 6].forEach(i => {
-      x + i < this.xlim ? frame.push({x: x + i, y: y, c: 0x00ff00}) : "";
-      x - i > this.LED_LINE_WALL - 1 ? frame.push({x: x - i, y: y, c: 0x00ff00}) : "";
+      x + i < this.xlim ? frame.push({x: x + i, y: y, c: this.color2}) : "";
+      x - i > this.LED_LINE_WALL - 1 ? frame.push({x: x - i, y: y, c: this.color2}) : "";
     });
   }
-
-  tick(tick: number): number {
-    if (tick === 359) {
-      return 0;
-    }
-    return tick + 1;
-  };
 
 }
 

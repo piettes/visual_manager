@@ -13,7 +13,7 @@ describe("Anim test", () => {
 
       for (let i = 0; i < 500; i++) {
         let array: Array<Point> = [];
-        anim.animate(array, anim.tick(i));
+        anim.animate(array);
         array.forEach((p: Point) => {
           // if (p.y === 0 || p.y === 5) {
           expect(p.x).toBeGreaterThan(-1);

@@ -8,7 +8,7 @@ import * as bodyParser from "body-parser";
 const app: Express = express();
 
 const canvas: Canvas = new CanvasNeopixel();
-canvas.setAnimation(AnimationFactory.getDefault());
+canvas.setAnimation1(AnimationFactory.getDefault());
 
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -24,7 +24,7 @@ app.get("/", function (req: any, res: any) {
 
 app.get("/anim/:anim", function (req: any, res: any) {
   console.log("Changing Animation to " + req.params.anim);
-  canvas.setAnimation(req.params.anim);
+  canvas.setAnimation1(req.params.anim);
   res.send("Changing Animation to " + req.params.anim);
 });
 

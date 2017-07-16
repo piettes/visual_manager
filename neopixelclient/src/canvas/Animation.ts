@@ -2,11 +2,15 @@ import {Point} from "./Point";
 
 interface Animation {
 
-  animate(frame: Array<Point>, tick: number): boolean;
-
-  tick(tick: number): number;
-
   getName(): string;
+
+  animate(frame: Array<Point>): boolean;
+
+  setBpm(bpm: number): void;
+
+  setColor1(colorIndex: number): void;
+
+  setColor2(colorIndex: number): void;
 
 }
 

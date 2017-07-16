@@ -19,10 +19,10 @@ abstract class Canvas {
 
   nextFrameList: Array<Point>;
   lastFrameList: Array<Point>;
-  nextFrameMap: Map<number, number>;
-  ticker: number;
+
   private manualMode: boolean;
-  animation: Animation;
+  private animation1: Animation | undefined;
+  private animation2: Animation | undefined;
 
   constructor() {
     this.initFrameLists();
@@ -57,7 +57,7 @@ abstract class Canvas {
         this.tickerCalled = 0;
         this.lastTickerCalled = now;
       }
-      if (_that.animation) {
+      if (_that.animation1 || _that.animation2) {
         this.accDelta += delta;
         if (this.accDelta > 1) {
           this.accDelta = 0;
@@ -68,24 +68,25 @@ abstract class Canvas {
   }
 
   private step(): void {
-    this.ticker = this.animation.tick(this.ticker);
-    if (this.animation.animate(this.nextFrameList, this.ticker)) {
+    let changed: boolean = this.animation1 !== undefined && this.animation1.animate(this.nextFrameList);
+    changed = (this.animation2 !== undefined && this.animation2.animate(this.nextFrameList)) || changed;
+    if (changed) {
       this.calculateFrameDiff();
       this.render();
     }
   }
 
   private calculateFrameDiff(): void {
-    this.nextFrameMap = new Map<number, number>();
+    let nextFrameMap = new Map<number, number>();
     this.nextFrameList = this.nextFrameList.filter((p: Point) => {
       return Canvas.isInFrame(p.x, p.y);
     });
     this.nextFrameList.forEach((p: Point) => {
       this.drawPixel(p.x, p.y, p.c);
-      this.nextFrameMap.set(p.x * 10 + p.y, p.c);
+      nextFrameMap.set(p.x * 10 + p.y, p.c);
     });
     this.lastFrameList.forEach((p: Point) => {
-      if (!this.nextFrameMap.get(p.x * 10 + p.y)) {
+      if (!nextFrameMap.get(p.x * 10 + p.y)) {
         this.drawPixel(p.x, p.y, LED_OFF);
       }
     });
@@ -97,8 +98,6 @@ abstract class Canvas {
   private initFrameLists(): void {
     this.nextFrameList = [];
     this.lastFrameList = [];
-
-    this.ticker = 0;
   }
 
   private static isInFrame(x: number, y: number): boolean {
@@ -109,10 +108,6 @@ abstract class Canvas {
     }
   }
 
-  setAnimation(animationName: string): void {
-    this.animation = AnimationFactory.get(animationName);
-  }
-
   setManual(manual: boolean): void {
     console.log("set manual " + manual);
     this.manualMode = manual;
@@ -121,6 +116,22 @@ abstract class Canvas {
 
   incTicker(): void {
     this.step();
+  }
+
+  getAnimation1(): Animation | undefined {
+    return this.animation1;
+  }
+
+  getAnimation2(): Animation | undefined {
+    return this.animation2;
+  }
+
+  setAnimation1(animationName?: string): void {
+    this.animation1 = AnimationFactory.get(animationName);
+  }
+
+  setAnimation2(animationName?: string): void {
+    this.animation2 = AnimationFactory.get(animationName);
   }
 
 }
