@@ -43,7 +43,12 @@ const config = {
       }
     ]
   },
-  plugins: [HTMLWebpackPluginConfig],
+  plugins: [HTMLWebpackPluginConfig,
+    new webpack.DefinePlugin({
+      'process.env': {
+        HOST: JSON.stringify("http://pi:3000/"),
+      }
+    })],
   devServer: {
     port: 8080,
     host: "0.0.0.0",

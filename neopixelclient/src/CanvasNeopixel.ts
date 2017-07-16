@@ -1,14 +1,10 @@
 import {Ws281x} from "../ws281x";
 import {Canvas} from "./canvas/Canvas";
-import Timer = NodeJS.Timer;
+let NanoTimer = require("nanotimer");
 
 const LED_LINE_ROOF = 120;
 const LED_LINE_WALL = 100;
 const LED_OFF = 0x000000;
-
-const FPS = 50;
-
-let NanoTimer = require("nanotimer");
 
 class CanvasNeopixel extends Canvas {
 
@@ -69,12 +65,9 @@ class CanvasNeopixel extends Canvas {
   }
 
   setTickerFunction(tickerFunction: (delta: number) => void): void {
-    let delta = 1000 / FPS;
-
     let timer = new NanoTimer();
-    console.log("delta " + delta);
     this.isRunning = true;
-    timer.setInterval(tickerFunction, [delta], "16666u");
+    timer.setInterval(tickerFunction, [0], "16666u");
   }
 
   toggleTicker(run: boolean): void {

@@ -19,7 +19,7 @@ import "bootswatch/paper/bootstrap.css";
 import "../resources/css/custom.css";
 
 declare let process: any;
-let hostUrl = process.env !== undefined ? process.env.host : "";
+let hostUrl = process.env !== undefined ? process.env.HOST : "";
 
 ReactDOM.render(
     <Main hostUrl={hostUrl}/>,

@@ -21,8 +21,8 @@ abstract class Canvas {
   lastFrameList: Array<Point>;
 
   private manualMode: boolean;
-  private animation1: Animation | undefined;
-  private animation2: Animation | undefined;
+  private animation1: Animation = AnimationFactory.getDefault();
+  private animation2: Animation = AnimationFactory.getOff();
 
   constructor() {
     this.initFrameLists();
@@ -43,7 +43,6 @@ abstract class Canvas {
 
   abstract reset(): void;
 
-  accDelta: number = 0;
   tickerCalled: number = 0;
   lastTickerCalled: number = new Date().getTime();
 
@@ -58,18 +57,14 @@ abstract class Canvas {
         this.lastTickerCalled = now;
       }
       if (_that.animation1 || _that.animation2) {
-        this.accDelta += delta;
-        if (this.accDelta > 1) {
-          this.accDelta = 0;
-          _that.step();
-        }
+        _that.step();
       }
     };
   }
 
   private step(): void {
-    let changed: boolean = this.animation1 !== undefined && this.animation1.animate(this.nextFrameList);
-    changed = (this.animation2 !== undefined && this.animation2.animate(this.nextFrameList)) || changed;
+    let changed: boolean = this.animation1.animate(this.nextFrameList);
+    changed = this.animation2.animate(this.nextFrameList) || changed;
     if (changed) {
       this.calculateFrameDiff();
       this.render();
@@ -118,20 +113,49 @@ abstract class Canvas {
     this.step();
   }
 
-  getAnimation1(): Animation | undefined {
-    return this.animation1;
+  setAnimation1(anim1: Animation): void {
+    this.setAnimations(anim1, this.animation2);
   }
 
-  getAnimation2(): Animation | undefined {
-    return this.animation2;
+  setAnimation2(anim2: Animation): void {
+    this.setAnimations(this.animation1, anim2);
   }
 
-  setAnimation1(animationName?: string): void {
-    this.animation1 = AnimationFactory.get(animationName);
+  setAnimations(anim1: Animation, anim2: Animation): void {
+    this.animation1 = anim1;
+    this.animation2 = anim2;
+    this.resetAnimations();
   }
 
-  setAnimation2(animationName?: string): void {
-    this.animation2 = AnimationFactory.get(animationName);
+  setColor(colorId: string, colorIndex: number): void {
+    switch (colorId) {
+      case "color11":
+        this.animation1.setColor1(colorIndex);
+        break;
+      case "color12":
+        this.animation1.setColor2(colorIndex);
+        break;
+      case "color21":
+        this.animation2.setColor1(colorIndex);
+        break;
+      case "color22":
+        this.animation2.setColor2(colorIndex);
+        break;
+      default:
+        console.log("Wrong wolor Id");
+    }
+    this.resetAnimations();
+  }
+
+  setBpm(bpm: number): void {
+    this.animation1.setBpm(bpm);
+    this.animation2.setBpm(bpm);
+    this.resetAnimations();
+  }
+
+  resetAnimations(): void {
+    this.animation1.reset();
+    this.animation2.reset();
   }
 
 }

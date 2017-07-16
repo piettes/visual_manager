@@ -9,7 +9,7 @@ class Main extends React.Component<any, any> {
 
   private canvas: CanvasHtml;
   private manualMode: boolean = false;
-  private host: string = "http://pi:3000/";
+  private host: string;
   private animationList: Array<string>;
 
   constructor(props: any) {
@@ -22,58 +22,34 @@ class Main extends React.Component<any, any> {
     this.changeColor = this.changeColor.bind(this);
     this.changeAnimation1 = this.changeAnimation1.bind(this);
     this.changeAnimation2 = this.changeAnimation2.bind(this);
+    this.changeBpm = this.changeBpm.bind(this);
 
     this.canvas = new CanvasHtml();
-    this.canvas.setAnimation1(AnimationFactory.getDefault());
-    this.canvas.setAnimation2(undefined);
-
-    this.state = {animation1: AnimationFactory.getDefault()};
+    this.canvas.setAnimations(AnimationFactory.getDefault(), AnimationFactory.getOff());
 
     this.animationList = Array.from(AnimationFactory.getAll().map(anim => anim.getName()));
+
+    this.host = props.hostUrl;
   }
 
   applyChanges(animJson: any): void {
-    console.log(this.state.animation1);
-    // Axios.get(this.host + "anim/" + this.state.animation1).then(res => console.log(res));
     Axios.post(this.host + "update", animJson).then(res => console.log(res));
   }
 
   changeAnimation1(name: string): void {
-    this.canvas.setAnimation2(name);
+    this.canvas.setAnimation1(AnimationFactory.get(name));
   }
 
   changeAnimation2(name: string): void {
-    this.canvas.setAnimation2(name);
+    this.canvas.setAnimation2(AnimationFactory.get(name));
   }
 
   changeColor(colorId: string, colorIndex: number): void {
-    let anim;
-    switch (colorId) {
-      case "color11":
-        anim = this.canvas.getAnimation1();
-        if (anim !== undefined) {
-          anim.setColor1(colorIndex);
-        }
-        return;
-      case "color12":
-        anim = this.canvas.getAnimation1();
-        if (anim !== undefined) {
-          anim.setColor2(colorIndex);
-        }
-        return;
-      case "color21":
-        anim = this.canvas.getAnimation2();
-        if (anim !== undefined) {
-          anim.setColor1(colorIndex);
-        }
-        return;
-      case "color22":
-        anim = this.canvas.getAnimation2();
-        if (anim !== undefined) {
-          anim.setColor2(colorIndex);
-        }
-        return;
-    }
+    this.canvas.setColor(colorId, colorIndex);
+  }
+
+  changeBpm(bpm: number) {
+    this.canvas.setBpm(bpm);
   }
 
   incTicker() {
@@ -98,7 +74,8 @@ class Main extends React.Component<any, any> {
 
           <Form changeAnimation1={this.changeAnimation1} changeAnimation2={this.changeAnimation2}
                 changeColor={this.changeColor} applyChanges={this.applyChanges}
-                animationList={this.animationList} toggleManual={this.toggleManual} incTicker={this.incTicker}/>
+                animationList={this.animationList} toggleManual={this.toggleManual} incTicker={this.incTicker}
+                changeBpm={this.changeBpm}/>
 
           <CanvasComponent getView={this.getView}/>
 

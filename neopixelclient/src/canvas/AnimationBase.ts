@@ -5,13 +5,19 @@ abstract class AnimationBase {
 
   LED_LINE_ROOF: number = 120;
   LED_LINE_WALL: number = 100;
-  bpm: number = 110;
+  protected bpm: number = 110;
+
+  LED_OFF: number = AnimationFactory.colorOFF;
 
   protected color1: number = AnimationFactory.colors[0];
   protected color2: number = AnimationFactory.colors[0];
 
   setBpm(bpm: number): void {
     this.bpm = bpm;
+  }
+
+  getBpm(): number {
+    return this.bpm;
   }
 
   setColor1(colorIndex: number): void {
@@ -30,7 +36,12 @@ abstract class AnimationBase {
   protected ticker: number = 0;
 
   protected abstract tick(): void;
+
   protected abstract nextframe(frame: Array<Point>, tick: number): boolean;
+
+  reset(): void {
+    this.ticker = 0;
+  }
 
 }
 

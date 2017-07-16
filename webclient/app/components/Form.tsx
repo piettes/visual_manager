@@ -5,6 +5,7 @@ interface FormProps {
   changeAnimation1: (name: string) => void;
   changeAnimation2: (name: string) => void;
   changeColor: (colorId: string, colorIndex: number) => void;
+  changeBpm: (bpm: number) => void;
   animationList: Array<string>;
   applyChanges: (animJson: any) => void;
   toggleManual: () => void;
@@ -20,7 +21,7 @@ class Form extends React.Component<FormProps, any> {
 
     this.state = {
       color11: 0, color12: 0, color21: 0, color22: 0,
-      animation1: AnimationFactory.getDefault(), animation2: null,
+      animation1: AnimationFactory.getDefault().getName(), animation2: AnimationFactory.getOff().getName(),
       bpm: 110
     };
     this.colorArray = AnimationFactory.colorsString;
@@ -60,6 +61,7 @@ class Form extends React.Component<FormProps, any> {
       val = 0;
     }
     this.setState({bpm: val});
+    this.props.changeBpm(val === 0 ? 1 : val);
   }
 
   onBpmPlus() {
@@ -154,7 +156,6 @@ class Form extends React.Component<FormProps, any> {
                     <div className="col-lg-10">
                       <select className="form-control" id="selectEffect1" onChange={this.onChangeAnimation1}>
                         {animOptions}
-                        <option key="null" value="null">off</option>
                       </select>
                     </div>
                   </div>
@@ -172,7 +173,6 @@ class Form extends React.Component<FormProps, any> {
                     <label htmlFor="selectEffect2" className="col-lg-2 control-label">Animation</label>
                     <div className="col-lg-10">
                       <select className="form-control" id="selectEffect2" onChange={this.onChangeAnimation2}>
-                        <option key="null" value="null">off</option>
                         {animOptions}
                       </select>
                     </div>

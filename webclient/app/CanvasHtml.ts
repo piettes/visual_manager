@@ -32,7 +32,7 @@ class CanvasHtml extends Canvas {
   }
 
   initDraw(): void {
-    this.app = new Application(ROOM_LENGTH + 300, ROOM_HEIGHT, {antialias: true});
+    this.app = new Application(ROOM_LENGTH + 300, ROOM_HEIGHT, {antialias: true, backgroundColor: 0x999999D});
     this.graphics = new Graphics();
     this.drawGrid();
   }

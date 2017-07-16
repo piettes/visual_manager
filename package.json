@@ -9,7 +9,8 @@
     "start": "npm run build:live",
     "build:live": "nodemon --exec ./node_modules/.bin/ts-node -- ./neopixelclient/src/index.ts",
     "buildserver": "./node_modules/.bin/webpack --config webpack.config.js",
-    "local": "./node_modules/.bin/webpack-dev-server -d --watch --define process.env.host='\"http://localhost:8080\"'"
+    "local": "./node_modules/.bin/webpack-dev-server -d --watch --define process.env.HOST='\"http://localhost:8080/\"'",
+    "pi": "./node_modules/.bin/webpack-dev-server -d --watch --define process.env.HOST='\"http://pi:3000/\"'"
   },
   "dependencies": {
     "axios": "^0.15.3",
@@ -21,8 +22,8 @@
     "moment": "^2.17.1",
     "nanotimer": "^0.3.14",
     "pixi.js": "^4.4.1",
-    "react": "^15.4.2",
-    "react-dom": "^15.4.2",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
     "rpi-ws281x-native": "^0.8.2"
   },
   "devDependencies": {
@@ -34,8 +35,8 @@
     "@types/jquery": "^3.2.7",
     "@types/node": "^7.0.22",
     "@types/pixi.js": "^4.4.0",
-    "@types/react": "^15.0.17",
-    "@types/react-dom": "^0.14.23",
+    "@types/react": "^15.0.38",
+    "@types/react-dom": "^15.5.1",
     "babel-core": "^6.22.1",
     "babel-loader": "^6.2.10",
     "babel-plugin-syntax-async-functions": "^6.13.0",
