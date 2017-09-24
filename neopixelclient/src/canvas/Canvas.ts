@@ -73,9 +73,7 @@ abstract class Canvas {
 
   private calculateFrameDiff(): void {
     let nextFrameMap = new Map<number, number>();
-    this.nextFrameList = this.nextFrameList.filter((p: Point) => {
-      return Canvas.isInFrame(p.x, p.y);
-    });
+
     this.nextFrameList.forEach((p: Point) => {
       this.drawPixel(p.x, p.y, p.c);
       nextFrameMap.set(p.x * 10 + p.y, p.c);
@@ -93,14 +91,6 @@ abstract class Canvas {
   private initFrameLists(): void {
     this.nextFrameList = [];
     this.lastFrameList = [];
-  }
-
-  private static isInFrame(x: number, y: number): boolean {
-    if (0 < y && y < 4) {
-      return LED_LINE_WALL - 1 < x && x % 2 === 0;
-    } else {
-      return x < LED_LINE_WALL || x % 2 === 0;
-    }
   }
 
   setManual(manual: boolean): void {

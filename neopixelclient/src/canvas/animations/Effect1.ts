@@ -9,24 +9,18 @@ class Effect1 extends AnimationBase implements Animation {
   }
 
   nextframe(frame: Array<Point>, tick: number): boolean {
-    if (tick < 100) {
-      [0, 4].forEach(y => {
-        frame.push({x: tick, y: y, c: this.color1});
-        frame.push({x: tick + 1, y: y, c: this.color1});
-        frame.push({x: tick + 2, y: y, c: this.color1});
-        frame.push({x: tick + 3, y: y, c: this.color1});
-        frame.push({x: tick + 4, y: y, c: this.color1});
-      });
-    } else {
+    if (tick < 120) {
       [0, 1, 2, 3, 4].forEach(y => {
-        frame.push({x: tick, y: y, c: this.color1});
-        frame.push({x: tick + 1, y: y, c: this.color1});
-        frame.push({x: tick + 2, y: y, c: this.color1});
-        frame.push({x: tick + 3, y: y, c: this.color1});
-        frame.push({x: tick + 4, y: y, c: this.color1});
+        let size = Math.min(4, 120 - tick);
+        for (let i = 0; i < size; i++) {
+          frame.push({x: tick + i, y: y, c: this.color1});
+        }
       });
+      return true;
+    } else if (tick === 120) {
+      return true;
     }
-    return true;
+    return false;
   }
 
   // 340

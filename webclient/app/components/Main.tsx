@@ -15,15 +15,6 @@ class Main extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
 
-    this.incTicker = this.incTicker.bind(this);
-    this.toggleManual = this.toggleManual.bind(this);
-    this.getView = this.getView.bind(this);
-    this.applyChanges = this.applyChanges.bind(this);
-    this.changeColor = this.changeColor.bind(this);
-    this.changeAnimation1 = this.changeAnimation1.bind(this);
-    this.changeAnimation2 = this.changeAnimation2.bind(this);
-    this.changeBpm = this.changeBpm.bind(this);
-
     this.canvas = new CanvasHtml();
     this.canvas.setAnimations(AnimationFactory.getDefault(), AnimationFactory.getOff());
 
@@ -63,6 +54,10 @@ class Main extends React.Component<any, any> {
     Axios.get(this.host + "setManual/" + this.manualMode);
   }
 
+  stopPreview() {
+    this.canvas.setManual(true);
+  }
+
   getView() {
     return this.canvas.getView();
   }
@@ -72,12 +67,16 @@ class Main extends React.Component<any, any> {
     return (
         <div>
 
-          <Form changeAnimation1={this.changeAnimation1} changeAnimation2={this.changeAnimation2}
-                changeColor={this.changeColor} applyChanges={this.applyChanges}
-                animationList={this.animationList} toggleManual={this.toggleManual} incTicker={this.incTicker}
-                changeBpm={this.changeBpm}/>
+          <Form changeAnimation1={(name: string) => this.changeAnimation1(name)}
+                changeAnimation2={(name: string) => this.changeAnimation2(name)}
+                changeColor={(colorId: string, colorIndex: number) => this.changeColor(colorId, colorIndex)}
+                applyChanges={(animJson: any) => this.applyChanges(animJson)}
+                animationList={this.animationList} toggleManual={() => this.toggleManual()}
+                incTicker={() => this.incTicker()}
+                changeBpm={(bpm: number) => this.changeBpm(bpm)}
+                stopPreview={() => this.stopPreview()}/>
 
-          <CanvasComponent getView={this.getView}/>
+          <CanvasComponent getView={() => this.getView()}/>
 
         </div>
     );

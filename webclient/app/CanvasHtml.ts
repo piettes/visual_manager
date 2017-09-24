@@ -18,14 +18,15 @@ class CanvasHtml extends Canvas {
 
   graphics: Graphics;
   app: Application;
-  pixelMap: Array<Array<Graphics>>;
+  // pixelMap: Array<Array<Graphics>>;
+  pixelMapRoof: Array<Array<Graphics>>;
 
   constructor() {
     super();
   }
 
   setTickerFunction(tickerFunction: (delta: number) => void): void {
-    this.app.ticker.speed = 0.3;
+    this.app.ticker.speed = 1;
     this.app.ticker.add(tickerFunction);
     console.log("minFPS " + this.app.ticker.minFPS);
     console.log("FPS " + this.app.ticker.FPS);
@@ -38,29 +39,21 @@ class CanvasHtml extends Canvas {
   }
 
   private drawGrid(): void {
-    this.pixelMap = new Array<Array<Graphics>>(5);
+    // this.pixelMap = new Array<Array<Graphics>>(5);
+    this.pixelMapRoof = new Array<Array<Graphics>>(5);
     for (let row = 0; row < 5; row++) {
-      this.pixelMap[row] = new Array<Graphics>(220);
-      for (let column = 0; column < 220; column++) {
+      this.pixelMapRoof[row] = new Array<Graphics>(120);
+      for (let column = 0; column < 120; column++) {
         this.graphics.beginFill(LED_OFF);
-        let x = 0;
-        if (column < LED_LINE_WALL) {
-          if (row === 0 || row === 4) {
-            x = column * 100 * FACTOR / LED_PER_METER_WALL + MARGIN_LEFT;
-          } else {
-            continue;
-          }
-        } else {
-          x = (column - LED_LINE_WALL) * 100 * FACTOR / LED_PER_METER_ROOF + LED_LINE_WALL * 100 * FACTOR
-              / LED_PER_METER_WALL + MARGIN_LEFT;
-        }
+        let x = (column) * 100 * FACTOR / LED_PER_METER_ROOF + LED_LINE_WALL * 100 * FACTOR
+            / LED_PER_METER_WALL + MARGIN_LEFT;
         let gr = new Graphics();
         gr.beginFill(LED_OFF);
         gr.drawRect(0, 0, PIXEL_SIZE, PIXEL_SIZE);
         gr.x = x;
         gr.y = ROOM_HEIGHT - (MARGIN_TOP + row * (LINE_SPACE - PIXEL_SIZE));
         this.app.stage.addChild(gr);
-        this.pixelMap[row][column] = gr;
+        this.pixelMapRoof[row][column] = gr;
       }
     }
     this.graphics.endFill();
@@ -81,11 +74,7 @@ class CanvasHtml extends Canvas {
 
   drawPixel(x: number, y: number, color: any): void {
     let gr: Graphics;
-    if (x < LED_LINE_WALL) {
-      gr = this.pixelMap[y][x];
-    } else {
-      gr = this.pixelMap[y][LED_LINE_WALL + (x - LED_LINE_WALL) / 2];
-    }
+    gr = this.pixelMapRoof[y][x];
     gr.beginFill(color === -1 ? LED_OFF : color);
     gr.drawRect(0, 0, PIXEL_SIZE, PIXEL_SIZE);
     gr.endFill();

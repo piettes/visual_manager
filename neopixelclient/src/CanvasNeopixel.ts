@@ -28,27 +28,19 @@ class CanvasNeopixel extends Canvas {
     let color = _color === -1 ? LED_OFF : _color;
     switch (y) {
       case 0:
-        if (x < 100) {
-          this.pixelData[x] = color;
-        } else {
-          this.pixelData[LED_LINE_WALL + LED_LINE_ROOF - (x - LED_LINE_WALL) / 2 - 1] = color;
-        }
+        this.pixelData[LED_LINE_WALL + x] = color;
         break;
       case 1:
-        this.pixelData[LED_LINE_WALL + LED_LINE_ROOF + (x - LED_LINE_WALL) / 2] = color;
+        this.pixelData[LED_LINE_WALL + LED_LINE_ROOF * 2 - x] = color;
         break;
       case 2:
-        this.pixelData[LED_LINE_WALL + LED_LINE_ROOF * 3 - (x - LED_LINE_WALL) / 2 - 1] = color;
+        this.pixelData[LED_LINE_WALL + LED_LINE_ROOF * 2 + x] = color;
         break;
       case 3:
-        this.pixelData[LED_LINE_WALL + LED_LINE_ROOF * 3 + (x - LED_LINE_WALL) / 2] = color;
+        this.pixelData[LED_LINE_WALL + LED_LINE_ROOF * 4 - x] = color;
         break;
       case 4:
-        if (x < 100) {
-          this.pixelData[LED_LINE_WALL * 2 + LED_LINE_ROOF * 6 - x - 1] = color;
-        } else {
-          this.pixelData[LED_LINE_WALL + LED_LINE_ROOF * 5 + (x - LED_LINE_WALL) / 2] = color;
-        }
+        this.pixelData[LED_LINE_WALL + LED_LINE_ROOF * 4 + x] = color;
         break;
     }
   }

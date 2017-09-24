@@ -10,6 +10,7 @@ interface FormProps {
   applyChanges: (animJson: any) => void;
   toggleManual: () => void;
   incTicker: () => void;
+  stopPreview: () => void;
 }
 
 class Form extends React.Component<FormProps, any> {
@@ -26,13 +27,6 @@ class Form extends React.Component<FormProps, any> {
     };
     this.colorArray = AnimationFactory.colorsString;
 
-    this.onChangeAnimation1 = this.onChangeAnimation1.bind(this);
-    this.onChangeAnimation2 = this.onChangeAnimation2.bind(this);
-    this.applyChanges = this.applyChanges.bind(this);
-
-    this.onBpmPlus = this.onBpmPlus.bind(this);
-    this.onBpmMinus = this.onBpmMinus.bind(this);
-    this.onChangeBpm = this.onChangeBpm.bind(this);
   }
 
   onChangeAnimation1(event: any) {
@@ -154,7 +148,7 @@ class Form extends React.Component<FormProps, any> {
                   <div className="form-group">
                     <label htmlFor="selectEffect1" className="col-lg-2 control-label">Animation</label>
                     <div className="col-lg-10">
-                      <select className="form-control" id="selectEffect1" onChange={this.onChangeAnimation1}>
+                      <select className="form-control" id="selectEffect1" onChange={(event: any) => this.onChangeAnimation1(event)}>
                         {animOptions}
                       </select>
                     </div>
@@ -172,7 +166,7 @@ class Form extends React.Component<FormProps, any> {
                   <div className="form-group">
                     <label htmlFor="selectEffect2" className="col-lg-2 control-label">Animation</label>
                     <div className="col-lg-10">
-                      <select className="form-control" id="selectEffect2" onChange={this.onChangeAnimation2}>
+                      <select className="form-control" id="selectEffect2" onChange={(event: any) => this.onChangeAnimation2(event)}>
                         {animOptions}
                       </select>
                     </div>
@@ -193,13 +187,13 @@ class Form extends React.Component<FormProps, any> {
                   <div className="form-group">
                     <label htmlFor="bpm" className="col-lg-2 control-label">BPM</label>
                     <div className="input-group col-lg-2">
-                      <input type="number" className="form-control" id="bpm" onChange={this.onChangeBpm}
+                      <input type="number" className="form-control" id="bpm" onChange={(event: any) => this.onChangeBpm(event)}
                              value={this.state.bpm}/>
                       <span className="input-group-btn">
-                          <button className="btn btn-default btn-xs my-plus-button" onClick={this.onBpmPlus}
+                          <button className="btn btn-default btn-xs my-plus-button" onClick={() => this.onBpmPlus()}
                                   type="button">+</button>
                         <br/>
-                          <button className="btn btn-default btn-xs my-minus-button" onClick={this.onBpmMinus}
+                          <button className="btn btn-default btn-xs my-minus-button" onClick={() => this.onBpmMinus()}
                                   type="button">-</button>
                       </span>
                     </div>
@@ -213,11 +207,12 @@ class Form extends React.Component<FormProps, any> {
 
           <br/>
 
-          <button className="btn btn-sm btn-primary" onClick={this.applyChanges}>Apply</button>
+          <button className="btn btn-sm btn-primary" onClick={() => this.applyChanges()}>Apply</button>
           <br/>
           <br/>
           <button className="btn btn-sm btn-default" onClick={this.props.toggleManual}>Toggle manual</button>
           <button className="btn btn-sm btn-default" onClick={this.props.incTicker}>Step</button>
+          <button className="btn btn-sm btn-default" onClick={() => this.props.stopPreview()}>Stop preview</button>
         </div>
     );
 
