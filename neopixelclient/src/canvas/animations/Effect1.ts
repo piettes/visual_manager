@@ -10,7 +10,7 @@ class Effect1 extends AnimationBase implements Animation {
 
   nextframe(frame: Array<Point>, tick: number): boolean {
     if (tick < 100) {
-      [0, 5].forEach(y => {
+      [0, 4].forEach(y => {
         frame.push({x: tick, y: y, c: this.color1});
         frame.push({x: tick + 1, y: y, c: this.color1});
         frame.push({x: tick + 2, y: y, c: this.color1});
@@ -18,7 +18,7 @@ class Effect1 extends AnimationBase implements Animation {
         frame.push({x: tick + 4, y: y, c: this.color1});
       });
     } else {
-      [0, 1, 2, 3, 4, 5].forEach(y => {
+      [0, 1, 2, 3, 4].forEach(y => {
         frame.push({x: tick, y: y, c: this.color1});
         frame.push({x: tick + 1, y: y, c: this.color1});
         frame.push({x: tick + 2, y: y, c: this.color1});

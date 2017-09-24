@@ -26,7 +26,7 @@ class Rotation extends AnimationBase implements Animation {
       return true;
     }
 
-    [0, 1, 2, 3, 4, 5].forEach(y => {
+    [0, 1, 2, 3, 4].forEach(y => {
       // x = (y / sin theta) * cos theta = y / tan theta
       let x = Math.round((y - 2.5) / Math.tan(theta / 360 * Math.PI * 2) * 30) + this.LED_LINE_ROOF + this.LED_LINE_WALL;
       if (x > 0 && x < this.LED_LINE_ROOF * 2 + this.LED_LINE_WALL) {

@@ -22,7 +22,7 @@ class Random extends AnimationBase implements Animation {
       if (this.currentColor === this.LED_OFF) {
         return true;
       }
-      [0, 5].forEach(y => {
+      [0, 4].forEach(y => {
         let r: number = Math.floor(Math.random() * this.scal1) * 2;
         frame.push({x: r, y: y, c: this.currentColor});
         frame.push({x: r + 1, y: y, c: this.currentColor});
@@ -33,7 +33,7 @@ class Random extends AnimationBase implements Animation {
         frame.push({x: r + 6, y: y, c: this.currentColor});
         frame.push({x: r + 7, y: y, c: this.currentColor});
       });
-      [1, 2, 3, 4].forEach(y => {
+      [1, 2, 3].forEach(y => {
         let r: number = Math.floor(Math.random() * this.scal2) * 2 + this.LED_LINE_WALL;
         frame.push({x: r, y: y, c: this.currentColor});
         frame.push({x: r + 1, y: y, c: this.currentColor});
@@ -51,7 +51,7 @@ class Random extends AnimationBase implements Animation {
   }
 
   tick(): void {
-    if (this.ticker >= 3600 / this.bpm) {
+    if (this.ticker >= 600 / this.bpm) {
       this.ticker = 0;
     }
     this.ticker++;

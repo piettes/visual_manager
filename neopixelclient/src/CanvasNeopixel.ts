@@ -44,9 +44,6 @@ class CanvasNeopixel extends Canvas {
         this.pixelData[LED_LINE_WALL + LED_LINE_ROOF * 3 + (x - LED_LINE_WALL) / 2] = color;
         break;
       case 4:
-        this.pixelData[LED_LINE_WALL + LED_LINE_ROOF * 5 - (x - LED_LINE_WALL) / 2 - 1] = color;
-        break;
-      case 5:
         if (x < 100) {
           this.pixelData[LED_LINE_WALL * 2 + LED_LINE_ROOF * 6 - x - 1] = color;
         } else {
@@ -67,7 +64,7 @@ class CanvasNeopixel extends Canvas {
   setTickerFunction(tickerFunction: (delta: number) => void): void {
     let timer = new NanoTimer();
     this.isRunning = true;
-    timer.setInterval(tickerFunction, [0], "16666u");
+    timer.setInterval(tickerFunction, [0], "100000u"); // 10 fps
   }
 
   toggleTicker(run: boolean): void {

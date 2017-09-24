@@ -38,14 +38,14 @@ class CanvasHtml extends Canvas {
   }
 
   private drawGrid(): void {
-    this.pixelMap = new Array<Array<Graphics>>(6);
-    for (let row = 0; row < 6; row++) {
+    this.pixelMap = new Array<Array<Graphics>>(5);
+    for (let row = 0; row < 5; row++) {
       this.pixelMap[row] = new Array<Graphics>(220);
       for (let column = 0; column < 220; column++) {
         this.graphics.beginFill(LED_OFF);
         let x = 0;
         if (column < LED_LINE_WALL) {
-          if (row === 0 || row === 5) {
+          if (row === 0 || row === 4) {
             x = column * 100 * FACTOR / LED_PER_METER_WALL + MARGIN_LEFT;
           } else {
             continue;

@@ -96,7 +96,7 @@ abstract class Canvas {
   }
 
   private static isInFrame(x: number, y: number): boolean {
-    if (0 < y && y < 5) {
+    if (0 < y && y < 4) {
       return LED_LINE_WALL - 1 < x && x % 2 === 0;
     } else {
       return x < LED_LINE_WALL || x % 2 === 0;
