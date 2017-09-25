@@ -25,6 +25,7 @@ abstract class Canvas {
   private animation2: Animation = AnimationFactory.getOff();
 
   constructor() {
+    console.log("New Canvas");
     this.initFrameLists();
     this.initDraw();
     this.setTickerFunction(this.tickerFunction(this));
@@ -51,6 +52,7 @@ abstract class Canvas {
 
   tickerFunction(_that: Canvas): (delta: number) => void {
     return (delta: number) => {
+      console.log(delta);
       this.acc += delta;
       if (this.acc > 60 / this.fps) {
         this.acc = 0;
