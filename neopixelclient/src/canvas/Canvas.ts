@@ -46,18 +46,25 @@ abstract class Canvas {
   tickerCalled: number = 0;
   lastTickerCalled: number = new Date().getTime();
 
+  fps: number = 10;
+  acc: number = 0;
+
   tickerFunction(_that: Canvas): (delta: number) => void {
     return (delta: number) => {
-
-      this.tickerCalled++;
-      let now = new Date().getTime();
-      if (now - this.lastTickerCalled >= 10000) {
-        console.log("avg fps: " + this.tickerCalled / 10);
-        this.tickerCalled = 0;
-        this.lastTickerCalled = now;
-      }
-      if (_that.animation1 || _that.animation2) {
-        _that.step();
+      this.acc += delta;
+      if (this.acc > 60 / this.fps) {
+        this.acc = 0;
+        // console.log(delta);
+        this.tickerCalled++;
+        let now = new Date().getTime();
+        if (now - this.lastTickerCalled >= 10000) {
+          console.log("avg fps: " + this.tickerCalled / 10);
+          this.tickerCalled = 0;
+          this.lastTickerCalled = now;
+        }
+        if (_that.animation1 || _that.animation2) {
+          _that.step();
+        }
       }
     };
   }
