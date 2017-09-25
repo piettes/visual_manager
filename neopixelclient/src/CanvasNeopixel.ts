@@ -56,7 +56,7 @@ class CanvasNeopixel extends Canvas {
   setTickerFunction(tickerFunction: (delta: number) => void): void {
     let timer = new NanoTimer();
     this.isRunning = true;
-    timer.setInterval(tickerFunction, [12], "100000u"); // 10 fps
+    timer.setInterval(tickerFunction, [12], "50000u"); // 20 fps
   }
 
   toggleTicker(run: boolean): void {

@@ -27,8 +27,9 @@ class Effect1 extends AnimationBase implements Animation {
   tick(): void {
     if (this.ticker >= 332) {
       this.ticker = 0;
+      return;
     }
-    this.ticker += 4;
+    this.ticker += 2;
   }
 
 }

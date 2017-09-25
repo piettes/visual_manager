@@ -3,6 +3,7 @@ import {Animation} from "./Animation";
 import {Effect1} from "./animations/Effect1";
 import {Random} from "./animations/Random";
 import {Off} from "./animations/Off";
+import {Stars} from "./animations/Stars";
 
 class AnimationFactory {
 
@@ -13,6 +14,8 @@ class AnimationFactory {
         return new Rotation();
       case "Effect1":
         return new Effect1();
+      case "Stars":
+        return new Stars();
       case "Random":
         return new Random();
       case "Off":
@@ -24,11 +27,11 @@ class AnimationFactory {
   }
 
   static getAll(): Array<Animation> {
-    return [new Random(), new Effect1(), new Rotation(), new Off()];
+    return [new Stars(), new Random(), new Effect1(), new Rotation(), new Off()];
   }
 
   static getDefault(): Animation {
-    return new Random();
+    return new Stars();
   }
 
   static getOff(): Animation {
