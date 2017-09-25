@@ -5,104 +5,124 @@ import Color from "../Color";
 
 class Stars extends AnimationBase implements Animation {
 
+  limit: number = 30;
+  col: Color = Color.PURPLE;
+  stars: Array<any> = [];
+
+  constructor() {
+    super();
+    this.stars.push(this.initStar(0));
+    this.stars.push(this.initStar(1));
+    this.stars.push(this.initStar(2));
+    this.stars.push(this.initStar(3));
+    this.stars.push(this.initStar(4));
+  }
+
   getName(): string {
     return "Stars";
   }
 
-  limit: number = 30;
-  col: Color = Color.RED;
-  star1: any = {x: 0, y: 0, c: this.col.shade1};
-  star1_1: any = {...this.star1, c: this.col.shade2};
-  star1_2: any = {...this.star1_1, c: this.col.shade3};
-  star1_3: any = {...this.star1_2, c: this.col.shade4};
-  star1_4: any = {...this.star1_3, c: this.col.shade5};
+  initStar(y: number) {
+    let x = Math.floor(Math.random() * (120 - this.limit));
+    let star = {star_1: {}, star_2: {}, star_3: {}, star_4: {}, star_5: {}};
+    star.star_1 = {x: x, y: y, c: this.col.shade1};
+    star.star_2 = {x: x, y: y, c: this.col.shade2};
+    star.star_3 = {x: x, y: y, c: this.col.shade3};
+    star.star_4 = {x: x, y: y, c: this.col.shade4};
+    star.star_5 = {x: x, y: y, c: this.col.shade5};
+    return star;
+  }
 
-  nextframe(frame: Array<Point>, tick: number): boolean {
-    console.log(tick);
+
+  displayStar(starIndex: number, tick: number, frame: Array<Point>): boolean {
     if (tick === 0) {
-      this.star1 = {x: 0, y: 0, c: this.col.shade1};
-      this.star1_1 = {...this.star1, c: this.col.shade2};
-      this.star1_2 = {...this.star1_1, c: this.col.shade3};
-      this.star1_3 = {...this.star1_2, c: this.col.shade4};
-      this.star1_4 = {...this.star1_3, c: this.col.shade5};
-      frame.push({...this.star1});
+      this.stars[starIndex] = this.initStar(starIndex);
+      frame.push({...this.stars[starIndex].star_1});
       return true;
     } else if (tick === 1) {
-      this.star1.x++;
-      frame.push({...this.star1});
-      frame.push({...this.star1_1});
+      this.stars[starIndex].star_1.x++;
+      frame.push({...this.stars[starIndex].star_1});
+      frame.push({...this.stars[starIndex].star_2});
       return true;
     } else if (tick === 2) {
-      this.star1.x++;
-      this.star1_1.x++;
-      frame.push({...this.star1});
-      frame.push({...this.star1_1});
-      frame.push({...this.star1_2});
+      this.stars[starIndex].star_1.x++;
+      this.stars[starIndex].star_2.x++;
+      frame.push({...this.stars[starIndex].star_1});
+      frame.push({...this.stars[starIndex].star_2});
+      frame.push({...this.stars[starIndex].star_3});
       return true;
     } else if (tick === 3) {
-      this.star1.x++;
-      this.star1_1.x++;
-      this.star1_2.x++;
-      frame.push({...this.star1});
-      frame.push({...this.star1_1});
-      frame.push({...this.star1_2});
-      frame.push({...this.star1_3});
+      this.stars[starIndex].star_1.x++;
+      this.stars[starIndex].star_2.x++;
+      this.stars[starIndex].star_3.x++;
+      frame.push({...this.stars[starIndex].star_1});
+      frame.push({...this.stars[starIndex].star_2});
+      frame.push({...this.stars[starIndex].star_3});
+      frame.push({...this.stars[starIndex].star_4});
       return true;
     } else if (tick === 4) {
-      this.star1.x++;
-      this.star1_1.x++;
-      this.star1_2.x++;
-      this.star1_3.x++;
-      frame.push({...this.star1});
-      frame.push({...this.star1_1});
-      frame.push({...this.star1_2});
-      frame.push({...this.star1_3});
-      frame.push({...this.star1_4});
+      this.stars[starIndex].star_1.x++;
+      this.stars[starIndex].star_2.x++;
+      this.stars[starIndex].star_3.x++;
+      this.stars[starIndex].star_4.x++;
+      frame.push({...this.stars[starIndex].star_1});
+      frame.push({...this.stars[starIndex].star_2});
+      frame.push({...this.stars[starIndex].star_3});
+      frame.push({...this.stars[starIndex].star_4});
+      frame.push({...this.stars[starIndex].star_5});
       return true;
     } else if (tick < this.limit) {
-      this.star1.x++;
-      this.star1_1.x++;
-      this.star1_2.x++;
-      this.star1_3.x++;
-      this.star1_4.x++;
-      frame.push({...this.star1});
-      frame.push({...this.star1_1});
-      frame.push({...this.star1_2});
-      frame.push({...this.star1_3});
-      frame.push({...this.star1_4});
+      this.stars[starIndex].star_1.x++;
+      this.stars[starIndex].star_2.x++;
+      this.stars[starIndex].star_3.x++;
+      this.stars[starIndex].star_4.x++;
+      this.stars[starIndex].star_5.x++;
+      frame.push({...this.stars[starIndex].star_1});
+      frame.push({...this.stars[starIndex].star_2});
+      frame.push({...this.stars[starIndex].star_3});
+      frame.push({...this.stars[starIndex].star_4});
+      frame.push({...this.stars[starIndex].star_5});
       return true;
     } else if (tick === this.limit) {
-      this.star1_1.x++;
-      this.star1_2.x++;
-      this.star1_3.x++;
-      this.star1_4.x++;
-      frame.push({...this.star1_1});
-      frame.push({...this.star1_2});
-      frame.push({...this.star1_3});
-      frame.push({...this.star1_4});
+      this.stars[starIndex].star_2.x++;
+      this.stars[starIndex].star_3.x++;
+      this.stars[starIndex].star_4.x++;
+      this.stars[starIndex].star_5.x++;
+      frame.push({...this.stars[starIndex].star_2});
+      frame.push({...this.stars[starIndex].star_3});
+      frame.push({...this.stars[starIndex].star_4});
+      frame.push({...this.stars[starIndex].star_5});
       return true;
     } else if (tick === this.limit + 1) {
-      this.star1_2.x++;
-      this.star1_3.x++;
-      this.star1_4.x++;
-      frame.push({...this.star1_2});
-      frame.push({...this.star1_3});
-      frame.push({...this.star1_4});
+      this.stars[starIndex].star_3.x++;
+      this.stars[starIndex].star_4.x++;
+      this.stars[starIndex].star_5.x++;
+      frame.push({...this.stars[starIndex].star_3});
+      frame.push({...this.stars[starIndex].star_4});
+      frame.push({...this.stars[starIndex].star_5});
       return true;
     } else if (tick === this.limit + 2) {
-      this.star1_3.x++;
-      this.star1_4.x++;
-      frame.push({...this.star1_3});
-      frame.push({...this.star1_4});
+      this.stars[starIndex].star_4.x++;
+      this.stars[starIndex].star_5.x++;
+      frame.push({...this.stars[starIndex].star_4});
+      frame.push({...this.stars[starIndex].star_5});
       return true;
     } else if (tick === this.limit + 3) {
-      this.star1_4.x++;
-      frame.push({...this.star1_4});
+      this.stars[starIndex].star_5.x++;
+      frame.push({...this.stars[starIndex].star_5});
       return true;
     } else if (tick === this.limit + 4) {
       return true;
     }
     return false;
+  }
+
+  nextframe(frame: Array<Point>, tick: number): boolean {
+    this.displayStar(0, tick, frame)
+    this.displayStar(1, tick, frame)
+    this.displayStar(2, tick, frame)
+    this.displayStar(3, tick, frame)
+    return this.displayStar(4, tick, frame);
   }
 
   // 340
