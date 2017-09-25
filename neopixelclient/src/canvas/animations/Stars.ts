@@ -5,9 +5,10 @@ import Color from "../Color";
 
 class Stars extends AnimationBase implements Animation {
 
-  limit: number = 30;
+  limit: number = 20;
   col: Color = Color.PURPLE;
   stars: Array<any> = [];
+  offsets: Array<any> = [];
 
   constructor() {
     super();
@@ -16,6 +17,12 @@ class Stars extends AnimationBase implements Animation {
     this.stars.push(this.initStar(2));
     this.stars.push(this.initStar(3));
     this.stars.push(this.initStar(4));
+    this.offsets.push(Math.floor(Math.random() * 40));
+    this.offsets.push(Math.floor(Math.random() * 40));
+    this.offsets.push(Math.floor(Math.random() * 40));
+    this.offsets.push(Math.floor(Math.random() * 40));
+    this.offsets.push(Math.floor(Math.random() * 40));
+
   }
 
   getName(): string {
@@ -118,11 +125,20 @@ class Stars extends AnimationBase implements Animation {
   }
 
   nextframe(frame: Array<Point>, tick: number): boolean {
-    this.displayStar(0, tick, frame)
-    this.displayStar(1, tick, frame)
-    this.displayStar(2, tick, frame)
-    this.displayStar(3, tick, frame)
-    return this.displayStar(4, tick, frame);
+    let res = this.displayStar(0, tick, frame);
+    if (tick - this.offsets[1] >= 0) {
+      res = this.displayStar(1, tick - this.offsets[1], frame) || res;
+    }
+    if (tick - this.offsets[2] >= 0) {
+      res = this.displayStar(2, tick - this.offsets[2], frame) || res;
+    }
+    if (tick - this.offsets[3] >= 0) {
+      res = this.displayStar(3, tick - this.offsets[3], frame) || res;
+    }
+    if (tick - this.offsets[4] >= 0) {
+      res = this.displayStar(4, tick - this.offsets[4], frame) || res;
+    }
+    return res;
   }
 
   // 340
