@@ -23,12 +23,17 @@ class Stars extends AnimationBase implements Animation {
   }
 
   initOffsets() {
-    this.offsets = [];
-    this.offsets.push(Math.floor(Math.random() * 70));
-    this.offsets.push(Math.floor(Math.random() * 70));
-    this.offsets.push(Math.floor(Math.random() * 70));
-    this.offsets.push(Math.floor(Math.random() * 70));
-    this.offsets.push(Math.floor(Math.random() * 70));
+    let offsets = [];
+    offsets.push(Math.floor(Math.random() * 30));
+    offsets.push(Math.floor(Math.random() * 40));
+    offsets.push(Math.floor(Math.random() * 50));
+    offsets.push(Math.floor(Math.random() * 60));
+    offsets.push(Math.floor(Math.random() * 70));
+    // https://stackoverflow.com/a/18650169
+    offsets.sort(function() {
+      return .5 - Math.random();
+    });
+    this.offsets = offsets;
   }
 
   initStar(y: number) {
@@ -148,7 +153,7 @@ class Stars extends AnimationBase implements Animation {
 
   // 340
   tick(): void {
-    if (this.ticker >= 110) {
+    if (this.ticker >= 100) {
       this.ticker = 0;
       this.initOffsets();
       return;
