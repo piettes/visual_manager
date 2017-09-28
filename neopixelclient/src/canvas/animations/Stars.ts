@@ -5,7 +5,7 @@ import Color from "../Color";
 
 class Stars extends AnimationBase implements Animation {
 
-  limit: number = 20;
+  limit: number = 30;
   stars: Array<any> = [];
   offsets: Array<any> = [];
 
