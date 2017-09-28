@@ -10,9 +10,9 @@ interface Animation {
 
   getBpm(): number;
 
-  setColor1(colorIndex: number): void;
+  setColor1(name: string): void;
 
-  setColor2(colorIndex: number): void;
+  setColor2(name: string): void;
 
   reset(): void;
 

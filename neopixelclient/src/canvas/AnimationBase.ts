@@ -1,5 +1,5 @@
-import {AnimationFactory} from "./AnimationFactory";
 import {Point} from "./Point";
+import Color from "./Color";
 
 abstract class AnimationBase {
 
@@ -7,10 +7,10 @@ abstract class AnimationBase {
   LED_LINE_WALL: number = 100;
   protected bpm: number = 110;
 
-  LED_OFF: number = AnimationFactory.colorOFF;
+  LED_OFF: number = Color.BLACK.value;
 
-  protected color1: number = AnimationFactory.colors[0];
-  protected color2: number = AnimationFactory.colors[0];
+  protected color1: Color = Color.PURPLE;
+  protected color2: Color = Color.PURPLE;
 
   setBpm(bpm: number): void {
     this.bpm = bpm;
@@ -20,12 +20,12 @@ abstract class AnimationBase {
     return this.bpm;
   }
 
-  setColor1(colorIndex: number): void {
-    this.color1 = AnimationFactory.colors[colorIndex];
+  setColor1(name: string): void {
+    this.color1 = Color.fromName(name);
   }
 
-  setColor2(colorIndex: number): void {
-    this.color2 = AnimationFactory.colors[colorIndex];
+  setColor2(name: string): void {
+    this.color2 = Color.fromName(name);
   }
 
   animate(frame: Array<Point>): boolean {

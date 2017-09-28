@@ -35,8 +35,8 @@ class Main extends React.Component<any, any> {
     this.canvas.setAnimation2(AnimationFactory.get(name));
   }
 
-  changeColor(colorId: string, colorIndex: number): void {
-    this.canvas.setColor(colorId, colorIndex);
+  changeColor(colorId: string, colorName: string): void {
+    this.canvas.setColor(colorId, colorName);
   }
 
   changeBpm(bpm: number) {
@@ -69,7 +69,7 @@ class Main extends React.Component<any, any> {
 
           <Form changeAnimation1={(name: string) => this.changeAnimation1(name)}
                 changeAnimation2={(name: string) => this.changeAnimation2(name)}
-                changeColor={(colorId: string, colorIndex: number) => this.changeColor(colorId, colorIndex)}
+                changeColor={(colorId: string, colorName: string) => this.changeColor(colorId, colorName)}
                 applyChanges={(animJson: any) => this.applyChanges(animJson)}
                 animationList={this.animationList} toggleManual={() => this.toggleManual()}
                 incTicker={() => this.incTicker()}

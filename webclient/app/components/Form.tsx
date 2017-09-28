@@ -1,10 +1,11 @@
 import * as React from "react";
 import {AnimationFactory} from "../../../neopixelclient/src/canvas/AnimationFactory";
+import Color from "../../../neopixelclient/src/canvas/Color";
 
 interface FormProps {
   changeAnimation1: (name: string) => void;
   changeAnimation2: (name: string) => void;
-  changeColor: (colorId: string, colorIndex: number) => void;
+  changeColor: (colorId: string, colorName: string) => void;
   changeBpm: (bpm: number) => void;
   animationList: Array<string>;
   applyChanges: (animJson: any) => void;
@@ -15,18 +16,14 @@ interface FormProps {
 
 class Form extends React.Component<FormProps, any> {
 
-  private colorArray: Array<string>;
-
   constructor(props: any) {
     super(props);
 
     this.state = {
-      color11: 0, color12: 0, color21: 0, color22: 0,
+      color11: "purple", color12: "purple", color21: "purple", color22: "purple",
       animation1: AnimationFactory.getDefault().getName(), animation2: AnimationFactory.getOff().getName(),
       bpm: 110
     };
-    this.colorArray = AnimationFactory.colorsString;
-
   }
 
   onChangeAnimation1(event: any) {
@@ -39,10 +36,10 @@ class Form extends React.Component<FormProps, any> {
     this.props.changeAnimation2(event.target.value);
   }
 
-  onChangeColor(colorId: string, colorIndex: number): () => void {
+  onChangeColor(colorId: string, colorName: string): () => void {
     return () => {
-      this.setState({[colorId]: colorIndex});
-      this.props.changeColor(colorId, colorIndex);
+      this.setState({[colorId]: colorName});
+      this.props.changeColor(colorId, colorName);
     };
   }
 
@@ -101,16 +98,16 @@ class Form extends React.Component<FormProps, any> {
 
   colorDropdown(colorId: string) {
 
-    const colorList = AnimationFactory.colorsString.map((color: string, index: number) => {
-          let style = {backgroundColor: color};
-          return <li key={color} style={style} className={"color-select-" + color}>
+    const colorList = Color.COLORS.map((color: Color, index: number) => {
+          let style = {backgroundColor: color.valueString};
+          return <li key={color.name} style={style} className={"color-select-" + color.valueString}>
             <a href="#" style={style}
-               onClick={this.onChangeColor(colorId, index)}>{color}</a>
+               onClick={this.onChangeColor(colorId, color.name)}>{color.name}</a>
           </li>;
         }
     );
 
-    const style = {backgroundColor: this.colorArray[this.state[colorId]]};
+    const style = {backgroundColor: Color.fromName(this.state[colorId]).valueString};
 
     return (
         <div className="btn-group">

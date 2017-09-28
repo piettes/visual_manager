@@ -125,19 +125,19 @@ abstract class Canvas {
     this.resetAnimations();
   }
 
-  setColor(colorId: string, colorIndex: number): void {
+  setColor(colorId: string, colorName: string): void {
     switch (colorId) {
       case "color11":
-        this.animation1.setColor1(colorIndex);
+        this.animation1.setColor1(colorName);
         break;
       case "color12":
-        this.animation1.setColor2(colorIndex);
+        this.animation1.setColor2(colorName);
         break;
       case "color21":
-        this.animation2.setColor1(colorIndex);
+        this.animation2.setColor1(colorName);
         break;
       case "color22":
-        this.animation2.setColor2(colorIndex);
+        this.animation2.setColor2(colorName);
         break;
       default:
         console.log("Wrong wolor Id");

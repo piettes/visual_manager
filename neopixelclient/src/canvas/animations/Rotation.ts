@@ -20,8 +20,8 @@ class Rotation extends AnimationBase implements Animation {
   nextframe(frame: Array<Point>, theta: number): boolean {
     if ([0, 1, 359, 179, 180, 181].indexOf(theta) !== -1) {
       for (let i = 0; i < this.LED_LINE_ROOF; i++) {
-        frame.push({x: this.LED_LINE_WALL + i * 2, y: 2, c: this.color1});
-        frame.push({x: this.LED_LINE_WALL + i * 2, y: 3, c: this.color1});
+        frame.push({x: this.LED_LINE_WALL + i * 2, y: 2, c: this.color1.value});
+        frame.push({x: this.LED_LINE_WALL + i * 2, y: 3, c: this.color1.value});
       }
       return true;
     }
