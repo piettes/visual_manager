@@ -4,7 +4,7 @@ import {AnimationBase} from "../AnimationBase";
 
 class Stars extends AnimationBase implements Animation {
 
-  limit: number = 30;
+  limit: number = 25;
   stars: Array<any> = [];
   offsets: Array<any> = [];
 
@@ -27,8 +27,8 @@ class Stars extends AnimationBase implements Animation {
     offsets.push(0);
     offsets.push(Math.floor(Math.random() * 30) + 10);
     offsets.push(Math.floor(Math.random() * 30) + 10);
-    offsets.push(Math.floor(Math.random() * 30) + 40);
-    offsets.push(Math.floor(Math.random() * 30) + 40);
+    offsets.push(Math.floor(Math.random() * 30) + 30);
+    offsets.push(Math.floor(Math.random() * 30) + 30);
     // https://stackoverflow.com/a/18650169
     offsets.sort(function() {
       return .5 - Math.random();
@@ -153,7 +153,7 @@ class Stars extends AnimationBase implements Animation {
 
   // 340
   tick(): void {
-    if (this.ticker >= 100) {
+    if (this.ticker >= 80) {
       this.ticker = 0;
       this.initOffsets();
       console.log("init offset")
