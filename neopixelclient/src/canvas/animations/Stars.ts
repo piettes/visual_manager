@@ -1,7 +1,6 @@
 import {Animation} from "../Animation";
 import {Point} from "../Point";
 import {AnimationBase} from "../AnimationBase";
-import Color from "../Color";
 
 class Stars extends AnimationBase implements Animation {
 
@@ -16,11 +15,11 @@ class Stars extends AnimationBase implements Animation {
     this.stars.push(this.initStar(2));
     this.stars.push(this.initStar(3));
     this.stars.push(this.initStar(4));
+    this.offsets.push(Math.floor(Math.random() * 30));
     this.offsets.push(Math.floor(Math.random() * 40));
-    this.offsets.push(Math.floor(Math.random() * 40));
-    this.offsets.push(Math.floor(Math.random() * 40));
-    this.offsets.push(Math.floor(Math.random() * 40));
-    this.offsets.push(Math.floor(Math.random() * 40));
+    this.offsets.push(Math.floor(Math.random() * 50));
+    this.offsets.push(Math.floor(Math.random() * 60));
+    this.offsets.push(Math.floor(Math.random() * 70));
 
   }
 
@@ -124,7 +123,10 @@ class Stars extends AnimationBase implements Animation {
   }
 
   nextframe(frame: Array<Point>, tick: number): boolean {
-    let res = this.displayStar(0, tick, frame);
+    let res = false;
+    if (tick - this.offsets[0] >= 0) {
+      res = this.displayStar(0, tick - this.offsets[0], frame) || res;
+    }
     if (tick - this.offsets[1] >= 0) {
       res = this.displayStar(1, tick - this.offsets[1], frame) || res;
     }
@@ -142,7 +144,7 @@ class Stars extends AnimationBase implements Animation {
 
   // 340
   tick(): void {
-    if (this.ticker >= 50) {
+    if (this.ticker >= 90) {
       this.ticker = 0;
       return;
     }
