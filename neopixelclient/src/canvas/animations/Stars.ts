@@ -24,11 +24,11 @@ class Stars extends AnimationBase implements Animation {
 
   initOffsets() {
     let offsets = [];
-    offsets.push(Math.floor(Math.random() * 30));
-    offsets.push(Math.floor(Math.random() * 40));
-    offsets.push(Math.floor(Math.random() * 50));
-    offsets.push(Math.floor(Math.random() * 60));
-    offsets.push(Math.floor(Math.random() * 70));
+    offsets.push(0);
+    offsets.push(Math.floor(Math.random() * 30) + 10);
+    offsets.push(Math.floor(Math.random() * 30) + 10);
+    offsets.push(Math.floor(Math.random() * 30) + 40);
+    offsets.push(Math.floor(Math.random() * 30) + 40);
     // https://stackoverflow.com/a/18650169
     offsets.sort(function() {
       return .5 - Math.random();
@@ -156,6 +156,7 @@ class Stars extends AnimationBase implements Animation {
     if (this.ticker >= 100) {
       this.ticker = 0;
       this.initOffsets();
+      console.log("init offset")
       return;
     }
     this.ticker++;
