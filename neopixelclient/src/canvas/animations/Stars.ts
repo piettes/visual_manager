@@ -15,15 +15,20 @@ class Stars extends AnimationBase implements Animation {
     this.stars.push(this.initStar(2));
     this.stars.push(this.initStar(3));
     this.stars.push(this.initStar(4));
-    this.offsets.push(Math.floor(Math.random() * 100));
-    this.offsets.push(Math.floor(Math.random() * 100));
-    this.offsets.push(Math.floor(Math.random() * 100));
-    this.offsets.push(Math.floor(Math.random() * 100));
-    this.offsets.push(Math.floor(Math.random() * 100));
+    this.initOffsets();
   }
 
   getName(): string {
     return "Stars";
+  }
+
+  initOffsets() {
+    this.offsets = [];
+    this.offsets.push(Math.floor(Math.random() * 70));
+    this.offsets.push(Math.floor(Math.random() * 70));
+    this.offsets.push(Math.floor(Math.random() * 70));
+    this.offsets.push(Math.floor(Math.random() * 70));
+    this.offsets.push(Math.floor(Math.random() * 70));
   }
 
   initStar(y: number) {
@@ -143,8 +148,9 @@ class Stars extends AnimationBase implements Animation {
 
   // 340
   tick(): void {
-    if (this.ticker >= 80) {
+    if (this.ticker >= 110) {
       this.ticker = 0;
+      this.initOffsets();
       return;
     }
     this.ticker++;
