@@ -15,11 +15,17 @@ class Stars extends AnimationBase implements Animation {
     this.stars.push(this.initStar(2));
     this.stars.push(this.initStar(3));
     this.stars.push(this.initStar(4));
-    this.offsets.push(Math.floor(Math.random() * 30));
-    this.offsets.push(Math.floor(Math.random() * 40));
-    this.offsets.push(Math.floor(Math.random() * 50));
-    this.offsets.push(Math.floor(Math.random() * 60));
-    this.offsets.push(Math.floor(Math.random() * 70));
+    // this.offsets.push(Math.floor(Math.random() * 30));
+    // this.offsets.push(Math.floor(Math.random() * 30));
+    // this.offsets.push(Math.floor(Math.random() * 30));
+    // this.offsets.push(Math.floor(Math.random() * 60));
+    // this.offsets.push(Math.floor(Math.random() * 70));
+    let rr = Math.floor(Math.random() * 30);
+    this.offsets.push(10 + rr);
+    this.offsets.push(20 + rr);
+    this.offsets.push(30 + rr);
+    this.offsets.push(40 + rr);
+    this.offsets.push(50 + rr);
 
   }
 
@@ -144,7 +150,7 @@ class Stars extends AnimationBase implements Animation {
 
   // 340
   tick(): void {
-    if (this.ticker >= 90) {
+    if (this.ticker >= 80) {
       this.ticker = 0;
       return;
     }
