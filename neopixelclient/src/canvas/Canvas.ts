@@ -46,7 +46,7 @@ abstract class Canvas {
   tickerCalled: number = 0;
   lastTickerCalled: number = new Date().getTime();
 
-  fps: number = 20;
+  fps: number = 60;
   acc: number = 0;
 
   tada: number = new Date().getTime();
@@ -60,7 +60,7 @@ abstract class Canvas {
         let now = new Date().getTime();
         if (now - this.lastTickerCalled >= 10000) {
           console.log(this.tada - new Date().getTime());
-          console.log("avg fps: " + this.tickerCalled);
+          console.log("avg fps: " + this.tickerCalled / 10);
           this.tickerCalled = 0;
           this.lastTickerCalled = now;
         }

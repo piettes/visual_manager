@@ -3,7 +3,7 @@ import Color from "./Color";
 
 abstract class AnimationBase {
 
-  static FPS_RATE: number = 20;
+  static FPS_RATE: number = 60;
   static DEFAULT_BPM: number = 125;
 
   LED_LINE_ROOF: number = 120;
