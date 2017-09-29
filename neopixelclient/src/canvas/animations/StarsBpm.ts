@@ -25,10 +25,10 @@ class StarsBpm extends AnimationBase implements Animation {
   initOffsets() {
     let offsets = [];
     offsets.push(0);
-    offsets.push(Math.floor(Math.random() * 30) + 10);
-    offsets.push(Math.floor(Math.random() * 30) + 10);
-    offsets.push(Math.floor(Math.random() * 30) + 30);
-    offsets.push(Math.floor(Math.random() * 30) + 30);
+    offsets.push(0);
+    offsets.push(0);
+    offsets.push(0);
+    offsets.push(0);
     // https://stackoverflow.com/a/18650169
     offsets.sort(function() {
       return .5 - Math.random();
