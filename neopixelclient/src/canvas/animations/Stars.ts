@@ -156,7 +156,6 @@ class Stars extends AnimationBase implements Animation {
     if (this.ticker >= 80) {
       this.ticker = 0;
       this.initOffsets();
-      console.log("init offset")
       return;
     }
     this.ticker++;
