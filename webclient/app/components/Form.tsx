@@ -1,6 +1,7 @@
 import * as React from "react";
 import {AnimationFactory} from "../../../neopixelclient/src/canvas/AnimationFactory";
 import Color from "../../../neopixelclient/src/canvas/Color";
+import {AnimationBase} from "../../../neopixelclient/src/canvas/AnimationBase";
 
 interface FormProps {
   changeAnimation1: (name: string) => void;
@@ -22,7 +23,7 @@ class Form extends React.Component<FormProps, any> {
     this.state = {
       color11: "purple", color12: "purple", color21: "purple", color22: "purple",
       animation1: AnimationFactory.getDefault().getName(), animation2: AnimationFactory.getOff().getName(),
-      bpm: 110
+      bpm: AnimationBase.DEFAULT_BPM
     };
   }
 

@@ -3,11 +3,12 @@ import Color from "./Color";
 
 abstract class AnimationBase {
 
-  FPS_RATE: number = 20;
+  static FPS_RATE: number = 20;
+  static DEFAULT_BPM: number = 125;
 
   LED_LINE_ROOF: number = 120;
   LED_LINE_WALL: number = 100;
-  protected bpm: number = 110;
+  protected bpm: number = AnimationBase.DEFAULT_BPM;
 
   LED_OFF: number = Color.BLACK.value;
 
