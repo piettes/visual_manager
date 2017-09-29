@@ -12,7 +12,6 @@ class Random extends AnimationBase implements Animation {
 
   nextframe(frame: Array<Point>, tick: number): boolean {
     if (tick === 1) {
-
       this.currentColor = this.currentColor === this.color1.value ? this.color2.value : this.color1.value;
 
       if (this.currentColor === this.LED_OFF) {
@@ -33,6 +32,7 @@ class Random extends AnimationBase implements Animation {
   tick(): void {
     if (this.ticker >= 60 * AnimationBase.FPS_RATE / this.bpm) {
       this.ticker = 0;
+      return;
     }
     this.ticker++;
   }

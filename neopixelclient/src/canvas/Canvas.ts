@@ -17,8 +17,8 @@ const LED_OFF = -1;
 
 abstract class Canvas {
 
-  nextFrameList: Array<Point>;
-  lastFrameList: Array<Point>;
+  nextFrameList: Array<Point> = [];
+  lastFrameList: Array<Point> = [];
 
   private manualMode: boolean;
   private animation1: Animation = AnimationFactory.getDefault();
@@ -26,7 +26,6 @@ abstract class Canvas {
 
   constructor() {
     console.log("New Canvas");
-    this.initFrameLists();
     this.initDraw();
     this.setTickerFunction(this.tickerFunction(this));
     this.manualMode = false;
@@ -46,7 +45,6 @@ abstract class Canvas {
 
   tickerCalled: number = 0;
   lastTickerCalled: number = new Date().getTime();
-
 
   fps: number = 20;
   acc: number = 0;
@@ -72,8 +70,8 @@ abstract class Canvas {
 
   private step(): void {
     let changed: boolean = this.animation1.animate(this.nextFrameList);
-    changed = this.animation2.animate(this.nextFrameList) || changed;
-    if (changed) {
+    let changed2 = this.animation2.animate(this.nextFrameList);
+    if (changed || changed2) {
       this.calculateFrameDiff();
       this.render();
     }
@@ -81,7 +79,6 @@ abstract class Canvas {
 
   private calculateFrameDiff(): void {
     let nextFrameMap = new Map<number, number>();
-
     this.nextFrameList.forEach((p: Point) => {
       this.drawPixel(p.x, p.y, p.c);
       nextFrameMap.set(p.x * 10 + p.y, p.c);
@@ -94,11 +91,6 @@ abstract class Canvas {
 
     this.lastFrameList = this.nextFrameList.concat();
     this.nextFrameList = [];
-  }
-
-  private initFrameLists(): void {
-    this.nextFrameList = [];
-    this.lastFrameList = [];
   }
 
   setManual(manual: boolean): void {
