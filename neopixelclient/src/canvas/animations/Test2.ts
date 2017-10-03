@@ -19,10 +19,10 @@ class Test2 extends AnimationBase implements Animation {
         return true;
       }
 
-      frame.push({x: 36, y: 0, c: this.currentColor});
-      frame.push({x: 37, y: 0, c: this.currentColor});
-      frame.push({x: 38, y: 0, c: this.currentColor});
-      frame.push({x: 39, y: 0, c: this.currentColor});
+      frame.push({x: 50, y: 1, c: this.currentColor});
+      frame.push({x: 51, y: 1, c: this.currentColor});
+      frame.push({x: 47, y: 2, c: this.currentColor});
+      frame.push({x: 46, y: 2, c: this.currentColor});
 
       return true;
     }
