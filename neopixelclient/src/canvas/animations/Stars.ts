@@ -37,7 +37,7 @@ class Stars extends AnimationBase implements Animation {
   }
 
   initStar(y: number) {
-    let inc = 1; //Math.random() < 0.5 ? -1 : 1;
+    let inc = Math.random() < 0.5 ? -1 : 1;
     let x;
     if (inc === 1) {
       x = Math.floor(Math.random() * (120 - this.limit));
