@@ -4,7 +4,7 @@ import {AnimationBase} from "../AnimationBase";
 
 class Test1 extends AnimationBase implements Animation {
 
-  private currentColor: number = this.color1.value
+  private currentColor: number = this.color1.value;
 
   getName(): string {
     return "Test1";

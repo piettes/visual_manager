@@ -10,7 +10,7 @@
     "build:live": "nodemon --exec ./node_modules/.bin/ts-node -- ./neopixelclient/src/index.ts",
     "buildserver": "./node_modules/.bin/webpack --config webpack.config.js",
     "local": "./node_modules/.bin/webpack-dev-server -d --watch --define process.env.HOST='\"http://localhost:8080/\"'",
-    "pi": "./node_modules/.bin/webpack-dev-server -d --watch --define process.env.HOST='\"http://pi:3000/\"'"
+    "pi": "./node_modules/.bin/webpack-dev-server -d --define process.env.HOST='\"http://pi:3000/\"'"
   },
   "dependencies": {
     "axios": "^0.15.3",
