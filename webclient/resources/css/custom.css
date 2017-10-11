@@ -25,3 +25,8 @@ input[type="number"] {
   text-align: right;
   padding-right: 5px;
 }
+
+body, legend, .form-control, .btn-default   {
+  background-color: black;
+  color: white;
+}

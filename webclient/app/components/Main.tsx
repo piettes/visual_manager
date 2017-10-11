@@ -15,8 +15,8 @@ class Main extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
 
-    this.canvas = new CanvasHtml();
-    this.canvas.setAnimations(AnimationFactory.getDefault(), AnimationFactory.getOff());
+    // this.canvas = new CanvasHtml();
+    // this.canvas.setAnimations(AnimationFactory.getDefault(), AnimationFactory.getOff());
 
     this.animationList = Array.from(AnimationFactory.getAll().map(anim => anim.getName()));
 
@@ -28,38 +28,38 @@ class Main extends React.Component<any, any> {
   }
 
   changeAnimation1(name: string): void {
-    this.canvas.setAnimation1(AnimationFactory.get(name));
+    // this.canvas.setAnimation1(AnimationFactory.get(name));
   }
 
   changeAnimation2(name: string): void {
-    this.canvas.setAnimation2(AnimationFactory.get(name));
+    // this.canvas.setAnimation2(AnimationFactory.get(name));
   }
 
   changeColor(colorId: string, colorName: string): void {
-    this.canvas.setColor(colorId, colorName);
+    // this.canvas.setColor(colorId, colorName);
   }
 
   changeBpm(bpm: number) {
-    this.canvas.setBpm(bpm);
+    // this.canvas.setBpm(bpm);
   }
 
   incTicker() {
-    this.canvas.incTicker();
+    // this.canvas.incTicker();
     Axios.get(this.host + "tick/");
   }
 
   toggleManual() {
     this.manualMode = !this.manualMode;
-    this.canvas.setManual(this.manualMode);
+    // this.canvas.setManual(this.manualMode);
     Axios.get(this.host + "setManual/" + this.manualMode);
   }
 
   stopPreview() {
-    this.canvas.setManual(true);
+    // this.canvas.setManual(true);
   }
 
   getView() {
-    return this.canvas.getView();
+    // return this.canvas.getView();
   }
 
   render() {

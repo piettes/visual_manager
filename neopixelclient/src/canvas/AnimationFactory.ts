@@ -11,6 +11,7 @@ import {StarsTest1} from "./animations/StarsTest1";
 import {StarsBpm} from "./animations/StarsBpm";
 import {Test4} from "./animations/Test4";
 import {StarsTest2} from "./animations/StarsTest2";
+import {StarsTest3} from "./animations/StarsTest3";
 
 class AnimationFactory {
 
@@ -40,15 +41,15 @@ class AnimationFactory {
         return new Off();
       case "StarsTest1":
         return new StarsTest1();
-        case "StarsTest2":
-        return new StarsTest2();
+      case "StarsTest3":
+        return new StarsTest3();
       default:
         console.error("Unknown animation ", name);
         return new Off();
     }
   }
 
-  static all: Array<Animation> = [new Random(), new StarsBpm(), new Stars(), new Effect1(), new Rotation(), new Off(), new Test1(), new Test2(), new Test3(), new Test4(), new StarsTest1(), new StarsTest2()];
+  static all: Array<Animation> = [new Random(), new StarsBpm(), new Stars(), new Effect1(), new Rotation(), new Off(), new Test1(), new Test2(), new Test3(), new Test4(), new StarsTest1(), new StarsTest2(), new StarsTest3()];
 
 
   static getAll(): Array<Animation> {
