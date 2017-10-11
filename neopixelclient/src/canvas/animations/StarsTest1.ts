@@ -29,7 +29,7 @@ class StarsTest1 extends AnimationBase implements Animation {
   }
 
   initStar(y: number) {
-    let x = 40;
+    let x = 36;
     let star = {star_1: {}, star_2: {}, star_3: {}, star_4: {}, star_5: {}};
     star.star_1 = {x: x, y: y, c: this.color1.shade1};
     star.star_2 = {x: x, y: y, c: this.color1.shade2};

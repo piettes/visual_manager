@@ -124,7 +124,7 @@ class StarsTest2 extends AnimationBase implements Animation {
   }
 
   nextframe(frame: Array<Point>, tick: number): boolean {
-    let res = this.displayStar(2, tick, frame);
+    let res = this.displayStar(3, tick, frame);
     // if (tick - this.offsets[1] >= 0) {
     //   res = this.displayStar(1, tick - this.offsets[1], frame) || res;
     // }
