@@ -10,11 +10,13 @@ import {Test3} from "./animations/Test3";
 import {StarsTest1} from "./animations/StarsTest1";
 import {StarsBpm} from "./animations/StarsBpm";
 import {Test4} from "./animations/Test4";
+import * as caca from "./animations/Bob";
 
 class AnimationFactory {
 
-  static get(name?: string): Animation {
+  static get(name: string): Animation {
     console.log("creating new Animation " + name);
+
     switch (name) {
       case "Rotation":
         return new Rotation();
@@ -32,6 +34,8 @@ class AnimationFactory {
         return new Test2();
       case "Test3":
         return new Test3();
+      case "Test4":
+        return new Test4();
       case "Off":
         return new Off();
       case "StarsTest1":
