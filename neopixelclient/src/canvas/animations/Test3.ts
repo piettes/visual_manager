@@ -23,7 +23,6 @@ class Test3 extends AnimationBase implements Animation {
         frame.push({x: 80 + i, y: 3, c: this.currentColor});
       }
 
-
       return true;
     }
     return false;

@@ -19,8 +19,8 @@ class Test4 extends AnimationBase implements Animation {
         return true;
       }
 
-      for (let i = 0; i < 5; i++) {
-        frame.push({x: 55 + i, y: 3, c: this.currentColor});
+      for (let i = 0; i < 4; i++) {
+        frame.push({x: 50 + i, y: 3, c: this.currentColor});
       }
 
 
