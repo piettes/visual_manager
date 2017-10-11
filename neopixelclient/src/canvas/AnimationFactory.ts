@@ -9,6 +9,7 @@ import {Test1} from "./animations/Test1";
 import {Test3} from "./animations/Test3";
 import {StarsTest1} from "./animations/StarsTest1";
 import {StarsBpm} from "./animations/StarsBpm";
+import {Test4} from "./animations/Test4";
 
 class AnimationFactory {
 
@@ -41,7 +42,7 @@ class AnimationFactory {
     }
   }
 
-  static all: Array<Animation> = [new Random(), new StarsBpm(), new Stars(), new Effect1(), new Rotation(), new Off(), new Test1(), new Test2(), new Test3(), new StarsTest1()];
+  static all: Array<Animation> = [new Random(), new StarsBpm(), new Stars(), new Effect1(), new Rotation(), new Off(), new Test1(), new Test2(), new Test3(), new Test4(), new StarsTest1()];
 
 
   static getAll(): Array<Animation> {

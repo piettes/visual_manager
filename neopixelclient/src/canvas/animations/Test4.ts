@@ -2,12 +2,12 @@ import {Animation} from "../Animation";
 import {Point} from "../Point";
 import {AnimationBase} from "../AnimationBase";
 
-class Test3 extends AnimationBase implements Animation {
+class Test4 extends AnimationBase implements Animation {
 
   private currentColor: number = this.color1.value;
 
   getName(): string {
-    return "Test3";
+    return "Test4";
   }
 
   nextframe(frame: Array<Point>, tick: number): boolean {
@@ -19,8 +19,8 @@ class Test3 extends AnimationBase implements Animation {
         return true;
       }
 
-      for (let i = 0; i < 25; i++) {
-        frame.push({x: 60 + i, y: 3, c: this.currentColor});
+      for (let i = 0; i < 3; i++) {
+        frame.push({x: 46 + i, y: 3, c: this.currentColor});
       }
 
 
@@ -43,4 +43,4 @@ class Test3 extends AnimationBase implements Animation {
 
 }
 
-export {Test3};
+export {Test4};
