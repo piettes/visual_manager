@@ -19,7 +19,7 @@ class Test3 extends AnimationBase implements Animation {
         return true;
       }
 
-      for (let i = 0; i < 25; i++) {
+      for (let i = 0; i < 20; i++) {
         frame.push({x: 60 + i, y: 3, c: this.currentColor});
       }
 

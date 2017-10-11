@@ -10,7 +10,6 @@ import {Test3} from "./animations/Test3";
 import {StarsTest1} from "./animations/StarsTest1";
 import {StarsBpm} from "./animations/StarsBpm";
 import {Test4} from "./animations/Test4";
-import * as caca from "./animations/Bob";
 
 class AnimationFactory {
 
