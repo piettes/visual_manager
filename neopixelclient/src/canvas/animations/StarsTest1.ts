@@ -29,7 +29,7 @@ class StarsTest1 extends AnimationBase implements Animation {
   }
 
   initStar(y: number) {
-    let x = 47;
+    let x = 40;
     let star = {star_1: {}, star_2: {}, star_3: {}, star_4: {}, star_5: {}};
     star.star_1 = {x: x, y: y, c: this.color1.shade1};
     star.star_2 = {x: x, y: y, c: this.color1.shade2};
@@ -124,7 +124,7 @@ class StarsTest1 extends AnimationBase implements Animation {
   }
 
   nextframe(frame: Array<Point>, tick: number): boolean {
-    let res = this.displayStar(0, tick, frame);
+    let res = this.displayStar(1, tick, frame);
     // if (tick - this.offsets[1] >= 0) {
     //   res = this.displayStar(1, tick - this.offsets[1], frame) || res;
     // }
