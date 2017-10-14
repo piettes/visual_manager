@@ -2,6 +2,7 @@ import * as React from "react";
 import {AnimationFactory} from "../../../neopixelclient/src/canvas/AnimationFactory";
 import Color from "../../../neopixelclient/src/canvas/Color";
 import {AnimationBase} from "../../../neopixelclient/src/canvas/AnimationBase";
+import FormEffect from "./FormEffect";
 
 interface FormProps {
   changeAnimation1: (name: string) => void;
@@ -22,26 +23,21 @@ class Form extends React.Component<FormProps, any> {
 
     this.state = {
       color11: "purple", color12: "purple", color21: "purple", color22: "purple",
+      color31: "purple", color32: "purple", color41: "purple", color42: "purple",
       animation1: AnimationFactory.getDefault().getName(), animation2: AnimationFactory.getOff().getName(),
+      animation3: AnimationFactory.getDefault().getName(), animation4: AnimationFactory.getOff().getName(),
       bpm: AnimationBase.DEFAULT_BPM
     };
   }
 
-  onChangeAnimation1(event: any) {
-    this.setState({animation1: event.target.value});
-    this.props.changeAnimation1(event.target.value);
+  changeAnimation(name: string, id: number) {
+    this.setState({["animation" + id]: name});
+    // this.props.changeAnimation1(event.target.value);
   }
 
-  onChangeAnimation2(event: any) {
-    this.setState({animation2: event.target.value});
-    this.props.changeAnimation2(event.target.value);
-  }
-
-  onChangeColor(colorId: string, colorName: string): () => void {
-    return () => {
-      this.setState({[colorId]: colorName});
-      this.props.changeColor(colorId, colorName);
-    };
+  changeColor(name: string, pos: number, id: number) {
+    this.setState({["color" + id + pos]: name});
+    // this.props.changeColor(colorId, colorName);
   }
 
   onChangeBpm(event: any) {
@@ -78,52 +74,20 @@ class Form extends React.Component<FormProps, any> {
 
   buildAnimJson(): any {
     let res: any = {};
-    if (this.state.animation1) {
-      let anim1: any = {};
-      anim1.name = this.state.animation1;
-      anim1.color1 = this.state.color11;
-      anim1.color2 = this.state.color12;
-      res.anim1 = anim1;
-    }
-    if (this.state.animation2) {
-      let anim2: any = {};
-      anim2.name = this.state.animation2;
-      anim2.color1 = this.state.color21;
-      anim2.color2 = this.state.color22;
-      res.anim2 = anim2;
+    for (let i = 1; i < 5; i++) {
+      if (this.state["animation" + i]) {
+        let anim: any = {};
+        anim.name = this.state["animation" + i];
+        anim.color1 = this.state["color" + i + 1];
+        anim.color2 = this.state["color" + i + 2];
+        res["anim" + i] = anim;
+      }
     }
     res.bpm = this.state.bpm ? this.state.bpm : 1;
 
     return res;
   }
 
-  colorDropdown(colorId: string) {
-
-    const colorList = Color.COLORS.map((color: Color, index: number) => {
-          let style = {backgroundColor: color.valueString};
-          return <li key={color.name} style={style} className={"color-select-" + color.valueString}>
-            <a href="#" style={style}
-               onClick={this.onChangeColor(colorId, color.name)}>{color.name}</a>
-          </li>;
-        }
-    );
-
-    const style = {backgroundColor: Color.fromName(this.state[colorId]).valueString};
-
-    return (
-        <div className="btn-group">
-          <div className="btn-group">
-            <a href="" className="btn btn-default btn-sm dropdown-toggle" style={style} data-toggle="dropdown"
-               aria-expanded="false">
-              {colorId}
-            </a>
-            <ul className="dropdown-menu">
-              {colorList}
-            </ul>
-          </div>
-        </div>
-    );
-  }
 
   render() {
 
@@ -132,48 +96,35 @@ class Form extends React.Component<FormProps, any> {
     );
 
     return (
-        <div className="container">
+        <div>
 
           <form className="form-horizontal">
 
             <fieldset>
 
               <div className="row">
-                <div className="col-lg-4">
 
-                  <legend>Effect 1</legend>
 
-                  <div className="form-group">
-                    <label htmlFor="selectEffect1" className="col-lg-2 control-label">Animation</label>
-                    <div className="col-lg-10">
-                      <select className="form-control" id="selectEffect1" onChange={(event: any) => this.onChangeAnimation1(event)}>
-                        {animOptions}
-                      </select>
-                    </div>
-                  </div>
+                <FormEffect animationList={this.props.animationList} number={1}
+                            changeAnimation={(name: string) => this.changeAnimation(name, 1)}
+                            changeColor={(name: string, pos: number) => this.changeColor(name, pos, 1)}
+                            color1={this.state.color11} color2={this.state.color12}/>
 
-                  {this.colorDropdown("color11")}
-                  {this.colorDropdown("color12")}
+                <FormEffect animationList={this.props.animationList} number={2}
+                            changeAnimation={(name: string) => this.changeAnimation(name, 2)}
+                            changeColor={(name: string, pos: number) => this.changeColor(name, pos, 2)}
+                            color1={this.state.color21} color2={this.state.color22}/>
 
-                </div>
 
-                <div className="col-lg-4">
+                <FormEffect animationList={this.props.animationList} number={3}
+                            changeAnimation={(name: string) => this.changeAnimation(name, 3)}
+                            changeColor={(name: string, pos: number) => this.changeColor(name, pos, 3)}
+                            color1={this.state.color31} color2={this.state.color32}/>
 
-                  <legend>Effect 2</legend>
-
-                  <div className="form-group">
-                    <label htmlFor="selectEffect2" className="col-lg-2 control-label">Animation</label>
-                    <div className="col-lg-10">
-                      <select className="form-control" id="selectEffect2" onChange={(event: any) => this.onChangeAnimation2(event)}>
-                        {animOptions}
-                      </select>
-                    </div>
-                  </div>
-
-                  {this.colorDropdown("color21")}
-                  {this.colorDropdown("color22")}
-
-                </div>
+                <FormEffect animationList={this.props.animationList} number={4}
+                            changeAnimation={(name: string) => this.changeAnimation(name, 4)}
+                            changeColor={(name: string, pos: number) => this.changeColor(name, pos, 4)}
+                            color1={this.state.color41} color2={this.state.color42}/>
 
               </div>
 
@@ -185,7 +136,8 @@ class Form extends React.Component<FormProps, any> {
                   <div className="form-group">
                     <label htmlFor="bpm" className="col-lg-2 control-label">BPM</label>
                     <div className="input-group col-lg-2">
-                      <input type="number" className="form-control" id="bpm" onChange={(event: any) => this.onChangeBpm(event)}
+                      <input type="number" className="form-control" id="bpm"
+                             onChange={(event: any) => this.onChangeBpm(event)}
                              value={this.state.bpm}/>
                       <span className="input-group-btn">
                           <button className="btn btn-default btn-xs my-plus-button" onClick={() => this.onBpmPlus()}
