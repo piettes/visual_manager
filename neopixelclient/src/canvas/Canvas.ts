@@ -125,7 +125,7 @@ abstract class Canvas {
     });
     [0, 1].forEach(i => {
       for (let j = 0; j < 20; j++) {
-        this.drawPixelRoof(j * 5, i, Color.WHITE.value);
+        this.drawPixelWall(j * 5, i, Color.WHITE.value);
       }
     });
     this.render();
