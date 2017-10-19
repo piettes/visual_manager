@@ -123,6 +123,11 @@ abstract class Canvas {
         this.drawPixelRoof(j * 10, i, Color.WHITE.value);
       }
     });
+    [0, 1].forEach(i => {
+      for (let j = 0; j < 20; j++) {
+        this.drawPixelRoof(j * 5, i, Color.WHITE.value);
+      }
+    });
     this.render();
     this.clearGrid();
     this.render();
