@@ -1,6 +1,7 @@
 import {Animation, Location} from "./Animation";
 import {Point} from "./Point";
 import {AnimationFactory} from "./AnimationFactory";
+import Color from "./Color";
 
 const LED_OFF = -1;
 
@@ -112,6 +113,14 @@ abstract class Canvas {
       this.lastFrameList2 = this.nextFrameList2.concat();
       this.nextFrameList2 = [];
     }
+  }
+
+  flash(num: number) {
+    [0, 1, 2, 3, 4].forEach(i => {
+      for (let j = 0; j < 12; j++) {
+        this.drawPixelRoof(j, i, Color.WHITE.value);
+      }
+    });
   }
 
   setManual(manual: boolean): void {

@@ -14,6 +14,7 @@ interface FormProps {
   toggleManual: () => void;
   incTicker: () => void;
   stopPreview: () => void;
+  flash: (num: number) => void;
 }
 
 class Form extends React.Component<FormProps, any> {
@@ -158,6 +159,10 @@ class Form extends React.Component<FormProps, any> {
           <br/>
 
           <button className="btn btn-sm btn-primary" onClick={() => this.applyChanges()}>Apply</button>
+          <button className="btn btn-sm btn-secondary" onClick={() => this.props.flash(1)}>Flash 1</button>
+          <button className="btn btn-sm btn-secondary" onClick={() => this.props.flash(2)}>Flash 2</button>
+          <button className="btn btn-sm btn-secondary" onClick={() => this.props.flash(3)}>Flash 3</button>
+          <button className="btn btn-sm btn-secondary" onClick={() => this.props.flash(4)}>Flash 4</button>
           <br/>
           <br/>
           <button className="btn btn-sm btn-default" onClick={this.props.toggleManual}>Toggle manual</button>

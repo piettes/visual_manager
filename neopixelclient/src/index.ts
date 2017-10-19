@@ -42,6 +42,13 @@ app.post("/update", function (req: any, res: any) {
   res.send("Ok");
 });
 
+app.post("/flash", function (req: any, res: any) {
+  console.log(req.body);
+  let num: any = req.body["num"];
+  canvas.flash(num);
+  res.send("Ok");
+});
+
 app.get("/setManual/:bool", function (req: any, res: any) {
   canvas.setManual(req.params.bool === "true");
   res.send("Set manual " + req.params.bool);
