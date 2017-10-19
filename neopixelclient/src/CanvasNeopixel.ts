@@ -8,20 +8,25 @@ const LED_OFF = 0x000000;
 
 class CanvasNeopixel extends Canvas {
 
-  ws281x: Ws281x;
-  pixelData: Uint32Array;
-  intervalId: any;
-  isRunning: boolean = false;
+  private ws281x: Ws281x;
+  private pixelData: Uint32Array;
+  private intervalId: any;
+  private isRunning: boolean = false;
+  private num_led: number;
 
   constructor() {
     super();
-    let num_led = LED_LINE_ROOF * 6 + LED_LINE_WALL * 2;
-    this.pixelData = new Uint32Array(num_led);
+    this.num_led = LED_LINE_ROOF * 6 + LED_LINE_WALL * 2;
+    this.pixelData = new Uint32Array(this.num_led);
     this.ws281x = require("rpi-ws281x-native");
-    this.ws281x.init(num_led);
+    this.ws281x.init(this.num_led);
   }
 
   initDraw(): void {
+  }
+
+  clearGrid(): void {
+    this.pixelData = new Uint32Array(this.num_led);
   }
 
   drawPixelRoof(x: number, y: number, _color: any): void {

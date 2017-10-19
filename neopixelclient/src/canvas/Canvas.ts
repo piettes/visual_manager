@@ -35,6 +35,8 @@ abstract class Canvas {
 
   abstract render(): void;
 
+  abstract clearGrid(): void;
+
   abstract toggleTicker(run: boolean): void;
 
   abstract reset(): void;
@@ -118,9 +120,12 @@ abstract class Canvas {
   flash(num: number) {
     [0, 1, 2, 3, 4].forEach(i => {
       for (let j = 0; j < 12; j++) {
-        this.drawPixelRoof(j, i, Color.WHITE.value);
+        this.drawPixelRoof(j * 10, i, Color.WHITE.value);
       }
     });
+    this.render();
+    this.clearGrid();
+    this.render();
   }
 
   setManual(manual: boolean): void {
