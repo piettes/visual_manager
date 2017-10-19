@@ -1,4 +1,4 @@
-import {Animation} from "../Animation";
+import {Animation, Location} from "../Animation";
 import {Point} from "../Point";
 import {AnimationBase} from "../AnimationBase";
 
@@ -22,13 +22,21 @@ class Test1 extends AnimationBase implements Animation {
       frame.push({x: 48, y: 2, c: this.currentColor});
       frame.push({x: 49, y: 2, c: this.currentColor});
 
+      if (this.location === Location.WALL) {
+        for (let i = 0; i < this.numLED; i++) {
+          frame.push({x: i, y: 1, c: this.currentColor});
+
+        }
+      }
+
+
       return true;
     }
     return false;
   }
 
   tick(): void {
-    if (this.ticker >= 60 * AnimationBase.FPS_RATE  / this.bpm) {
+    if (this.ticker >= 60 * AnimationBase.FPS_RATE / this.bpm) {
       this.ticker = 0;
     }
     this.ticker++;
