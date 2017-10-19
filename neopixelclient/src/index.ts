@@ -26,7 +26,7 @@ app.get("/", function (req: any, res: any) {
 app.post("/update", function (req: any, res: any) {
   console.log(req.body);
   const anims: Array<Animation> = [];
-  for (let i = 1; i < 4; i++) {
+  for (let i = 1; i < 5; i++) {
     let animObj: any = req.body["anim" + i] || {};
     let anim: Animation = AnimationFactory.get(animObj.name);
     if (anim) {
