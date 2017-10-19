@@ -25,6 +25,7 @@ class Test1 extends AnimationBase implements Animation {
       if (this.location === Location.WALL) {
         for (let i = 0; i < this.numLED; i++) {
           frame.push({x: i, y: 1, c: this.currentColor});
+          frame.push({x: i, y: 0, c: this.currentColor});
 
         }
       }
