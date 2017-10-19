@@ -40,9 +40,9 @@ class Stars extends AnimationBase implements Animation {
     let inc = Math.random() < 0.5 ? -1 : 1;
     let x;
     if (inc === 1) {
-      x = Math.floor(Math.random() * (120 - this.limit));
+      x = Math.floor(Math.random() * (this.numLED - this.limit));
     } else {
-      x = Math.floor(Math.random() * (120 - this.limit) + this.limit);
+      x = Math.floor(Math.random() * (this.numLED - this.limit) + this.limit);
     }
     let star = {star_1: {}, star_2: {}, star_3: {}, star_4: {}, star_5: {}, inc: inc};
     star.star_1 = {x: x, y: y, c: this.color1.shade1};
@@ -138,21 +138,11 @@ class Stars extends AnimationBase implements Animation {
 
   nextframe(frame: Array<Point>, tick: number): boolean {
     let res = false;
-    if (tick - this.offsets[0] >= 0) {
-      res = this.displayStar(0, tick - this.offsets[0], frame) || res;
-    }
-    if (tick - this.offsets[1] >= 0) {
-      res = this.displayStar(1, tick - this.offsets[1], frame) || res;
-    }
-    if (tick - this.offsets[2] >= 0) {
-      res = this.displayStar(2, tick - this.offsets[2], frame) || res;
-    }
-    if (tick - this.offsets[3] >= 0) {
-      res = this.displayStar(3, tick - this.offsets[3], frame) || res;
-    }
-    if (tick - this.offsets[4] >= 0) {
-      res = this.displayStar(4, tick - this.offsets[4], frame) || res;
-    }
+    this.array.forEach(i => {
+      if (tick - this.offsets[i] >= 0) {
+        res = this.displayStar(i, tick - this.offsets[i], frame) || res;
+      }
+    });
     return res;
   }
 

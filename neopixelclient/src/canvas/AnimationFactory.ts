@@ -1,4 +1,3 @@
-import {Rotation} from "./animations/Rotation";
 import {Animation} from "./Animation";
 import {Effect1} from "./animations/Effect1";
 import {Random} from "./animations/Random";
@@ -19,8 +18,6 @@ class AnimationFactory {
     console.log("creating new Animation " + name);
 
     switch (name) {
-      case "Rotation":
-        return new Rotation();
       case "Effect1":
         return new Effect1();
       case "Stars":
@@ -49,7 +46,7 @@ class AnimationFactory {
     }
   }
 
-  static all: Array<Animation> = [new Random(), new StarsBpm(), new Stars(), new Effect1(), new Rotation(), new Off(), new Test1(), new Test2(), new Test3(), new Test4(), new StarsTest1(), new StarsTest2(), new StarsTest3()];
+  static all: Array<Animation> = [new Random(), new StarsBpm(), new Stars(), new Effect1(), new Off(), new Test1(), new Test2(), new Test3(), new Test4(), new StarsTest1(), new StarsTest2(), new StarsTest3()];
 
 
   static getAll(): Array<Animation> {

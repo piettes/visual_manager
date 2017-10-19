@@ -18,8 +18,8 @@ class Random extends AnimationBase implements Animation {
         return true;
       }
 
-      [0, 1, 2, 3, 4].forEach(y => {
-        let r: number = Math.floor(Math.random() * (this.LED_LINE_ROOF - 7));
+      this.array.forEach(y => {
+        let r: number = Math.floor(Math.random() * (this.numLED - 7));
         for (let i = 0; i < 7; i++) {
           frame.push({x: r + i, y: y, c: this.currentColor});
         }

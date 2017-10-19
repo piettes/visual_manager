@@ -1,5 +1,6 @@
 import {Point} from "./Point";
 import Color from "./Color";
+import {Location} from "./Animation";
 
 abstract class AnimationBase {
 
@@ -9,6 +10,11 @@ abstract class AnimationBase {
   LED_LINE_ROOF: number = 120;
   LED_LINE_WALL: number = 100;
   protected bpm: number = AnimationBase.DEFAULT_BPM;
+  protected location: Location = Location.ROOF;
+
+  protected array: Array<number> = [0, 1, 2, 3, 4];
+  protected numLED: number = this.LED_LINE_ROOF;
+  protected size: number = 5;
 
   LED_OFF: number = Color.BLACK.value;
 
@@ -44,6 +50,13 @@ abstract class AnimationBase {
 
   reset(): void {
     this.ticker = 0;
+  }
+
+  setLocation(location: Location) {
+    this.location = location;
+    this.array = location === Location.ROOF ? [0, 1, 2, 3, 4] : [0, 1];
+    this.numLED = location === Location.ROOF ? this.LED_LINE_ROOF : this.LED_LINE_WALL;
+    this.size = location === Location.ROOF ? 5 : 2;
   }
 
 }

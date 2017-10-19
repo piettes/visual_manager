@@ -16,6 +16,15 @@ interface Animation {
 
   reset(): void;
 
+  setLocation(location: Location): void;
+
 }
 
-export {Animation};
+
+enum Location {
+  WALL,
+  ROOF
+}
+
+
+export {Animation, Location};
