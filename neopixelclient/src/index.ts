@@ -43,7 +43,6 @@ app.post("/update", function (req: any, res: any) {
 });
 
 app.post("/flash", function (req: any, res: any) {
-  console.log(req.body);
   let num: any = req.body["num"];
   canvas.flash(num);
   res.send("Ok");
