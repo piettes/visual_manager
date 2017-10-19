@@ -119,8 +119,8 @@ abstract class Canvas {
 
   flash(num: number) {
     [0, 1, 2, 3, 4].forEach(i => {
-      for (let j = 0; j < 12; j++) {
-        this.drawPixelRoof(j * 10, i, Color.WHITE.value);
+      for (let j = 0; j < 24; j++) {
+        this.drawPixelRoof(j * 5, i, Color.WHITE.value);
       }
     });
     this.render();
