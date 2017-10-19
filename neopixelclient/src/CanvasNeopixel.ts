@@ -24,7 +24,7 @@ class CanvasNeopixel extends Canvas {
   initDraw(): void {
   }
 
-  drawPixel(x: number, y: number, _color: any): void {
+  drawPixelRoof(x: number, y: number, _color: any): void {
     let color = _color === -1 ? LED_OFF : _color;
     switch (y) {
       case 0:
@@ -41,6 +41,18 @@ class CanvasNeopixel extends Canvas {
         break;
       case 4:
         this.pixelData[LED_LINE_WALL + LED_LINE_ROOF * 4 + x] = color;
+        break;
+    }
+  }
+
+  drawPixelWall(x: number, y: number, _color: any): void {
+    let color = _color === -1 ? LED_OFF : _color;
+    switch (y) {
+      case 0:
+        this.pixelData[x] = color;
+        break;
+      case 1:
+        this.pixelData[LED_LINE_WALL + LED_LINE_ROOF * 5 + x] = color;
         break;
     }
   }

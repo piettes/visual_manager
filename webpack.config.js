@@ -29,7 +29,7 @@ const config = {
           presets: ['es2015', 'react']
         }
       },
-      { test: /\.tsx?$/, exclude:/__tests__/, loader: "ts-loader" },
+      {test: /\.tsx?$/, exclude: /__tests__/, loader: "ts-loader"},
       {test: /\.css$/, loader: 'style-loader!css-loader'},
       {test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: "file"},
       {test: /\.(woff|woff2)$/, loader: "url?prefix=font/&limit=5000"},
@@ -58,7 +58,8 @@ const config = {
      secure: false
      }
      },*/
-    inline: true
+    hot: false,
+    inline: false
   }
 };
 

@@ -70,12 +70,16 @@ class CanvasHtml extends Canvas {
     return this.app.view;
   }
 
-  drawPixel(x: number, y: number, color: any): void {
+  drawPixelRoof(x: number, y: number, color: any): void {
     let gr: Graphics;
     gr = this.pixelMapRoof[y][x];
     gr.beginFill(color === -1 ? LED_OFF : color);
     gr.drawRect(0, 0, PIXEL_SIZE, PIXEL_SIZE);
     gr.endFill();
+  }
+
+  drawPixelWall(x: number, y: number, color: any): void {
+    // TODO
   }
 
   reset(): void {

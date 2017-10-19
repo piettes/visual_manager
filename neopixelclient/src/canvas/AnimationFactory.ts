@@ -60,6 +60,10 @@ class AnimationFactory {
     return AnimationFactory.all[0];
   }
 
+  static getDefaultArray(): Array<Animation> {
+    return [new Random(), new Off(), new Off(), new Off()];
+  }
+
   static getOff(): Animation {
     return new Off();
   }

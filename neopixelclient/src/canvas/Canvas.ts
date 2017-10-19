@@ -2,27 +2,26 @@ import {Animation} from "./Animation";
 import {Point} from "./Point";
 import {AnimationFactory} from "./AnimationFactory";
 
-const FACTOR = 2;
-const PIXEL_SIZE = 1 * FACTOR;
-const LED_PER_METER_ROOF = 30;
-const LED_PER_METER_WALL = 60;
-const LED_LINE_ROOF = 120;
-const LED_LINE_WALL = 100;
-const LINE_SPACE = 65 * FACTOR;
-const ROOM_LENGTH = 520 * FACTOR;
-const ROOM_HEIGHT = 390 * FACTOR;
-const MARGIN_LEFT = 10 * FACTOR;
-const MARGIN_TOP = 67 * FACTOR;
 const LED_OFF = -1;
+
+enum Location {
+  WALL,
+  ROOF
+}
+
 
 abstract class Canvas {
 
   nextFrameList: Array<Point> = [];
   lastFrameList: Array<Point> = [];
+  nextFrameList2: Array<Point> = [];
+  lastFrameList2: Array<Point> = [];
 
   private manualMode: boolean;
   private animation1: Animation = AnimationFactory.getDefault();
   private animation2: Animation = AnimationFactory.getOff();
+  private animation3: Animation = AnimationFactory.getOff();
+  private animation4: Animation = AnimationFactory.getOff();
 
   constructor() {
     console.log("New Canvas");
@@ -31,7 +30,9 @@ abstract class Canvas {
     this.manualMode = false;
   }
 
-  abstract drawPixel(x: number, y: number, color: any): void;
+  abstract drawPixelRoof(x: number, y: number, color: any): void;
+
+  abstract drawPixelWall(x: number, y: number, color: any): void;
 
   abstract initDraw(): void;
 
@@ -74,26 +75,49 @@ abstract class Canvas {
   private step(): void {
     let changed: boolean = this.animation1.animate(this.nextFrameList);
     let changed2 = this.animation2.animate(this.nextFrameList);
+    let changed3 = this.animation3.animate(this.nextFrameList2);
+    let changed4 = this.animation4.animate(this.nextFrameList2);
     if (changed || changed2) {
-      this.calculateFrameDiff();
+      this.calculateFrameDiff(Location.ROOF);
+    }
+    if (changed3 || changed4) {
+      this.calculateFrameDiff(Location.WALL);
+    }
+    if (changed || changed2 || changed3 || changed4) {
       this.render();
     }
   }
 
-  private calculateFrameDiff(): void {
-    let nextFrameMap = new Map<number, number>();
-    this.nextFrameList.forEach((p: Point) => {
-      this.drawPixel(p.x, p.y, p.c);
-      nextFrameMap.set(p.x * 10 + p.y, p.c);
-    });
-    this.lastFrameList.forEach((p: Point) => {
-      if (!nextFrameMap.get(p.x * 10 + p.y)) {
-        this.drawPixel(p.x, p.y, LED_OFF);
-      }
-    });
+  private calculateFrameDiff(location: Location): void {
+    // TODO refactor that
+    if (location === Location.ROOF) {
+      let nextFrameMap = new Map<number, number>();
+      this.nextFrameList.forEach((p: Point) => {
+        this.drawPixelRoof(p.x, p.y, p.c);
+        nextFrameMap.set(p.x * 10 + p.y, p.c);
+      });
+      this.lastFrameList.forEach((p: Point) => {
+        if (!nextFrameMap.get(p.x * 10 + p.y)) {
+          this.drawPixelRoof(p.x, p.y, LED_OFF);
+        }
+      });
+      this.lastFrameList = this.nextFrameList.concat();
+      this.nextFrameList = [];
+    } else {
+      let nextFrameMap = new Map<number, number>();
+      this.nextFrameList2.forEach((p: Point) => {
+        this.drawPixelWall(p.x, p.y, p.c);
+        nextFrameMap.set(p.x * 10 + p.y, p.c);
+      });
+      this.lastFrameList2.forEach((p: Point) => {
+        if (!nextFrameMap.get(p.x * 10 + p.y)) {
+          this.drawPixelWall(p.x, p.y, LED_OFF);
+        }
+      });
 
-    this.lastFrameList = this.nextFrameList.concat();
-    this.nextFrameList = [];
+      this.lastFrameList2 = this.nextFrameList2.concat();
+      this.nextFrameList2 = [];
+    }
   }
 
   setManual(manual: boolean): void {
@@ -106,17 +130,11 @@ abstract class Canvas {
     this.step();
   }
 
-  setAnimation1(anim1: Animation): void {
-    this.setAnimations(anim1, this.animation2);
-  }
-
-  setAnimation2(anim2: Animation): void {
-    this.setAnimations(this.animation1, anim2);
-  }
-
-  setAnimations(anim1: Animation, anim2: Animation): void {
-    this.animation1 = anim1;
-    this.animation2 = anim2;
+  setAnimations(anims: Array<Animation>): void {
+    this.animation1 = anims[0];
+    this.animation2 = anims[1];
+    this.animation3 = anims[2];
+    this.animation4 = anims[3];
     this.resetAnimations();
   }
 
@@ -134,6 +152,18 @@ abstract class Canvas {
       case "color22":
         this.animation2.setColor2(colorName);
         break;
+      case "color31":
+        this.animation3.setColor1(colorName);
+        break;
+      case "color32":
+        this.animation3.setColor2(colorName);
+        break;
+      case "color41":
+        this.animation4.setColor1(colorName);
+        break;
+      case "color42":
+        this.animation4.setColor2(colorName);
+        break;
       default:
         console.log("Wrong wolor Id");
     }
@@ -143,12 +173,16 @@ abstract class Canvas {
   setBpm(bpm: number): void {
     this.animation1.setBpm(bpm);
     this.animation2.setBpm(bpm);
+    this.animation3.setBpm(bpm);
+    this.animation4.setBpm(bpm);
     this.resetAnimations();
   }
 
   resetAnimations(): void {
     this.animation1.reset();
     this.animation2.reset();
+    this.animation3.reset();
+    this.animation4.reset();
   }
 
 }

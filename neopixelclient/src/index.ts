@@ -4,12 +4,12 @@ import {Canvas} from "./canvas/Canvas";
 import {AnimationFactory} from "./canvas/AnimationFactory";
 import {Express} from "express";
 import * as bodyParser from "body-parser";
+import {Animation} from "./canvas/Animation";
 
 const app: Express = express();
 
 const canvas: Canvas = new CanvasNeopixel();
-canvas.setAnimations(AnimationFactory.getDefault(), AnimationFactory.getOff());
-canvas.setAnimations(AnimationFactory.getDefault(), AnimationFactory.getOff());
+canvas.setAnimations(AnimationFactory.getDefaultArray());
 
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -25,22 +25,18 @@ app.get("/", function (req: any, res: any) {
 
 app.post("/update", function (req: any, res: any) {
   console.log(req.body);
-  let anim1Obj: any = req.body.anim1 || {};
-  let anim1 = AnimationFactory.get(anim1Obj.name);
-  if (anim1) {
-    anim1.setColor1(anim1Obj.color1);
-    anim1.setColor2(anim1Obj.color2);
-    anim1.setBpm(parseInt(req.body.bpm));
+  const anims: Array<Animation> = [];
+  for (let i = 1; i < 4; i++) {
+    let animObj: any = req.body["anim" + i] || {};
+    let anim: Animation = AnimationFactory.get(animObj.name);
+    if (anim) {
+      anim.setColor1(animObj.color1);
+      anim.setColor2(animObj.color2);
+      anim.setBpm(parseInt(req.body.bpm));
+    }
+    anims.push(anim);
   }
-  let anim2Obj: any = req.body.anim2 || {};
-  let anim2 = AnimationFactory.get(anim2Obj.name);
-  if (anim2) {
-    anim2.setColor1(anim2Obj.color1);
-    anim2.setColor2(anim2Obj.color2);
-    anim2.setBpm(parseInt(req.body.bpm));
-  }
-
-  canvas.setAnimations(anim1, anim2);
+  canvas.setAnimations(anims);
   res.send("Ok");
 });
 
