@@ -131,10 +131,10 @@ abstract class Canvas {
   }
 
   setAnimations(anims: Array<Animation>): void {
-    this.animation1 = anims[0];
-    this.animation2 = anims[1];
-    this.animation3 = anims[2];
-    this.animation4 = anims[3];
+    this.animation1 = anims[0] ? anims[0] : AnimationFactory.getOff();
+    this.animation2 = anims[1] ? anims[1] : AnimationFactory.getOff();
+    this.animation3 = anims[2] ? anims[2] : AnimationFactory.getOff();
+    this.animation4 = anims[3] ? anims[3] : AnimationFactory.getOff();
     this.resetAnimations();
   }
 
