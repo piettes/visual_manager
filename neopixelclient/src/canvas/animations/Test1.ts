@@ -28,7 +28,7 @@ class Test1 extends AnimationBase implements Animation {
   }
 
   tick(): void {
-    if (this.ticker >= 600 / this.bpm) {
+    if (this.ticker >= 60 * AnimationBase.FPS_RATE  / this.bpm) {
       this.ticker = 0;
     }
     this.ticker++;
