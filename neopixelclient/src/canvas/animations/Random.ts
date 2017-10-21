@@ -11,7 +11,7 @@ class Random extends AnimationBase implements Animation {
   }
 
   nextframe(frame: Array<Point>, tick: number): boolean {
-    if (tick === 1) {
+    if (tick === 0) {
       this.currentColor = this.currentColor === this.color1.value ? this.color2.value : this.color1.value;
 
       if (this.currentColor === this.LED_OFF) {
@@ -29,15 +29,19 @@ class Random extends AnimationBase implements Animation {
     return false;
   }
 
-  timeAcc: number = 0;
+  timeAcc: number = -1;
 
   tick(timeDiff: number): number {
+    if (this.timeAcc === -1) {
+      this.timeAcc = timeDiff;
+      return 0;
+    }
     this.timeAcc += timeDiff;
     if (this.timeAcc > this.animDuration) {
       this.timeAcc -= this.animDuration;
-      return 1;
+      return 0;
     }
-    return 0;
+    return 1;
   }
 
   reset(): void {
