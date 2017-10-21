@@ -131,7 +131,7 @@ abstract class Canvas {
     this.render();
     this.clearGrid();
     this.render();
-    if (num > 0) {
+    if (num > 1) {
       this.flash(num - 1);
     }
   }

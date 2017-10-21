@@ -83,6 +83,10 @@ class CanvasHtml extends Canvas {
   }
 
   reset(): void {
+    // TODO
+  }
+
+  clearGrid(): void {
   }
 
   render(): void {
