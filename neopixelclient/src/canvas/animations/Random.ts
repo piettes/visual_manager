@@ -39,7 +39,6 @@ class Random extends AnimationBase implements Animation {
       console.log("time acc", this.timeAcc);
       console.log("anima dur ", this.animDuration);
     }
-    console.log("time acc", this.timeAcc)
 
     if (this.ticker >= 60 * AnimationBase.FPS_RATE / this.bpm) {
       this.ticker = 0;
