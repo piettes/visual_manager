@@ -18,11 +18,14 @@ abstract class Canvas {
   private animation3: Animation = AnimationFactory.getOff();
   private animation4: Animation = AnimationFactory.getOff();
 
+  private lastTimeCalled: number;
+
   constructor() {
     console.log("New Canvas");
     this.initDraw();
     this.setTickerFunction(this.tickerFunction(this));
     this.manualMode = false;
+    this.lastTimeCalled = new Date().getTime();
   }
 
   abstract drawPixelRoof(x: number, y: number, color: any): void;
@@ -44,36 +47,26 @@ abstract class Canvas {
   tickerCalled: number = 0;
   lastTickerCalled: number = new Date().getTime();
 
-  fps: number = 60;
-  acc: number = 0;
-
-  tada: number = new Date().getTime();
-
   tickerFunction(_that: Canvas): (delta: number) => void {
     return (delta: number) => {
-      this.acc += delta;
-      if (this.acc > 60 / this.fps) {
-        this.acc = 0;
-        this.tickerCalled++;
-        let now = new Date().getTime();
-        if (now - this.lastTickerCalled >= 10000) {
-          console.log(this.tada - new Date().getTime());
-          console.log("avg fps: " + this.tickerCalled / 10);
-          this.tickerCalled = 0;
-          this.lastTickerCalled = now;
-        }
-        if (_that.animation1 || _that.animation2) {
-          _that.step();
-        }
+      this.tickerCalled++;
+      let now = new Date().getTime();
+      if (now - this.lastTickerCalled >= 10000) {
+        console.log("avg ticker per seconde" + this.tickerCalled / 10);
+        this.tickerCalled = 0;
+        this.lastTickerCalled = now;
       }
+      let timeDiff = now - this.lastTimeCalled;
+      this.lastTimeCalled = timeDiff;
+      _that.step(timeDiff);
     };
   }
 
-  private step(): void {
-    let changed: boolean = this.animation1.animate(this.nextFrameList);
-    let changed2 = this.animation2.animate(this.nextFrameList);
-    let changed3 = this.animation3.animate(this.nextFrameList2);
-    let changed4 = this.animation4.animate(this.nextFrameList2);
+  private step(timeDiff: number): void {
+    let changed: boolean = this.animation1.animate(this.nextFrameList, timeDiff);
+    let changed2 = this.animation2.animate(this.nextFrameList, timeDiff);
+    let changed3 = this.animation3.animate(this.nextFrameList2, timeDiff);
+    let changed4 = this.animation4.animate(this.nextFrameList2, timeDiff);
     if (changed || changed2) {
       this.calculateFrameDiff(Location.ROOF);
     }
@@ -143,7 +136,7 @@ abstract class Canvas {
   }
 
   incTicker(): void {
-    this.step();
+    this.step(1000);
   }
 
   setAnimations(anims: Array<Animation>): void {

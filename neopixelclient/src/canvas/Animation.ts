@@ -4,7 +4,7 @@ interface Animation {
 
   getName(): string;
 
-  animate(frame: Array<Point>): boolean;
+  animate(frame: Array<Point>, timeDiff: number): boolean;
 
   setBpm(bpm: number): void;
 

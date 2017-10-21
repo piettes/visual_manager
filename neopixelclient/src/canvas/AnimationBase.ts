@@ -37,18 +37,19 @@ abstract class AnimationBase {
     this.color2 = Color.fromName(name);
   }
 
-  animate(frame: Array<Point>): boolean {
-    this.tick();
+  animate(frame: Array<Point>, timeDiff: number): boolean {
+    this.tick(timeDiff);
     return this.nextframe(frame, this.ticker);
   }
 
   protected ticker: number = 0;
 
-  protected abstract tick(): void;
+  protected abstract tick(timeDiff: number): void;
 
   protected abstract nextframe(frame: Array<Point>, tick: number): boolean;
 
   reset(): void {
+    this.ticker = 0;
     this.ticker = 0;
   }
 

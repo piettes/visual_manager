@@ -29,7 +29,7 @@ class Random extends AnimationBase implements Animation {
     return false;
   }
 
-  tick(): void {
+  tick(timeDiff: number): void {
     if (this.ticker >= 60 * AnimationBase.FPS_RATE / this.bpm) {
       this.ticker = 0;
       return;

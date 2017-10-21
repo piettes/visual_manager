@@ -141,7 +141,7 @@ class StarsBpm extends AnimationBase implements Animation {
     return res;
   }
 
-  tick(): void {
+  tick(timeDiff: number): void {
     if (this.ticker >= 60 * AnimationBase.FPS_RATE / this.bpm) {
       this.ticker = 0;
       // this.initOffsets();

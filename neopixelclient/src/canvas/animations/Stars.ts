@@ -147,7 +147,7 @@ class Stars extends AnimationBase implements Animation {
   }
 
   // 340
-  tick(): void {
+  tick(timeDiff: number): void {
     if (this.ticker >= 80) {
       this.ticker = 0;
       this.initOffsets();

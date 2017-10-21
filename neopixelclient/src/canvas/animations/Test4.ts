@@ -33,7 +33,7 @@ class Test4 extends AnimationBase implements Animation {
     return false;
   }
 
-  tick(): void {
+  tick(timeDiff: number): void {
     if (this.ticker >= 600 / this.bpm) {
       this.ticker = 0;
     }
