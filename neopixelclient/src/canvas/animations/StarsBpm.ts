@@ -129,6 +129,8 @@ class StarsBpm extends AnimationBase implements Animation {
       this.timeAcc -= this.animDuration;
       return 0;
     }
+    let caca = this.animDuration * this.limit / this.timeAcc;
+    console.log("caca", caca);
     return this.animDuration * this.limit / this.timeAcc;
     //
     // if (this.ticker >= 60 * AnimationBase.FPS_RATE / this.bpm) {
