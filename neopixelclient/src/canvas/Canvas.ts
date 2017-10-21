@@ -57,7 +57,7 @@ abstract class Canvas {
         this.lastTickerCalled = now;
       }
       let timeDiff = now - this.lastTimeCalled;
-      this.lastTimeCalled = timeDiff;
+      this.lastTimeCalled = now;
       _that.step(timeDiff);
     };
   }

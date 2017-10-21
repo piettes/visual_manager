@@ -34,9 +34,9 @@ class Random extends AnimationBase implements Animation {
   tick(timeDiff: number): number {
     this.timeAcc += timeDiff;
     if (this.timeAcc > this.animDuration) {
+      console.log("time acc", this.timeAcc);
       this.timeAcc -= this.animDuration;
       console.log("time diff", timeDiff);
-      console.log("time acc", this.timeAcc);
       console.log("anima dur ", this.animDuration);
     }
 
