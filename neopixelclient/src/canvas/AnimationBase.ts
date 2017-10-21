@@ -40,6 +40,7 @@ abstract class AnimationBase {
   }
 
   protected ticker: number = 0;
+  protected timeAcc: number = -1;
 
   protected abstract tick(timeDiff: number): number;
 
@@ -47,6 +48,7 @@ abstract class AnimationBase {
 
   reset(): void {
     this.ticker = 0;
+    this.timeAcc = -1;
   }
 
   setLocation(location: Location) {

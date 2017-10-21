@@ -29,8 +29,6 @@ class Random extends AnimationBase implements Animation {
     return false;
   }
 
-  timeAcc: number = -1;
-
   tick(timeDiff: number): number {
     if (this.timeAcc === -1) {
       this.timeAcc = timeDiff;
