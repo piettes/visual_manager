@@ -125,11 +125,11 @@ class StarsBpm extends AnimationBase implements Animation {
       return 0;
     }
     this.timeAcc += timeDiff;
-    if (this.timeAcc > this.animDuration) {
+    if (this.timeAcc >= this.animDuration) {
       this.timeAcc -= this.animDuration;
       return 0;
     }
-    let caca =  Math.floor(this.animDuration * this.limit / this.timeAcc);
+    let caca =  Math.floor(this.animDuration / (this.animDuration - this.timeAcc) * this.limit) + 1;
     console.log("this.animDuration", this.animDuration);
     console.log("this.timeAcc", this.timeAcc);
     return caca;
