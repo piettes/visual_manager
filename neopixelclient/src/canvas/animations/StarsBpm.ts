@@ -4,7 +4,7 @@ import {AnimationBase} from "../AnimationBase";
 
 class StarsBpm extends AnimationBase implements Animation {
 
-  limit: number = 40;
+  limit: number = 8;
   stars: Array<any> = [];
 
   constructor() {
