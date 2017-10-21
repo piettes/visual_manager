@@ -23,13 +23,13 @@ class Effect1 extends AnimationBase implements Animation {
     return false;
   }
 
-  // 340
-  tick(timeDiff: number): void {
+  tick(timeDiff: number): number {
     if (this.ticker >= 332) {
       this.ticker = 0;
-      return;
+      return this.ticker;
     }
     this.ticker += 2;
+    return this.ticker;
   }
 
 }

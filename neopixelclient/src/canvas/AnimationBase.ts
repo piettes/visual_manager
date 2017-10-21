@@ -10,6 +10,7 @@ abstract class AnimationBase {
   LED_LINE_ROOF: number = 120;
   LED_LINE_WALL: number = 100;
   protected bpm: number = AnimationBase.DEFAULT_BPM;
+  protected animDuration: number = 60 * 1000 / AnimationBase.DEFAULT_BPM;
   protected location: Location = Location.ROOF;
 
   protected array: Array<number> = [0, 1, 2, 3, 4];
@@ -23,10 +24,7 @@ abstract class AnimationBase {
 
   setBpm(bpm: number): void {
     this.bpm = bpm;
-  }
-
-  getBpm(): number {
-    return this.bpm;
+    this.animDuration = 60 * 1000 / bpm;
   }
 
   setColor1(name: string): void {
@@ -38,18 +36,16 @@ abstract class AnimationBase {
   }
 
   animate(frame: Array<Point>, timeDiff: number): boolean {
-    this.tick(timeDiff);
-    return this.nextframe(frame, this.ticker);
+    return this.nextframe(frame, this.tick(timeDiff));
   }
 
   protected ticker: number = 0;
 
-  protected abstract tick(timeDiff: number): void;
+  protected abstract tick(timeDiff: number): number;
 
   protected abstract nextframe(frame: Array<Point>, tick: number): boolean;
 
   reset(): void {
-    this.ticker = 0;
     this.ticker = 0;
   }
 

@@ -29,12 +29,24 @@ class Random extends AnimationBase implements Animation {
     return false;
   }
 
-  tick(timeDiff: number): void {
+  timeAcc: number = 0;
+
+  tick(timeDiff: number): number {
+    this.timeAcc += timeDiff;
+    if (this.timeAcc > this.animDuration) {
+      this.timeAcc -= this.animDuration;
+      console.log("time diff", timeDiff);
+      console.log("time acc", this.timeAcc);
+      console.log("anima dur ", this.animDuration);
+    }
+    console.log("time acc", this.timeAcc)
+
     if (this.ticker >= 60 * AnimationBase.FPS_RATE / this.bpm) {
       this.ticker = 0;
-      return;
+      return this.ticker;
     }
     this.ticker++;
+    return this.ticker;
   }
 
   reset(): void {

@@ -141,12 +141,13 @@ class StarsTest1 extends AnimationBase implements Animation {
   }
 
   // 340
-  tick(timeDiff: number): void {
+  tick(timeDiff: number): number {
     if (this.ticker >= 50) {
       this.ticker = 0;
-      return;
+      return this.ticker;
     }
     this.ticker++;
+    return this.ticker;
   }
 
 }

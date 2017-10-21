@@ -8,8 +8,6 @@ interface Animation {
 
   setBpm(bpm: number): void;
 
-  getBpm(): number;
-
   setColor1(name: string): void;
 
   setColor2(name: string): void;

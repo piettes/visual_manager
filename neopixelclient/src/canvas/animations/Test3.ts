@@ -28,11 +28,13 @@ class Test3 extends AnimationBase implements Animation {
     return false;
   }
 
-  tick(timeDiff: number): void {
+  tick(timeDiff: number): number {
     if (this.ticker >= 600 / this.bpm) {
       this.ticker = 0;
+      return this.ticker;
     }
     this.ticker++;
+    return this.ticker;
   }
 
   reset(): void {

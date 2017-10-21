@@ -15,8 +15,9 @@ class Off extends AnimationBase implements Animation {
     return false;
   }
 
-  tick(timeDiff: number): void {
+  tick(timeDiff: number): number {
     this.ticker++;
+    return this.ticker;
   }
 
   reset(): void {
