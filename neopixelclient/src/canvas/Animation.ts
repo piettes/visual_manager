@@ -8,6 +8,8 @@ interface Animation {
 
   setBpm(bpm: number): void;
 
+  setPatternLength(value: number): void;
+
   setColor1(name: string): void;
 
   setColor2(name: string): void;
@@ -17,7 +19,6 @@ interface Animation {
   setLocation(location: Location): void;
 
 }
-
 
 enum Location {
   WALL,

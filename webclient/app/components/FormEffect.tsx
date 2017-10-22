@@ -4,6 +4,7 @@ import Color from "../../../neopixelclient/src/canvas/Color";
 interface FormProps {
   changeAnimation: (name: string) => void;
   changeColor: (colorName: string, pos: number) => void;
+  changePatternLength: (value: number) => void;
   animationList: Array<string>;
   number: number;
   color1: string;
@@ -25,6 +26,10 @@ class FormEffect extends React.Component<FormProps, any> {
     return () => {
       this.props.changeColor(colorName, pos);
     };
+  }
+
+  onChangePatternLength(event: any) {
+    this.props.changePatternLength(event.target.value);
   }
 
   colorDropdown(pos: number) {
@@ -74,9 +79,9 @@ class FormEffect extends React.Component<FormProps, any> {
           <legend>Effect {this.props.number}</legend>
 
           <div className="form-group">
-            <label htmlFor="selectEffect1" className="col-lg-2 control-label">Animation</label>
-            <div className="col-lg-10">
-              <select className="form-control" id="selectEffect1"
+            <label htmlFor="selectEffect" className="col-lg-4 control-label">Animation</label>
+            <div className="col-lg-8">
+              <select className="form-control" id="selectEffect"
                       onChange={(event: any) => this.onChangeAnimation(event)}>
                 {animOptions}
               </select>
@@ -85,6 +90,23 @@ class FormEffect extends React.Component<FormProps, any> {
 
           {this.colorDropdown(1)}
           {this.colorDropdown(2)}
+
+          <div className="form-group">
+            <label htmlFor="selectPatternLength" className="col-lg-4 control-label">Pattern Length</label>
+            <div className="col-lg-8">
+              <select className="form-control" id="selectPatternLength"
+                      onChange={(event: any) => this.onChangePatternLength(event)}>
+                <option>1</option>
+                <option>2</option>
+                <option>4</option>
+                <option>8</option>
+                <option>16</option>
+                <option>32</option>
+              </select>
+
+            </div>
+          </div>
+
 
         </div>
     );

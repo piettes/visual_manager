@@ -146,7 +146,6 @@ class Stars extends AnimationBase implements Animation {
     return res;
   }
 
-  // 340
   tick(timeDiff: number): number {
     if (this.ticker >= 80) {
       this.ticker = 0;

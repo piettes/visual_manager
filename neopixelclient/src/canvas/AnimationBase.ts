@@ -22,9 +22,20 @@ abstract class AnimationBase {
   protected color1: Color = Color.PURPLE;
   protected color2: Color = Color.PURPLE;
 
+  protected patternLength: number = 1;
+
   setBpm(bpm: number): void {
     this.bpm = bpm;
-    this.animDuration = 60 * 1000 / bpm;
+    this.fixAnimDuration();
+  }
+
+  private fixAnimDuration(): void {
+    this.animDuration = 60 * 1000 / this.bpm * this.patternLength;
+  }
+
+  setPatternLength(value: number): void {
+    this.patternLength = value;
+    this.fixAnimDuration();
   }
 
   setColor1(name: string): void {
