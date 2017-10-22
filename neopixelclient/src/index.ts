@@ -33,7 +33,7 @@ app.post("/update", function (req: any, res: any) {
       anim.setColor1(animObj.color1);
       anim.setColor2(animObj.color2);
       anim.setBpm(parseInt(req.body.bpm));
-      anim.setPatternLength(parseInt(req.body.patternLength));
+      anim.setPatternLength(parseInt(animObj.patternLength));
       anims.push(anim);
     } else {
       anims.push(AnimationFactory.getOff());
