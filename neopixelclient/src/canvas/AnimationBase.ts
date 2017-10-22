@@ -10,7 +10,8 @@ abstract class AnimationBase {
   LED_LINE_ROOF: number = 120;
   LED_LINE_WALL: number = 100;
   protected bpm: number = AnimationBase.DEFAULT_BPM;
-  protected animDuration: number = 60 * 1000 / AnimationBase.DEFAULT_BPM;
+  protected patternLength: number = 1;
+  protected animDuration: number = 60 * 1000 / AnimationBase.DEFAULT_BPM * this.patternLength;
   protected location: Location = Location.ROOF;
 
   protected array: Array<number> = [0, 1, 2, 3, 4];
@@ -22,7 +23,6 @@ abstract class AnimationBase {
   protected color1: Color = Color.PURPLE;
   protected color2: Color = Color.PURPLE;
 
-  protected patternLength: number = 1;
 
   setBpm(bpm: number): void {
     this.bpm = bpm;
