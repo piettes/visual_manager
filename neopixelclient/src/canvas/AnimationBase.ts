@@ -11,7 +11,7 @@ abstract class AnimationBase {
   LED_LINE_WALL: number = 100;
   protected bpm: number = AnimationBase.DEFAULT_BPM;
   protected patternLength: number = 1;
-  protected animDuration: number = 60 * 1000 / AnimationBase.DEFAULT_BPM * this.patternLength;
+  protected animDuration: number = 60 * 1000 * this.patternLength / AnimationBase.DEFAULT_BPM;
   protected location: Location = Location.ROOF;
 
   protected array: Array<number> = [0, 1, 2, 3, 4];
@@ -30,7 +30,7 @@ abstract class AnimationBase {
   }
 
   private fixAnimDuration(): void {
-    this.animDuration = 60 * 1000 / this.bpm * this.patternLength;
+    this.animDuration = 60 * 1000 * this.patternLength / this.bpm;
   }
 
   setPatternLength(value: number): void {
