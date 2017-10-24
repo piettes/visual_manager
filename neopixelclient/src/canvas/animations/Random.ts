@@ -29,7 +29,7 @@ class Random extends AnimationBase implements Animation {
       });
     }
     this.array.forEach(y => {
-      frame.concat(this.columns["col" + y]);
+      frame.push(...this.columns["col" + y]);
     });
 
     return true;
