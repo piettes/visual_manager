@@ -57,19 +57,16 @@ class Stars extends AnimationBase implements Animation {
     if (tick === 0) {
       this.stars[starIndex] = this.initStar(starIndex);
       frame.push({...this.stars[starIndex].star_1});
-      return true;
     } else if (tick === 1) {
       this.stars[starIndex].star_1.x += this.stars[starIndex].inc;
       frame.push({...this.stars[starIndex].star_1});
       frame.push({...this.stars[starIndex].star_2});
-      return true;
     } else if (tick === 2) {
       this.stars[starIndex].star_1.x += this.stars[starIndex].inc;
       this.stars[starIndex].star_2.x += this.stars[starIndex].inc;
       frame.push({...this.stars[starIndex].star_1});
       frame.push({...this.stars[starIndex].star_2});
       frame.push({...this.stars[starIndex].star_3});
-      return true;
     } else if (tick === 3) {
       this.stars[starIndex].star_1.x += this.stars[starIndex].inc;
       this.stars[starIndex].star_2.x += this.stars[starIndex].inc;
@@ -78,7 +75,6 @@ class Stars extends AnimationBase implements Animation {
       frame.push({...this.stars[starIndex].star_2});
       frame.push({...this.stars[starIndex].star_3});
       frame.push({...this.stars[starIndex].star_4});
-      return true;
     } else if (tick === 4) {
       this.stars[starIndex].star_1.x += this.stars[starIndex].inc;
       this.stars[starIndex].star_2.x += this.stars[starIndex].inc;
@@ -89,7 +85,6 @@ class Stars extends AnimationBase implements Animation {
       frame.push({...this.stars[starIndex].star_3});
       frame.push({...this.stars[starIndex].star_4});
       frame.push({...this.stars[starIndex].star_5});
-      return true;
     } else if (tick < this.limit) {
       this.stars[starIndex].star_1.x += this.stars[starIndex].inc;
       this.stars[starIndex].star_2.x += this.stars[starIndex].inc;
@@ -101,7 +96,6 @@ class Stars extends AnimationBase implements Animation {
       frame.push({...this.stars[starIndex].star_3});
       frame.push({...this.stars[starIndex].star_4});
       frame.push({...this.stars[starIndex].star_5});
-      return true;
     } else if (tick === this.limit) {
       this.stars[starIndex].star_2.x += this.stars[starIndex].inc;
       this.stars[starIndex].star_3.x += this.stars[starIndex].inc;
@@ -111,7 +105,6 @@ class Stars extends AnimationBase implements Animation {
       frame.push({...this.stars[starIndex].star_3});
       frame.push({...this.stars[starIndex].star_4});
       frame.push({...this.stars[starIndex].star_5});
-      return true;
     } else if (tick === this.limit + 1) {
       this.stars[starIndex].star_3.x += this.stars[starIndex].inc;
       this.stars[starIndex].star_4.x += this.stars[starIndex].inc;
@@ -119,21 +112,16 @@ class Stars extends AnimationBase implements Animation {
       frame.push({...this.stars[starIndex].star_3});
       frame.push({...this.stars[starIndex].star_4});
       frame.push({...this.stars[starIndex].star_5});
-      return true;
     } else if (tick === this.limit + 2) {
       this.stars[starIndex].star_4.x += this.stars[starIndex].inc;
       this.stars[starIndex].star_5.x += this.stars[starIndex].inc;
       frame.push({...this.stars[starIndex].star_4});
       frame.push({...this.stars[starIndex].star_5});
-      return true;
     } else if (tick === this.limit + 3) {
       this.stars[starIndex].star_5.x += this.stars[starIndex].inc;
       frame.push({...this.stars[starIndex].star_5});
-      return true;
-    } else if (tick === this.limit + 4) {
-      return true;
     }
-    return false;
+    return true;
   }
 
   nextframe(frame: Array<Point>, tick: number): boolean {
@@ -158,7 +146,7 @@ class Stars extends AnimationBase implements Animation {
       this.initOffsets();
       return 0;
     }
-    return Math.floor(this.timeAcc * this.patternLength / this.animDuration  * 80) + 1;
+    return Math.floor(this.timeAcc * this.patternLength / this.animDuration * 80) + 1;
   }
 
 }
