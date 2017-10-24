@@ -15,10 +15,10 @@ class Random extends AnimationBase implements Animation {
   nextframe(frame: Array<Point>, tick: number): boolean {
     if (tick === 0) {
       this.currentColor = this.currentColor === this.color1.value ? this.color2.value : this.color1.value;
-
       if (this.currentColor === this.LED_OFF) {
         return true;
       }
+
 
       this.array.forEach(y => {
         this.columns["col" + y] = [];
@@ -27,6 +27,9 @@ class Random extends AnimationBase implements Animation {
           this.columns["col" + y].push({x: r + i, y: y, c: this.currentColor});
         }
       });
+    }
+    if (this.currentColor === this.LED_OFF) {
+      return true;
     }
     this.array.forEach(y => {
       frame.push(...this.columns["col" + y]);
