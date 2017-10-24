@@ -17,10 +17,8 @@ class Effect1 extends AnimationBase implements Animation {
         }
       });
       return true;
-    } else if (tick === this.numLED) {
-      return true;
     }
-    return false;
+    return true;
   }
 
   tick(timeDiff: number): number {

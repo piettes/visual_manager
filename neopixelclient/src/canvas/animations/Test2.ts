@@ -1,6 +1,7 @@
 import {Animation} from "../Animation";
 import {Point} from "../Point";
 import {AnimationBase} from "../AnimationBase";
+import Color from "../Color";
 
 class Test2 extends AnimationBase implements Animation {
 
@@ -19,9 +20,10 @@ class Test2 extends AnimationBase implements Animation {
         return true;
       }
 
-      for (let i = 0; i < 22; i++) {
-        frame.push({x: 34 + i, y: 1, c: this.currentColor});
-      }
+      frame.push({x: 120, y: 3, c: Color.RED.value});
+      frame.push({x: 119, y: 3, c: Color.CYAN.value});
+      frame.push({x: 118, y: 3, c: Color.BLUE.value});
+
 
       return true;
     }

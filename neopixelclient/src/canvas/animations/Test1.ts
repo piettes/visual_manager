@@ -1,6 +1,7 @@
 import {Animation, Location} from "../Animation";
 import {Point} from "../Point";
 import {AnimationBase} from "../AnimationBase";
+import Color from "../Color";
 
 class Test1 extends AnimationBase implements Animation {
 
@@ -19,8 +20,9 @@ class Test1 extends AnimationBase implements Animation {
         return true;
       }
 
-      frame.push({x: 48, y: 2, c: this.currentColor});
-      frame.push({x: 49, y: 2, c: this.currentColor});
+      frame.push({x: 120, y: 1, c: Color.RED.value});
+      frame.push({x: 119, y: 1, c: Color.CYAN.value});
+      frame.push({x: 118, y: 1, c: Color.BLUE.value});
 
       if (this.location === Location.WALL) {
         for (let i = 0; i < this.numLED; i++) {
