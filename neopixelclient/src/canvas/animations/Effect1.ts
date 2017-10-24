@@ -24,12 +24,16 @@ class Effect1 extends AnimationBase implements Animation {
   }
 
   tick(timeDiff: number): number {
-    if (this.ticker >= 332) {
-      this.ticker = 0;
-      return this.ticker;
+    if (this.timeAcc === -1) {
+      this.timeAcc = timeDiff;
+      return 0;
     }
-    this.ticker += 2;
-    return this.ticker;
+    this.timeAcc += timeDiff;
+    if (this.timeAcc >= this.animDuration) {
+      this.timeAcc -= this.animDuration;
+      return 0;
+    }
+    return Math.floor(this.timeAcc / this.animDuration * this.numLED * 2) + 1;
   }
 
 }
