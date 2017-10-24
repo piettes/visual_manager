@@ -36,13 +36,13 @@ class CanvasNeopixel extends Canvas {
         this.pixelData[LED_LINE_WALL + x] = color;
         break;
       case 1:
-        this.pixelData[LED_LINE_WALL + LED_LINE_ROOF * 2 - x] = color;
+        this.pixelData[LED_LINE_WALL + LED_LINE_ROOF * 2 - x - 1] = color;
         break;
       case 2:
         this.pixelData[LED_LINE_WALL + LED_LINE_ROOF * 2 + x] = color;
         break;
       case 3:
-        this.pixelData[LED_LINE_WALL + LED_LINE_ROOF * 4 - x] = color;
+        this.pixelData[LED_LINE_WALL + LED_LINE_ROOF * 4 - x - 1] = color;
         break;
       case 4:
         this.pixelData[LED_LINE_WALL + LED_LINE_ROOF * 4 + x] = color;
@@ -57,7 +57,7 @@ class CanvasNeopixel extends Canvas {
         this.pixelData[x] = color;
         break;
       case 1:
-        this.pixelData[2 * LED_LINE_WALL + LED_LINE_ROOF * 5 - x] = color;
+        this.pixelData[2 * LED_LINE_WALL + LED_LINE_ROOF * 5 - x - 1] = color;
         break;
     }
   }
