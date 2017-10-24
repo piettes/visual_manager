@@ -17,7 +17,7 @@ class StarsBpm extends AnimationBase implements Animation {
   }
 
   initStar(y: number) {
-    let x = Math.floor(Math.random() * (this.numLED - this.limit));
+    let x = Math.floor(Math.random() * (this.numLED - this.limit * this.patternLength));
     let star = {star_1: {}, star_2: {}, star_3: {}, star_4: {}, star_5: {}};
     star.star_1 = {x: x, y: y, c: this.color1.shade1};
     star.star_2 = {x: x, y: y, c: this.color1.shade2};
@@ -65,7 +65,7 @@ class StarsBpm extends AnimationBase implements Animation {
       frame.push({...this.stars[starIndex].star_4});
       frame.push({...this.stars[starIndex].star_5});
       return true;
-    } else if (tick < this.limit) {
+    } else if (tick < this.limit * this.patternLength) {
       this.stars[starIndex].star_1.x++;
       this.stars[starIndex].star_2.x++;
       this.stars[starIndex].star_3.x++;
@@ -77,7 +77,7 @@ class StarsBpm extends AnimationBase implements Animation {
       frame.push({...this.stars[starIndex].star_4});
       frame.push({...this.stars[starIndex].star_5});
       return true;
-    } else if (tick === this.limit - 4) {
+    } else if (tick === this.limit * this.patternLength - 4) {
       this.stars[starIndex].star_2.x++;
       this.stars[starIndex].star_3.x++;
       this.stars[starIndex].star_4.x++;
@@ -87,7 +87,7 @@ class StarsBpm extends AnimationBase implements Animation {
       frame.push({...this.stars[starIndex].star_4});
       frame.push({...this.stars[starIndex].star_5});
       return true;
-    } else if (tick === this.limit - 3) {
+    } else if (tick === this.limit * this.patternLength - 3) {
       this.stars[starIndex].star_3.x++;
       this.stars[starIndex].star_4.x++;
       this.stars[starIndex].star_5.x++;
@@ -95,17 +95,17 @@ class StarsBpm extends AnimationBase implements Animation {
       frame.push({...this.stars[starIndex].star_4});
       frame.push({...this.stars[starIndex].star_5});
       return true;
-    } else if (tick === this.limit - 2) {
+    } else if (tick === this.limit * this.patternLength - 2) {
       this.stars[starIndex].star_4.x++;
       this.stars[starIndex].star_5.x++;
       frame.push({...this.stars[starIndex].star_4});
       frame.push({...this.stars[starIndex].star_5});
       return true;
-    } else if (tick === this.limit - 1) {
+    } else if (tick === this.limit * this.patternLength - 1) {
       this.stars[starIndex].star_5.x++;
       frame.push({...this.stars[starIndex].star_5});
       return true;
-    } else if (tick === this.limit) {
+    } else if (tick === this.limit * this.patternLength) {
       return true;
     }
     return false;
@@ -129,7 +129,7 @@ class StarsBpm extends AnimationBase implements Animation {
       this.timeAcc -= this.animDuration;
       return 0;
     }
-    return Math.floor(this.timeAcc * this.patternLength / this.animDuration  * this.limit) + 1;
+    return Math.floor(this.timeAcc / this.animDuration  * this.limit) + 1;
   }
 
 }
