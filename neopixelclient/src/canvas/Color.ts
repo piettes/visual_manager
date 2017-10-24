@@ -29,6 +29,8 @@ class Color {
     switch (name) {
       case Color.RED.name :
         return Color.RED;
+      case Color.ORANGE.name :
+        return Color.ORANGE;
       case Color.PURPLE.name :
         return Color.PURPLE;
       case Color.WHITE.name :
@@ -52,6 +54,7 @@ class Color {
 
   static BLUE: Color = new Color("blue", 0x0000FF, "#0000FF", 0x0000DD, 0x0000BB, 0x000099, 0x000077, 0x000055, 0x000033, 0x000011);
   static RED: Color = new Color("red", 0xFF0000, "#FF0000", 0xDD0000, 0xBB0000, 0x990000, 0x770000, 0x550000, 0x330000, 0x110000);
+  static ORANGE: Color = new Color("orange", 0xFF8800, "#FF8800", 0xDD6600, 0xBB5500, 0x994400, 0x773300, 0x552200, 0x331100, 0x110000);
   static GREEN: Color = new Color("green", 0x00FF00, "#00FF00", 0x00DD00, 0x00BB00, 0x009900, 0x007700, 0x005500, 0x003300, 0x001100);
   static PURPLE: Color = new Color("purple", 0xFF00FF, "#FF00FF", 0xDD00DD, 0xBB00BB, 0x990099, 0x770077, 0x550055, 0x330033, 0x110011);
   static YELLOW: Color = new Color("yellow", 0xFFFF00, "#FFFF00", 0xDDDD00, 0xBBBB00, 0x999900, 0x777700, 0x555500, 0x333300, 0x111100);

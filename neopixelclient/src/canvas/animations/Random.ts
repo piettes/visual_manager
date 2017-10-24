@@ -18,8 +18,6 @@ class Random extends AnimationBase implements Animation {
       if (this.currentColor === this.LED_OFF) {
         return true;
       }
-
-
       this.array.forEach(y => {
         this.columns["col" + y] = [];
         let r: number = Math.floor(Math.random() * (this.numLED - 7));
