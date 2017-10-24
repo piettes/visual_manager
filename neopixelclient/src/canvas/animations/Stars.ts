@@ -147,13 +147,18 @@ class Stars extends AnimationBase implements Animation {
   }
 
   tick(timeDiff: number): number {
-    if (this.ticker >= 80) {
-      this.ticker = 0;
+    if (this.timeAcc === -1) {
+      this.timeAcc = timeDiff;
       this.initOffsets();
-      return this.ticker;
+      return 0;
     }
-    this.ticker++;
-    return this.ticker;
+    this.timeAcc += timeDiff;
+    if (this.timeAcc >= this.animDuration) {
+      this.timeAcc -= this.animDuration;
+      this.initOffsets();
+      return 0;
+    }
+    return Math.floor(this.timeAcc * this.patternLength / this.animDuration  * 80) + 1;
   }
 
 }
