@@ -24,9 +24,8 @@ class Random extends AnimationBase implements Animation {
           frame.push({x: r + i, y: y, c: this.currentColor});
         }
       });
-      return true;
     }
-    return false;
+    return true;
   }
 
   tick(timeDiff: number): number {
