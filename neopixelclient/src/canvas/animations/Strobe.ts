@@ -7,7 +7,7 @@ class Strobe extends AnimationBase implements Animation {
   private currentColor: number = this.color1.value;
 
   getName(): string {
-    return "Random";
+    return "Strobe";
   }
 
   columns: any = {};
