@@ -9,7 +9,7 @@ import {Test3} from "./animations/Test3";
 import {StarsBpm} from "./animations/StarsBpm";
 import {Test4} from "./animations/Test4";
 import {Strobe} from "./animations/Strobe";
-import {Fire} from "./animations/Fire";
+import {Rain} from "./animations/Rain";
 
 class AnimationFactory {
 
@@ -19,10 +19,10 @@ class AnimationFactory {
     switch (name) {
       case "Effect1":
         return new Effect1();
-      case "Fire":
-        return new Fire();
       case "Stars":
         return new Stars();
+      case "Rain":
+        return new Rain();
       case "StarsBpm":
         return new StarsBpm();
       case "Random":
@@ -45,7 +45,7 @@ class AnimationFactory {
     }
   }
 
-  static all: Array<Animation> = [new Fire(), new Random(), new Strobe(), new StarsBpm(), new Stars(), new Effect1(), new Off(), new Test1(), new Test2(), new Test3(), new Test4()];
+  static all: Array<Animation> = [new Random(), new Strobe(), new StarsBpm(), new Stars(), new Rain(), new Effect1(), new Off(), new Test1(), new Test2(), new Test3(), new Test4()];
 
 
   static getAll(): Array<Animation> {
