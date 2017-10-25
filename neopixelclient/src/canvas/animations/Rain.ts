@@ -5,30 +5,13 @@ import Color from "../Color";
 
 class Rain extends AnimationBase implements Animation {
 
-  // offsets: Array<any> = [];
-
   constructor() {
     super();
-    // this.initOffsets();
   }
 
   getName(): string {
     return "Rain";
   }
-
-  // initOffsets() {
-  //   let offsets = [];
-  //   offsets.push(0);
-  //   offsets.push(Math.floor(Math.random() * 30) + 10);
-  //   offsets.push(Math.floor(Math.random() * 30) + 10);
-  //   offsets.push(Math.floor(Math.random() * 30) + 30);
-  //   offsets.push(Math.floor(Math.random() * 30) + 30);
-  //   // https://stackoverflow.com/a/18650169
-  //   offsets.sort(function () {
-  //     return .5 - Math.random();
-  //   });
-  //   this.offsets = offsets;
-  // }
 
   nextframe(frame: Array<Point>, tick: number): boolean {
     if (tick === 0) {
@@ -44,7 +27,6 @@ class Rain extends AnimationBase implements Animation {
   tick(timeDiff: number): number {
     if (this.ticker >= this.patternLength) {
       this.ticker = 0;
-      // this.initOffsets();
       return this.ticker;
     }
     this.ticker++;
