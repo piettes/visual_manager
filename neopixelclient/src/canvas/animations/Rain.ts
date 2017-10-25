@@ -31,17 +31,15 @@ class Rain extends AnimationBase implements Animation {
   }
 
   nextframe(frame: Array<Point>, tick: number): boolean {
-    let res = false;
     this.array.forEach(y => {
-      if (tick  === this.offsets[y]) {
-        res = true;
-        let color: Color =  Math.random() > 0.5 ? this.color1 : this.color2;
+      if (tick === this.offsets[y]) {
+        let color: Color = Math.random() > 0.5 ? this.color1 : this.color2;
         let shade: number = color.getShade(Math.floor(Math.random() * 6));
         let position: number = Math.floor(Math.random() * this.numLED);
         frame.push({x: position, y: y, c: shade});
       }
     });
-    return res;
+    return true;
   }
 
   tick(timeDiff: number): number {
