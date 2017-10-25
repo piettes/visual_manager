@@ -12,6 +12,8 @@ class Color {
   shade6: number;
   shade7: number;
 
+  shadeMap: Map<number, number>;
+
   constructor(name: string, value: number, valueString: string, shade1: number, shade2: number, shade3: number, shade4: number, shade5: number, shade6: number, shade7: number) {
     this.name = name;
     this.value = value;
@@ -23,6 +25,19 @@ class Color {
     this.shade5 = shade5;
     this.shade6 = shade6;
     this.shade7 = shade7;
+    this.shadeMap = new Map();
+    this.shadeMap.set(0, value);
+    this.shadeMap.set(1, shade1);
+    this.shadeMap.set(2, shade2);
+    this.shadeMap.set(3, shade3);
+    this.shadeMap.set(4, shade4);
+    this.shadeMap.set(5, shade5);
+    this.shadeMap.set(6, shade6);
+    this.shadeMap.set(7, shade7);
+  }
+
+  getShade(index: number): number {
+    return this.shadeMap.get(index) || 0x000000;
   }
 
   static fromName(name: string): Color {
@@ -47,7 +62,7 @@ class Color {
         return Color.CHARTREUSE;
       case Color.DODGER_BLUE.name :
         return Color.DODGER_BLUE;
-        case Color.DEEP_PINK.name :
+      case Color.DEEP_PINK.name :
         return Color.DEEP_PINK;
       case Color.BLACK.name :
         return Color.BLACK;
