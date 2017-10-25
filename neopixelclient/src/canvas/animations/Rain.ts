@@ -42,7 +42,7 @@ class Rain extends AnimationBase implements Animation {
   }
 
   tick(timeDiff: number): number {
-    if (this.ticker >= 80) {
+    if (this.ticker >= this.patternLength) {
       this.ticker = 0;
       // this.initOffsets();
       return this.ticker;
