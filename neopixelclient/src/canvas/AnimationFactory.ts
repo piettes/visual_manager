@@ -3,11 +3,7 @@ import {Effect1} from "./animations/Effect1";
 import {Random} from "./animations/Random";
 import {Off} from "./animations/Off";
 import {Stars} from "./animations/Stars";
-import {Test2} from "./animations/Test2";
-import {Test1} from "./animations/Test1";
-import {Test3} from "./animations/Test3";
 import {StarsBpm} from "./animations/StarsBpm";
-import {Test4} from "./animations/Test4";
 import {Strobe} from "./animations/Strobe";
 import {Rain} from "./animations/Rain";
 
@@ -30,13 +26,6 @@ class AnimationFactory {
       case "Strobe":
         return new Strobe();
       case "Test1":
-        return new Test1();
-      case "Test2":
-        return new Test2();
-      case "Test3":
-        return new Test3();
-      case "Test4":
-        return new Test4();
       case "Off":
         return new Off();
       default:
@@ -45,7 +34,7 @@ class AnimationFactory {
     }
   }
 
-  static all: Array<Animation> = [new Random(), new Strobe(), new StarsBpm(), new Stars(), new Rain(), new Effect1(), new Off(), new Test1(), new Test2(), new Test3(), new Test4()];
+  static all: Array<Animation> = [new Random(), new Strobe(), new StarsBpm(), new Stars(), new Rain(), new Effect1(), new Off()];
 
 
   static getAll(): Array<Animation> {
