@@ -4,7 +4,7 @@ import {AnimationBase} from "../AnimationBase";
 
 class Random extends AnimationBase implements Animation {
 
-  private currentColor: number = this.color1.value;
+  private currentColor: number = this.getShade1();
 
   getName(): string {
     return "Random";
@@ -14,7 +14,7 @@ class Random extends AnimationBase implements Animation {
 
   nextframe(frame: Array<Point>, tick: number): boolean {
     if (tick === 0) {
-      this.currentColor = this.currentColor === this.color1.value ? this.color2.value : this.color1.value;
+      this.currentColor = this.currentColor === this.getShade1() ? this.getShade2() : this.getShade1();
       if (this.currentColor === this.LED_OFF) {
         return true;
       }
@@ -51,7 +51,7 @@ class Random extends AnimationBase implements Animation {
 
   reset(): void {
     super.reset();
-    this.currentColor = this.color1.value;
+    this.currentColor = this.getShade1();
   }
 
 }

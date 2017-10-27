@@ -12,7 +12,7 @@ class Color {
   private shade6: number;
   private shade7: number;
 
-  shadeMap: Map<number, number>;
+  private shadeMap: Map<number, number>;
 
   constructor(name: string, value: number, valueString: string, shade1: number, shade2: number, shade3: number, shade4: number, shade5: number, shade6: number, shade7: number) {
     this.name = name;

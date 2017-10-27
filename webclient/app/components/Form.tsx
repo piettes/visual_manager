@@ -26,6 +26,7 @@ class Form extends React.Component<FormProps, any> {
       color11: "purple", color12: "purple", color21: "purple", color22: "purple",
       color31: "purple", color32: "purple", color41: "purple", color42: "purple",
       patternLength1: 1, patternLength2: 1, patternLength3: 1, patternLength4: 1,
+      luminosity1: 0, luminosity2: 0, luminosity3: 0, luminosity4: 0,
       animation1: AnimationFactory.getDefault().getName(), animation2: AnimationFactory.getOff().getName(),
       animation3: AnimationFactory.getDefault().getName(), animation4: AnimationFactory.getOff().getName(),
       bpm: AnimationBase.DEFAULT_BPM
@@ -45,6 +46,11 @@ class Form extends React.Component<FormProps, any> {
   changePatternLength(id: number, value: number): void {
     this.setState({["patternLength" + id]: value});
   }
+
+  changeLuminosity(id: number, value: number): void {
+    this.setState({["luminosity" + id]: value});
+  }
+
 
   onChangeBpm(event: any) {
     let val: number = event.target.value;
@@ -87,6 +93,7 @@ class Form extends React.Component<FormProps, any> {
         anim.color1 = this.state["color" + i + 1];
         anim.color2 = this.state["color" + i + 2];
         anim.patternLength = this.state["patternLength" + i];
+        anim.luminosity = this.state["luminosity" + i];
         res["anim" + i] = anim;
       }
     }
@@ -117,26 +124,33 @@ class Form extends React.Component<FormProps, any> {
                             changeColor={(name: string, pos: number) => this.changeColor(name, pos, 1)}
                             color1={this.state.color11} color2={this.state.color12}
                             changePatternLength={(value: number) => this.changePatternLength(1, value)}
+                            changeLuminosity={(value: number) => this.changeLuminosity(1, value)}
                 />
 
                 <FormEffect animationList={this.props.animationList} number={2}
                             changeAnimation={(name: string) => this.changeAnimation(name, 2)}
                             changeColor={(name: string, pos: number) => this.changeColor(name, pos, 2)}
                             color1={this.state.color21} color2={this.state.color22}
-                            changePatternLength={(value: number) => this.changePatternLength(2, value)}/>
+                            changePatternLength={(value: number) => this.changePatternLength(2, value)}
+                            changeLuminosity={(value: number) => this.changeLuminosity(2, value)}
+                />
 
 
                 <FormEffect animationList={this.props.animationList} number={3}
                             changeAnimation={(name: string) => this.changeAnimation(name, 3)}
                             changeColor={(name: string, pos: number) => this.changeColor(name, pos, 3)}
                             color1={this.state.color31} color2={this.state.color32}
-                            changePatternLength={(value: number) => this.changePatternLength(3, value)}/>
+                            changePatternLength={(value: number) => this.changePatternLength(3, value)}
+                            changeLuminosity={(value: number) => this.changeLuminosity(3, value)}
+                />
 
                 <FormEffect animationList={this.props.animationList} number={4}
                             changeAnimation={(name: string) => this.changeAnimation(name, 4)}
                             changeColor={(name: string, pos: number) => this.changeColor(name, pos, 4)}
                             color1={this.state.color41} color2={this.state.color42}
-                            changePatternLength={(value: number) => this.changePatternLength(4, value)}/>
+                            changePatternLength={(value: number) => this.changePatternLength(4, value)}
+                            changeLuminosity={(value: number) => this.changeLuminosity(4, value)}
+                />
 
               </div>
 

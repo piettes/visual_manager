@@ -13,7 +13,7 @@ class Effect1 extends AnimationBase implements Animation {
       this.array.forEach(y => {
         let size = Math.min(4, this.numLED - tick);
         for (let i = 0; i < size; i++) {
-          frame.push({x: tick + i, y: y, c: this.color1.value});
+          frame.push({x: tick + i, y: y, c: this.getShade1()});
         }
       });
       return true;

@@ -14,6 +14,8 @@ interface Animation {
 
   setColor2(name: string): void;
 
+  setLuminosity(luminosity: number): void;
+
   reset(): void;
 
   setLocation(location: Location): void;

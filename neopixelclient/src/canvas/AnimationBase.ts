@@ -22,7 +22,7 @@ abstract class AnimationBase {
 
   protected color1: Color = Color.PURPLE;
   protected color2: Color = Color.PURPLE;
-
+  protected luminosity: number = 0;
 
   setBpm(bpm: number): void {
     this.bpm = bpm;
@@ -44,6 +44,18 @@ abstract class AnimationBase {
 
   setColor2(name: string): void {
     this.color2 = Color.fromName(name);
+  }
+
+  protected getShade1(): number {
+    return this.color1.getShade(this.luminosity);
+  }
+
+  protected getShade2(): number {
+    return this.color2.getShade(this.luminosity);
+  }
+
+  setLuminosity(luminosity: number): void {
+    this.luminosity = luminosity;
   }
 
   animate(frame: Array<Point>, timeDiff: number): boolean {

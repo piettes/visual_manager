@@ -5,6 +5,7 @@ interface FormProps {
   changeAnimation: (name: string) => void;
   changeColor: (colorName: string, pos: number) => void;
   changePatternLength: (value: number) => void;
+  changeLuminosity: (value: number) => void;
   animationList: Array<string>;
   number: number;
   color1: string;
@@ -30,6 +31,10 @@ class FormEffect extends React.Component<FormProps, any> {
 
   onChangePatternLength(event: any) {
     this.props.changePatternLength(event.target.value);
+  }
+
+  onChangeLuminosity(event: any) {
+    this.props.changeLuminosity(event.target.value);
   }
 
   colorDropdown(pos: number) {
@@ -102,6 +107,23 @@ class FormEffect extends React.Component<FormProps, any> {
                 <option>8</option>
                 <option>16</option>
                 <option>32</option>
+              </select>
+
+            </div>
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="selectLuminosity" className="col-lg-4 control-label">Luminosity</label>
+            <div className="col-lg-8">
+              <select className="form-control" id="selectLuminosity"
+                      onChange={(event: any) => this.onChangeLuminosity(event)}>
+                <option>0</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
               </select>
 
             </div>
