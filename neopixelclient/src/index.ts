@@ -52,7 +52,7 @@ app.post("/flash", function (req: any, res: any) {
 
 app.post("/switchAutoColorChange", function (req: any, res: any) {
   canvas.switchAutoColorChange();
-  console.log("switchAutoColorChange: " + canvas.get)
+  console.log("switchAutoColorChange: " + canvas.getAutoColorChange());
   res.send("Ok");
 });
 
