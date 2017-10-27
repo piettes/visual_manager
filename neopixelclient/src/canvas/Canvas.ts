@@ -209,6 +209,10 @@ abstract class Canvas {
     });
   }
 
+  getAutoColorChange(): boolean {
+    return this.autoColorChange;
+  }
+
   switchAutoColorChange(): void {
     this.autoColorChange = !this.autoColorChange;
   }
