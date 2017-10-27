@@ -32,7 +32,7 @@ app.post("/update", function (req: any, res: any) {
     if (anim) {
       anim.setColor1(animObj.color1);
       anim.setColor2(animObj.color2);
-      anim.setLuminosity(animObj.luminosity)
+      anim.setLuminosity(parseInt(animObj.luminosity))
       anim.setBpm(parseInt(req.body.bpm));
       anim.setPatternLength(parseInt(animObj.patternLength));
       anims.push(anim);

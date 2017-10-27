@@ -28,7 +28,7 @@ class Form extends React.Component<FormProps, any> {
       patternLength1: 1, patternLength2: 1, patternLength3: 1, patternLength4: 1,
       luminosity1: 0, luminosity2: 0, luminosity3: 0, luminosity4: 0,
       animation1: AnimationFactory.getDefault().getName(), animation2: AnimationFactory.getOff().getName(),
-      animation3: AnimationFactory.getDefault().getName(), animation4: AnimationFactory.getOff().getName(),
+      animation3: AnimationFactory.getOff().getName(), animation4: AnimationFactory.getOff().getName(),
       bpm: AnimationBase.DEFAULT_BPM
     };
   }
