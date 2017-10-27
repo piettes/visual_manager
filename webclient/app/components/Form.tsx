@@ -15,6 +15,7 @@ interface FormProps {
   incTicker: () => void;
   stopPreview: () => void;
   flash: (num: number) => void;
+  switchAutoColorChange: () => void;
 }
 
 class Form extends React.Component<FormProps, any> {
@@ -188,6 +189,7 @@ class Form extends React.Component<FormProps, any> {
           <button className="btn btn-sm btn-secondary" onClick={() => this.props.flash(4)}>Flash 4</button>
           <button className="btn btn-sm btn-secondary" onClick={() => this.props.flash(8)}>Flash 8</button>
           <button className="btn btn-sm btn-secondary" onClick={() => this.props.flash(13)}>Flash 13</button>
+          <button className="btn btn-sm btn-primary" onClick={() => this.props.switchAutoColorChange()}>Flash 13</button>
           <br/>
           <br/>
           <button className="btn btn-sm btn-default" onClick={this.props.toggleManual}>Toggle manual</button>

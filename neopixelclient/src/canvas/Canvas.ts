@@ -46,6 +46,8 @@ abstract class Canvas {
 
   tickerCalled: number = 0;
   lastTickerCalled: number = new Date().getTime();
+  autoColorChangeTime: number = new Date().getTime();
+  autoColorChange: boolean = false;
 
   tickerFunction(_that: Canvas): (delta: number) => void {
     return (delta: number) => {
@@ -55,6 +57,10 @@ abstract class Canvas {
         console.log("avg ticker per seconde " + this.tickerCalled / 10);
         this.tickerCalled = 0;
         this.lastTickerCalled = now;
+        if (this.autoColorChange === true && now - this.autoColorChangeTime >= 60000) {
+          this.randomizeColors();
+          this.autoColorChangeTime = now;
+        }
       }
       let timeDiff = now - this.lastTimeCalled;
       this.lastTimeCalled = now;
@@ -194,6 +200,17 @@ abstract class Canvas {
     this.animation2.reset();
     this.animation3.reset();
     this.animation4.reset();
+  }
+
+  randomizeColors(): void {
+    [this.animation1, this.animation2, this.animation3, this.animation4].forEach(anim => {
+      anim.setColor1(Color.COLORS[Math.floor(Math.random() * Color.COLORS.length)].name);
+      anim.setColor2(Color.COLORS[Math.floor(Math.random() * Color.COLORS.length)].name);
+    });
+  }
+
+  switchAutoColorChange(): void {
+    this.autoColorChange = !this.autoColorChange;
   }
 
 }

@@ -32,9 +32,9 @@ app.post("/update", function (req: any, res: any) {
     if (anim) {
       anim.setColor1(animObj.color1);
       anim.setColor2(animObj.color2);
-      anim.setLuminosity(parseInt(animObj.luminosity))
       anim.setBpm(parseInt(req.body.bpm));
       anim.setPatternLength(parseInt(animObj.patternLength));
+      anim.setLuminosity(parseInt(animObj.luminosity));
       anims.push(anim);
     } else {
       anims.push(AnimationFactory.getOff());
@@ -47,6 +47,11 @@ app.post("/update", function (req: any, res: any) {
 app.post("/flash", function (req: any, res: any) {
   let num: any = req.body["num"];
   canvas.flash(num);
+  res.send("Ok");
+});
+
+app.post("/switchAutoColorChange", function (req: any, res: any) {
+  canvas.switchAutoColorChange();
   res.send("Ok");
 });
 

@@ -31,6 +31,10 @@ class Main extends React.Component<any, any> {
     Axios.post(this.host + "flash", {num: num}).then(res => console.log(res));
   }
 
+  switchAutoColorChange(): void {
+    Axios.post(this.host + "switchAutoColorChange").then(res => console.log(res));
+  }
+
   changeAnimation1(name: string): void {
     // this.canvas.setAnimation1(AnimationFactory.get(name));
   }
@@ -80,6 +84,7 @@ class Main extends React.Component<any, any> {
                 changeBpm={(bpm: number) => this.changeBpm(bpm)}
                 stopPreview={() => this.stopPreview()}
                 flash={(num: number) => this.flash(num)}
+                switchAutoColorChange={() => this.switchAutoColorChange()}
           />
 
           <CanvasComponent getView={() => this.getView()}/>
