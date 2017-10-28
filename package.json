@@ -9,7 +9,7 @@
     "start": "npm run build:live",
     "build:live": "nodemon --exec ./node_modules/.bin/ts-node -- ./neopixelclient/src/index.ts",
     "buildserver": "./node_modules/.bin/webpack --config webpack.config.js",
-    "local": "./node_modules/.bin/webpack-dev-server -d",
+    "local": "./node_modules/.bin/webpack-dev-server -d --public --host 0.0.0.0",
     "pi": "./node_modules/.bin/webpack-dev-server -d"
   },
   "dependencies": {

@@ -52,6 +52,7 @@ const config = {
   devServer: {
     port: 8080,
     host: "0.0.0.0",
+    disableHostCheck: true,
     /*proxy: {
      '/customers/*': {
      target: 'http://localhost:8080/',
