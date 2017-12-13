@@ -4,6 +4,7 @@ import CanvasComponent from "./CanvasComponent";
 import CanvasHtml from "../CanvasHtml";
 import {AnimationFactory} from "../../../neopixelclient/src/canvas/AnimationFactory";
 import Form from "./Form";
+import {Animation} from "../../../neopixelclient/src/canvas/Animation";
 
 class Main extends React.Component<any, any> {
 
@@ -11,14 +12,17 @@ class Main extends React.Component<any, any> {
   private manualMode: boolean = false;
   private host: string;
   private animationList: Array<string>;
+  private currentAnimations: Array<Animation>;
 
   constructor(props: any) {
     super(props);
 
-    // this.canvas = new CanvasHtml();
-    // this.canvas.setAnimations(AnimationFactory.getDefault(), AnimationFactory.getOff());
+    this.canvas = new CanvasHtml();
+    this.canvas.setAnimations([AnimationFactory.getDefault(), AnimationFactory.getOff(), AnimationFactory.getOff(), AnimationFactory.getOff()]);
 
     this.animationList = Array.from(AnimationFactory.getAll().map(anim => anim.getName()));
+
+    this.currentAnimations = [AnimationFactory.getDefault(), AnimationFactory.getOff(), AnimationFactory.getOff(), AnimationFactory.getOff()];
 
     this.host = props.hostUrl;
   }
@@ -36,19 +40,26 @@ class Main extends React.Component<any, any> {
   }
 
   changeAnimation1(name: string): void {
-    // this.canvas.setAnimation1(AnimationFactory.get(name));
+    this.currentAnimations[0] = AnimationFactory.get(name);
+    this.canvas.setAnimations(this.currentAnimations);
   }
 
   changeAnimation2(name: string): void {
-    // this.canvas.setAnimation2(AnimationFactory.get(name));
+    this.currentAnimations[1] = AnimationFactory.get(name);
+    this.canvas.setAnimations(this.currentAnimations);
   }
 
-  changeColor(colorId: string, colorName: string): void {
-    // this.canvas.setColor(colorId, colorName);
+  changeColor(pos: number, id: number, colorName: string): void {
+    if (pos === 1) {
+      this.currentAnimations[id - 1].setColor1(colorName);
+    } else {
+      this.currentAnimations[id - 1].setColor2(colorName);
+    }
+    this.canvas.setAnimations(this.currentAnimations);
   }
 
   changeBpm(bpm: number) {
-    // this.canvas.setBpm(bpm);
+    this.canvas.setBpm(bpm);
   }
 
   incTicker() {
@@ -67,7 +78,7 @@ class Main extends React.Component<any, any> {
   }
 
   getView() {
-    // return this.canvas.getView();
+    return this.canvas.getView();
   }
 
   render() {
@@ -77,7 +88,7 @@ class Main extends React.Component<any, any> {
 
           <Form changeAnimation1={(name: string) => this.changeAnimation1(name)}
                 changeAnimation2={(name: string) => this.changeAnimation2(name)}
-                changeColor={(colorId: string, colorName: string) => this.changeColor(colorId, colorName)}
+                changeColor={(pos: number, id: number, colorName: string) => this.changeColor(pos, id, colorName)}
                 applyChanges={(animJson: any) => this.applyChanges(animJson)}
                 animationList={this.animationList} toggleManual={() => this.toggleManual()}
                 incTicker={() => this.incTicker()}

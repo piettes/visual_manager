@@ -1,5 +1,8 @@
+### Visual Manager
 
+Start Neopixel client
 
-To sync with PI  in ./neopixelclient
+`sudo npm start`
 
-fswatch . | xargs -n1 ./rsync.sh 
+Start Animation selector client
+`npm run pi`

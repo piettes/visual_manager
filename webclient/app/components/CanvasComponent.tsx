@@ -11,8 +11,8 @@ class CanvasComponent extends React.Component<CanvasComponentProps, any> {
   }
 
   componentDidMount() {
-    // let myCanvas: any = this.refs.myCanvas;
-    // myCanvas.appendChild(this.props.getView());
+    let myCanvas: any = this.refs.myCanvas;
+    myCanvas.appendChild(this.props.getView());
   }
 
   render() {

@@ -7,7 +7,7 @@ import FormEffect from "./FormEffect";
 interface FormProps {
   changeAnimation1: (name: string) => void;
   changeAnimation2: (name: string) => void;
-  changeColor: (colorId: string, colorName: string) => void;
+  changeColor: (pos: number, id: number, colorName: string) => void;
   changeBpm: (bpm: number) => void;
   animationList: Array<string>;
   applyChanges: (animJson: any) => void;
@@ -36,12 +36,12 @@ class Form extends React.Component<FormProps, any> {
 
   changeAnimation(name: string, id: number) {
     this.setState({["animation" + id]: name});
-    // this.props.changeAnimation1(event.target.value);
+    this.props.changeAnimation1(name);
   }
 
   changeColor(name: string, pos: number, id: number) {
     this.setState({["color" + id + pos]: name});
-    // this.props.changeColor(colorId, colorName);
+    this.props.changeColor(pos, id, name);
   }
 
   changePatternLength(id: number, value: number): void {

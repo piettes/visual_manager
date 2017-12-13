@@ -10,7 +10,7 @@ const LED_LINE_WALL = 100;
 const LINE_SPACE = 56 * FACTOR;
 const ROOM_LENGTH = 524 * FACTOR;
 const ROOM_HEIGHT = 320 * FACTOR;
-const MARGIN_LEFT = 10 * FACTOR; // 35cm du plafond + 50 du mur
+const MARGIN_LEFT = 10 * FACTOR;
 const MARGIN_TOP = LINE_SPACE;
 const LED_OFF = 0xFFFFFF;
 
