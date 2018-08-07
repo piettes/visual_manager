@@ -46,7 +46,7 @@ const config = {
   plugins: [HTMLWebpackPluginConfig,
     new webpack.DefinePlugin({
       'process.env': {
-        HOST: JSON.stringify("http://192.168.0.200:3000/"),
+        HOST: JSON.stringify("http://192.168.2.200:3000/"),
       }
     })],
   devServer: {
