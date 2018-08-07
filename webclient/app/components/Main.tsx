@@ -1,14 +1,11 @@
 import * as React from "react";
 import Axios from "axios";
-import CanvasComponent from "./CanvasComponent";
-import CanvasHtml from "../CanvasHtml";
 import {AnimationFactory} from "../../../neopixelclient/src/canvas/AnimationFactory";
 import Form from "./Form";
 import {Animation} from "../../../neopixelclient/src/canvas/Animation";
 
 class Main extends React.Component<any, any> {
 
-  private canvas: CanvasHtml;
   private manualMode: boolean = false;
   private host: string;
   private animationList: Array<string>;
@@ -16,9 +13,6 @@ class Main extends React.Component<any, any> {
 
   constructor(props: any) {
     super(props);
-
-    this.canvas = new CanvasHtml();
-    this.canvas.setAnimations([AnimationFactory.getDefault(), AnimationFactory.getOff(), AnimationFactory.getOff(), AnimationFactory.getOff()]);
 
     this.animationList = Array.from(AnimationFactory.getAll().map(anim => anim.getName()));
 
@@ -41,12 +35,10 @@ class Main extends React.Component<any, any> {
 
   changeAnimation1(name: string): void {
     this.currentAnimations[0] = AnimationFactory.get(name);
-    this.canvas.setAnimations(this.currentAnimations);
   }
 
   changeAnimation2(name: string): void {
     this.currentAnimations[1] = AnimationFactory.get(name);
-    this.canvas.setAnimations(this.currentAnimations);
   }
 
   changeColor(pos: number, id: number, colorName: string): void {
@@ -55,30 +47,15 @@ class Main extends React.Component<any, any> {
     } else {
       this.currentAnimations[id - 1].setColor2(colorName);
     }
-    this.canvas.setAnimations(this.currentAnimations);
-  }
-
-  changeBpm(bpm: number) {
-    this.canvas.setBpm(bpm);
   }
 
   incTicker() {
-    // this.canvas.incTicker();
     Axios.get(this.host + "tick/");
   }
 
   toggleManual() {
     this.manualMode = !this.manualMode;
-    // this.canvas.setManual(this.manualMode);
     Axios.get(this.host + "setManual/" + this.manualMode);
-  }
-
-  stopPreview() {
-    // this.canvas.setManual(true);
-  }
-
-  getView() {
-    return this.canvas.getView();
   }
 
   render() {
@@ -92,13 +69,9 @@ class Main extends React.Component<any, any> {
                 applyChanges={(animJson: any) => this.applyChanges(animJson)}
                 animationList={this.animationList} toggleManual={() => this.toggleManual()}
                 incTicker={() => this.incTicker()}
-                changeBpm={(bpm: number) => this.changeBpm(bpm)}
-                stopPreview={() => this.stopPreview()}
                 flash={(num: number) => this.flash(num)}
                 switchAutoColorChange={() => this.switchAutoColorChange()}
           />
-
-          <CanvasComponent getView={() => this.getView()}/>
 
         </div>
     );

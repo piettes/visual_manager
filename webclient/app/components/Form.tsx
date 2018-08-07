@@ -1,6 +1,5 @@
 import * as React from "react";
 import {AnimationFactory} from "../../../neopixelclient/src/canvas/AnimationFactory";
-import Color from "../../../neopixelclient/src/canvas/Color";
 import {AnimationBase} from "../../../neopixelclient/src/canvas/AnimationBase";
 import FormEffect from "./FormEffect";
 
@@ -8,12 +7,10 @@ interface FormProps {
   changeAnimation1: (name: string) => void;
   changeAnimation2: (name: string) => void;
   changeColor: (pos: number, id: number, colorName: string) => void;
-  changeBpm: (bpm: number) => void;
   animationList: Array<string>;
   applyChanges: (animJson: any) => void;
   toggleManual: () => void;
   incTicker: () => void;
-  stopPreview: () => void;
   flash: (num: number) => void;
   switchAutoColorChange: () => void;
 }
@@ -62,7 +59,6 @@ class Form extends React.Component<FormProps, any> {
       val = 0;
     }
     this.setState({bpm: val});
-    this.props.changeBpm(val === 0 ? 1 : val);
   }
 
   onBpmPlus() {
@@ -106,9 +102,9 @@ class Form extends React.Component<FormProps, any> {
 
   render() {
 
-    const animOptions = this.props.animationList.map((anim: string) =>
-        <option key={anim} value={anim}>{anim}</option>
-    );
+    // const animOptions = this.props.animationList.map((anim: string) =>
+     //   {/*<option key={anim} value={anim}>{anim}</option>*/}
+    // );
 
     return (
         <div>
@@ -194,7 +190,6 @@ class Form extends React.Component<FormProps, any> {
           <br/>
           <button className="btn btn-sm btn-default" onClick={this.props.toggleManual}>Toggle manual</button>
           <button className="btn btn-sm btn-default" onClick={this.props.incTicker}>Step</button>
-          <button className="btn btn-sm btn-default" onClick={() => this.props.stopPreview()}>Stop preview</button>
         </div>
     );
 
