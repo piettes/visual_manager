@@ -5,16 +5,12 @@ import {AnimationBase} from "../AnimationBase";
 class Stars extends AnimationBase implements Animation {
 
   limit: number = 35;
-  stars: Array<any> = [];
-  offsets: Array<any> = [];
+  star: any = {};
+  offset: number = 0;
 
   constructor() {
     super();
-    this.stars.push(this.initStar(0));
-    this.stars.push(this.initStar(1));
-    this.stars.push(this.initStar(2));
-    this.stars.push(this.initStar(3));
-    this.stars.push(this.initStar(4));
+    this.star  = this.initStar();
     this.initOffsets();
   }
 
@@ -23,20 +19,10 @@ class Stars extends AnimationBase implements Animation {
   }
 
   initOffsets() {
-    let offsets = [];
-    offsets.push(0);
-    offsets.push(Math.floor(Math.random() * 30) + 10);
-    offsets.push(Math.floor(Math.random() * 30) + 10);
-    offsets.push(Math.floor(Math.random() * 30) + 30);
-    offsets.push(Math.floor(Math.random() * 30) + 30);
-    // https://stackoverflow.com/a/18650169
-    offsets.sort(function () {
-      return .5 - Math.random();
-    });
-    this.offsets = offsets;
+    this.offset = Math.floor(Math.random() * 30) + 10;
   }
 
-  initStar(y: number) {
+  initStar() {
     let inc = Math.random() < 0.5 ? -1 : 1;
     let x;
     if (inc === 1) {
@@ -45,92 +31,90 @@ class Stars extends AnimationBase implements Animation {
       x = Math.floor(Math.random() * (this.numLED - this.limit) + this.limit);
     }
     let star = {star_1: {}, star_2: {}, star_3: {}, star_4: {}, star_5: {}, inc: inc};
-    star.star_1 = {x: x, y: y, c: this.color1.getShade(1 + this.luminosity)};
-    star.star_2 = {x: x, y: y, c: this.color1.getShade(2 + this.luminosity)};
-    star.star_3 = {x: x, y: y, c: this.color1.getShade(3 + this.luminosity)};
-    star.star_4 = {x: x, y: y, c: this.color1.getShade(4 + this.luminosity)};
-    star.star_5 = {x: x, y: y, c: this.color1.getShade(5 + this.luminosity)};
+    star.star_1 = {x: x, c: this.color1.getShade(1 + this.luminosity)};
+    star.star_2 = {x: x, c: this.color1.getShade(2 + this.luminosity)};
+    star.star_3 = {x: x, c: this.color1.getShade(3 + this.luminosity)};
+    star.star_4 = {x: x, c: this.color1.getShade(4 + this.luminosity)};
+    star.star_5 = {x: x, c: this.color1.getShade(5 + this.luminosity)};
     return star;
   }
 
-  displayStar(starIndex: number, tick: number, frame: Array<Point>): boolean {
+  displayStar(tick: number, frame: Array<Point>): boolean {
     if (tick === 0) {
-      this.stars[starIndex] = this.initStar(starIndex);
-      frame.push({...this.stars[starIndex].star_1});
+      this.star = this.initStar();
+      frame.push({...this.star.star_1});
     } else if (tick === 1) {
-      this.stars[starIndex].star_1.x += this.stars[starIndex].inc;
-      frame.push({...this.stars[starIndex].star_1});
-      frame.push({...this.stars[starIndex].star_2});
+      this.star.star_1.x += this.star.inc;
+      frame.push({...this.star.star_1});
+      frame.push({...this.star.star_2});
     } else if (tick === 2) {
-      this.stars[starIndex].star_1.x += this.stars[starIndex].inc;
-      this.stars[starIndex].star_2.x += this.stars[starIndex].inc;
-      frame.push({...this.stars[starIndex].star_1});
-      frame.push({...this.stars[starIndex].star_2});
-      frame.push({...this.stars[starIndex].star_3});
+      this.star.star_1.x += this.star.inc;
+      this.star.star_2.x += this.star.inc;
+      frame.push({...this.star.star_1});
+      frame.push({...this.star.star_2});
+      frame.push({...this.star.star_3});
     } else if (tick === 3) {
-      this.stars[starIndex].star_1.x += this.stars[starIndex].inc;
-      this.stars[starIndex].star_2.x += this.stars[starIndex].inc;
-      this.stars[starIndex].star_3.x += this.stars[starIndex].inc;
-      frame.push({...this.stars[starIndex].star_1});
-      frame.push({...this.stars[starIndex].star_2});
-      frame.push({...this.stars[starIndex].star_3});
-      frame.push({...this.stars[starIndex].star_4});
+      this.star.star_1.x += this.star.inc;
+      this.star.star_2.x += this.star.inc;
+      this.star.star_3.x += this.star.inc;
+      frame.push({...this.star.star_1});
+      frame.push({...this.star.star_2});
+      frame.push({...this.star.star_3});
+      frame.push({...this.star.star_4});
     } else if (tick === 4) {
-      this.stars[starIndex].star_1.x += this.stars[starIndex].inc;
-      this.stars[starIndex].star_2.x += this.stars[starIndex].inc;
-      this.stars[starIndex].star_3.x += this.stars[starIndex].inc;
-      this.stars[starIndex].star_4.x += this.stars[starIndex].inc;
-      frame.push({...this.stars[starIndex].star_1});
-      frame.push({...this.stars[starIndex].star_2});
-      frame.push({...this.stars[starIndex].star_3});
-      frame.push({...this.stars[starIndex].star_4});
-      frame.push({...this.stars[starIndex].star_5});
+      this.star.star_1.x += this.star.inc;
+      this.star.star_2.x += this.star.inc;
+      this.star.star_3.x += this.star.inc;
+      this.star.star_4.x += this.star.inc;
+      frame.push({...this.star.star_1});
+      frame.push({...this.star.star_2});
+      frame.push({...this.star.star_3});
+      frame.push({...this.star.star_4});
+      frame.push({...this.star.star_5});
     } else if (tick < this.limit) {
-      this.stars[starIndex].star_1.x += this.stars[starIndex].inc;
-      this.stars[starIndex].star_2.x += this.stars[starIndex].inc;
-      this.stars[starIndex].star_3.x += this.stars[starIndex].inc;
-      this.stars[starIndex].star_4.x += this.stars[starIndex].inc;
-      this.stars[starIndex].star_5.x += this.stars[starIndex].inc;
-      frame.push({...this.stars[starIndex].star_1});
-      frame.push({...this.stars[starIndex].star_2});
-      frame.push({...this.stars[starIndex].star_3});
-      frame.push({...this.stars[starIndex].star_4});
-      frame.push({...this.stars[starIndex].star_5});
+      this.star.star_1.x += this.star.inc;
+      this.star.star_2.x += this.star.inc;
+      this.star.star_3.x += this.star.inc;
+      this.star.star_4.x += this.star.inc;
+      this.star.star_5.x += this.star.inc;
+      frame.push({...this.star.star_1});
+      frame.push({...this.star.star_2});
+      frame.push({...this.star.star_3});
+      frame.push({...this.star.star_4});
+      frame.push({...this.star.star_5});
     } else if (tick === this.limit) {
-      this.stars[starIndex].star_2.x += this.stars[starIndex].inc;
-      this.stars[starIndex].star_3.x += this.stars[starIndex].inc;
-      this.stars[starIndex].star_4.x += this.stars[starIndex].inc;
-      this.stars[starIndex].star_5.x += this.stars[starIndex].inc;
-      frame.push({...this.stars[starIndex].star_2});
-      frame.push({...this.stars[starIndex].star_3});
-      frame.push({...this.stars[starIndex].star_4});
-      frame.push({...this.stars[starIndex].star_5});
+      this.star.star_2.x += this.star.inc;
+      this.star.star_3.x += this.star.inc;
+      this.star.star_4.x += this.star.inc;
+      this.star.star_5.x += this.star.inc;
+      frame.push({...this.star.star_2});
+      frame.push({...this.star.star_3});
+      frame.push({...this.star.star_4});
+      frame.push({...this.star.star_5});
     } else if (tick === this.limit + 1) {
-      this.stars[starIndex].star_3.x += this.stars[starIndex].inc;
-      this.stars[starIndex].star_4.x += this.stars[starIndex].inc;
-      this.stars[starIndex].star_5.x += this.stars[starIndex].inc;
-      frame.push({...this.stars[starIndex].star_3});
-      frame.push({...this.stars[starIndex].star_4});
-      frame.push({...this.stars[starIndex].star_5});
+      this.star.star_3.x += this.star.inc;
+      this.star.star_4.x += this.star.inc;
+      this.star.star_5.x += this.star.inc;
+      frame.push({...this.star.star_3});
+      frame.push({...this.star.star_4});
+      frame.push({...this.star.star_5});
     } else if (tick === this.limit + 2) {
-      this.stars[starIndex].star_4.x += this.stars[starIndex].inc;
-      this.stars[starIndex].star_5.x += this.stars[starIndex].inc;
-      frame.push({...this.stars[starIndex].star_4});
-      frame.push({...this.stars[starIndex].star_5});
+      this.star.star_4.x += this.star.inc;
+      this.star.star_5.x += this.star.inc;
+      frame.push({...this.star.star_4});
+      frame.push({...this.star.star_5});
     } else if (tick === this.limit + 3) {
-      this.stars[starIndex].star_5.x += this.stars[starIndex].inc;
-      frame.push({...this.stars[starIndex].star_5});
+      this.star.star_5.x += this.star.inc;
+      frame.push({...this.star.star_5});
     }
     return true;
   }
 
   nextframe(frame: Array<Point>, tick: number): boolean {
     let res = false;
-    this.array.forEach(i => {
-      if (tick - this.offsets[i] >= 0) {
-        res = this.displayStar(i, tick - this.offsets[i], frame) || res;
-      }
-    });
+    if (tick - this.offset >= 0) {
+      res = this.displayStar(tick - this.offset, frame) || res;
+    }
     return res;
   }
 

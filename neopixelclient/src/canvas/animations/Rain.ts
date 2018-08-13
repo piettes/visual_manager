@@ -18,8 +18,7 @@ class Rain extends AnimationBase implements Animation {
       let color: Color = Math.random() > 0.5 ? this.color1 : this.color2;
       let shade: number = color.getShade(Math.floor(Math.random() * 6));
       let x: number = Math.floor(Math.random() * this.numLED);
-      let y: number = Math.floor(Math.random() * this.array.length);
-      frame.push({x: x, y: y, c: shade});
+      frame.push({x: x, c: shade});
     }
     return true;
   }

@@ -16,7 +16,7 @@ class Main extends React.Component<any, any> {
 
     this.animationList = Array.from(AnimationFactory.getAll().map(anim => anim.getName()));
 
-    this.currentAnimations = [AnimationFactory.getDefault(), AnimationFactory.getOff(), AnimationFactory.getOff(), AnimationFactory.getOff()];
+    this.currentAnimations = AnimationFactory.getDefaultArray();
 
     this.host = props.hostUrl;
   }

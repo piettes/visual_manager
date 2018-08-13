@@ -1,4 +1,4 @@
-import {Animation, Location} from "../Animation";
+import {Animation} from "../Animation";
 import {Point} from "../Point";
 import {AnimationBase} from "../AnimationBase";
 
@@ -10,12 +10,10 @@ class Effect1 extends AnimationBase implements Animation {
 
   nextframe(frame: Array<Point>, tick: number): boolean {
     if (tick < this.numLED) {
-      this.array.forEach(y => {
-        let size = Math.min(4, this.numLED - tick);
-        for (let i = 0; i < size; i++) {
-          frame.push({x: tick + i, y: y, c: this.getShade1()});
-        }
-      });
+      let size = Math.min(4, this.numLED - tick);
+      for (let i = 0; i < size; i++) {
+        frame.push({x: tick + i, c: this.getShade1()});
+      }
       return true;
     }
     return true;
@@ -27,6 +25,7 @@ class Effect1 extends AnimationBase implements Animation {
       return 0;
     }
     this.timeAcc += timeDiff;
+
     if (this.timeAcc >= this.animDuration) {
       this.timeAcc -= this.animDuration;
       return 0;

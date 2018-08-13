@@ -1,22 +1,17 @@
 import {Point} from "./Point";
 import Color from "./Color";
-import {Location} from "./Animation";
+import {Location, getNumLed} from "./Setup";
 
 abstract class AnimationBase {
 
-  static FPS_RATE: number = 60;
   static DEFAULT_BPM: number = 125;
 
-  LED_LINE_ROOF: number = 120;
-  LED_LINE_WALL: number = 100;
   protected bpm: number = AnimationBase.DEFAULT_BPM;
   protected patternLength: number = 1;
   protected animDuration: number = 60 * 1000 * this.patternLength / AnimationBase.DEFAULT_BPM;
-  protected location: Location = Location.ROOF;
+  protected location: Location = Location.CENTRAL_1;
 
-  protected array: Array<number> = [0, 1, 2, 3, 4];
-  protected numLED: number = this.LED_LINE_ROOF;
-  protected size: number = 5;
+  protected numLED: number = getNumLed(Location.CENTRAL_1);
 
   LED_OFF: number = Color.BLACK.value;
 
@@ -76,9 +71,7 @@ abstract class AnimationBase {
 
   setLocation(location: Location) {
     this.location = location;
-    this.array = location === Location.ROOF ? [0, 1, 2, 3, 4] : [0, 1];
-    this.numLED = location === Location.ROOF ? this.LED_LINE_ROOF : this.LED_LINE_WALL;
-    this.size = location === Location.ROOF ? 5 : 2;
+    this.numLED = getNumLed(location);
   }
 
 }

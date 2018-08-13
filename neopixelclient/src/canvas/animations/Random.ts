@@ -10,7 +10,7 @@ class Random extends AnimationBase implements Animation {
     return "Random";
   }
 
-  columns: any = {};
+  colum: Array<Point> = [];
 
   nextframe(frame: Array<Point>, tick: number): boolean {
     if (tick === 0) {
@@ -18,20 +18,16 @@ class Random extends AnimationBase implements Animation {
       if (this.currentColor === this.LED_OFF) {
         return true;
       }
-      this.array.forEach(y => {
-        this.columns["col" + y] = [];
-        let r: number = Math.floor(Math.random() * (this.numLED - 7));
-        for (let i = 0; i < 7; i++) {
-          this.columns["col" + y].push({x: r + i, y: y, c: this.currentColor});
-        }
-      });
+      this.colum = [];
+      let r: number = Math.floor(Math.random() * (this.numLED - 7));
+      for (let i = 0; i < 7; i++) {
+        this.colum.push({x: r + i, c: this.currentColor});
+      }
     }
     if (this.currentColor === this.LED_OFF) {
       return true;
     }
-    this.array.forEach(y => {
-      frame.push(...this.columns["col" + y]);
-    });
+    frame.push(...this.colum);
 
     return true;
   }

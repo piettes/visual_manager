@@ -10,6 +10,7 @@ const app: Express = express();
 
 const canvas: Canvas = new CanvasNeopixel();
 canvas.setAnimations(AnimationFactory.getDefaultArray());
+canvas.start();
 
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");

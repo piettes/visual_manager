@@ -1,4 +1,5 @@
 import {Point} from "./Point";
+import {Location} from "./Setup";
 
 interface Animation {
 
@@ -22,10 +23,4 @@ interface Animation {
 
 }
 
-enum Location {
-  WALL,
-  ROOF
-}
-
-
-export {Animation, Location};
+export {Animation};

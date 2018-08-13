@@ -1,7 +1,8 @@
-import {Animation, Location} from "./Animation";
+import {Animation} from "./Animation";
 import {Point} from "./Point";
 import {AnimationFactory} from "./AnimationFactory";
 import Color from "./Color";
+import {Location} from "./Setup";
 
 const LED_OFF = -1;
 
@@ -13,7 +14,7 @@ abstract class Canvas {
   lastFrameList2: Array<Point> = [];
 
   private manualMode: boolean;
-  private animation1: Animation = AnimationFactory.getDefault();
+  private animation1: Animation = AnimationFactory.getOff();
   private animation2: Animation = AnimationFactory.getOff();
   private animation3: Animation = AnimationFactory.getOff();
   private animation4: Animation = AnimationFactory.getOff();
@@ -23,14 +24,17 @@ abstract class Canvas {
   constructor() {
     console.log("New Canvas");
     this.initDraw();
-    this.setTickerFunction(this.tickerFunction(this));
     this.manualMode = false;
     this.lastTimeCalled = new Date().getTime();
   }
 
-  abstract drawPixelRoof(x: number, y: number, color: any): void;
+  start() {
+    this.setTickerFunction(this.tickerFunction(this));
+  }
 
-  abstract drawPixelWall(x: number, y: number, color: any): void;
+  abstract drawPixelCentral1(x: number, color: any): void;
+
+  abstract drawPixelCentral2(x: number, color: any): void;
 
   abstract initDraw(): void;
 
@@ -68,16 +72,16 @@ abstract class Canvas {
     };
   }
 
-  private step(timeDiff: number): void {
-    let changed: boolean = this.animation1.animate(this.nextFrameList, timeDiff);
-    let changed2 = this.animation2.animate(this.nextFrameList, timeDiff);
-    let changed3 = this.animation3.animate(this.nextFrameList2, timeDiff);
-    let changed4 = this.animation4.animate(this.nextFrameList2, timeDiff);
-    if (changed || changed2) {
-      this.calculateFrameDiff(Location.ROOF);
+  private step(timeDiffMs: number): void {
+    let changed: boolean = this.animation1.animate(this.nextFrameList, timeDiffMs);
+    let changed2 = this.animation2.animate(this.nextFrameList, timeDiffMs);
+    let changed3 = this.animation3.animate(this.nextFrameList2, timeDiffMs);
+    let changed4 = this.animation4.animate(this.nextFrameList2, timeDiffMs);
+    if (changed) {
+      this.calculateFrameDiff(Location.CENTRAL_1);
     }
-    if (changed3 || changed4) {
-      this.calculateFrameDiff(Location.WALL);
+    if (changed2) {
+      this.calculateFrameDiff(Location.CENTRAL_2);
     }
     if (changed || changed2 || changed3 || changed4) {
       this.render();
@@ -86,28 +90,28 @@ abstract class Canvas {
 
   private calculateFrameDiff(location: Location): void {
     // TODO refactor that
-    if (location === Location.ROOF) {
+    if (location === Location.CENTRAL_1) {
       let nextFrameMap = new Map<number, number>();
       this.nextFrameList.forEach((p: Point) => {
-        this.drawPixelRoof(p.x, p.y, p.c);
-        nextFrameMap.set(p.x * 10 + p.y, p.c);
+        this.drawPixelCentral1(p.x, p.c);
+        nextFrameMap.set(p.x, p.c);
       });
       this.lastFrameList.forEach((p: Point) => {
-        if (!nextFrameMap.get(p.x * 10 + p.y)) {
-          this.drawPixelRoof(p.x, p.y, LED_OFF);
+        if (!nextFrameMap.get(p.x)) {
+          this.drawPixelCentral1(p.x, LED_OFF);
         }
       });
       this.lastFrameList = this.nextFrameList.concat();
       this.nextFrameList = [];
-    } else {
+    } else if (location === Location.CENTRAL_2) {
       let nextFrameMap = new Map<number, number>();
       this.nextFrameList2.forEach((p: Point) => {
-        this.drawPixelWall(p.x, p.y, p.c);
-        nextFrameMap.set(p.x * 10 + p.y, p.c);
+        this.drawPixelCentral2(p.x, p.c);
+        nextFrameMap.set(p.x, p.c);
       });
       this.lastFrameList2.forEach((p: Point) => {
-        if (!nextFrameMap.get(p.x * 10 + p.y)) {
-          this.drawPixelWall(p.x, p.y, LED_OFF);
+        if (!nextFrameMap.get(p.x)) {
+          this.drawPixelCentral2(p.x, LED_OFF);
         }
       });
 
@@ -117,16 +121,10 @@ abstract class Canvas {
   }
 
   flash(num: number) {
-    [0, 1, 2, 3, 4].forEach(i => {
-      for (let j = 0; j < 12; j++) {
-        this.drawPixelRoof(j * 10, i, Color.WHITE.value);
-      }
-    });
-    [0, 1].forEach(i => {
-      for (let j = 0; j < 20; j++) {
-        this.drawPixelWall(j * 5, i, Color.WHITE.value);
-      }
-    });
+    for (let j = 0; j < 20; j++) {
+      this.drawPixelCentral1(j * 5, Color.WHITE.value);
+      this.drawPixelCentral2(j * 5, Color.WHITE.value);
+    }
     this.render();
     this.clearGrid();
     this.render();
@@ -141,8 +139,8 @@ abstract class Canvas {
     this.toggleTicker(!manual);
   }
 
-  incTicker(): void {
-    this.step(1000);
+  incTicker(timeDiffMs = 16): void {
+    this.step(timeDiffMs);
   }
 
   setAnimations(anims: Array<Animation>): void {
@@ -150,48 +148,6 @@ abstract class Canvas {
     this.animation2 = anims[1] ? anims[1] : AnimationFactory.getOff();
     this.animation3 = anims[2] ? anims[2] : AnimationFactory.getOff();
     this.animation4 = anims[3] ? anims[3] : AnimationFactory.getOff();
-    this.animation3.setLocation(Location.WALL);
-    this.animation4.setLocation(Location.WALL);
-    this.resetAnimations();
-  }
-
-  setColor(colorId: string, colorName: string): void {
-    switch (colorId) {
-      case "color11":
-        this.animation1.setColor1(colorName);
-        break;
-      case "color12":
-        this.animation1.setColor2(colorName);
-        break;
-      case "color21":
-        this.animation2.setColor1(colorName);
-        break;
-      case "color22":
-        this.animation2.setColor2(colorName);
-        break;
-      case "color31":
-        this.animation3.setColor1(colorName);
-        break;
-      case "color32":
-        this.animation3.setColor2(colorName);
-        break;
-      case "color41":
-        this.animation4.setColor1(colorName);
-        break;
-      case "color42":
-        this.animation4.setColor2(colorName);
-        break;
-      default:
-        console.log("Wrong wolor Id");
-    }
-    this.resetAnimations();
-  }
-
-  setBpm(bpm: number): void {
-    this.animation1.setBpm(bpm);
-    this.animation2.setBpm(bpm);
-    this.animation3.setBpm(bpm);
-    this.animation4.setBpm(bpm);
     this.resetAnimations();
   }
 

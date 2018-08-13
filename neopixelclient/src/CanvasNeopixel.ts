@@ -1,25 +1,22 @@
-import {Ws281x} from "../ws281x";
 import {Canvas} from "./canvas/Canvas";
-let NanoTimer = require("nanotimer");
+import {Location, LED_OFF, TOTAL_LED} from "./canvas/Setup";
+import Ws281xWrapper from "./Ws281xWrapper";
 
-const LED_LINE_ROOF = 120;
-const LED_LINE_WALL = 100;
-const LED_OFF = 0x000000;
+let NanoTimer = require("nanotimer");
 
 class CanvasNeopixel extends Canvas {
 
-  private ws281x: Ws281x;
   private pixelData: Uint32Array;
   private intervalId: any;
   private isRunning: boolean = false;
   private num_led: number;
+  private ws281xWrapper: Ws281xWrapper;
 
   constructor() {
     super();
-    this.num_led = LED_LINE_ROOF * 6 + LED_LINE_WALL * 2;
+    this.num_led = TOTAL_LED;
     this.pixelData = new Uint32Array(this.num_led);
-    this.ws281x = require("rpi-ws281x-native");
-    this.ws281x.init(this.num_led);
+    this.ws281xWrapper = new Ws281xWrapper(this.num_led);
   }
 
   initDraw(): void {
@@ -29,45 +26,20 @@ class CanvasNeopixel extends Canvas {
     this.pixelData = new Uint32Array(this.num_led);
   }
 
-  drawPixelRoof(x: number, y: number, _color: any): void {
-    let color = _color === -1 ? LED_OFF : _color;
-    switch (y) {
-      case 0:
-        this.pixelData[LED_LINE_WALL + x] = color;
-        break;
-      case 1:
-        this.pixelData[LED_LINE_WALL + LED_LINE_ROOF * 2 - x - 1] = color;
-        break;
-      case 2:
-        this.pixelData[LED_LINE_WALL + LED_LINE_ROOF * 2 + x] = color;
-        break;
-      case 3:
-        this.pixelData[LED_LINE_WALL + LED_LINE_ROOF * 4 - x - 1] = color;
-        break;
-      case 4:
-        this.pixelData[LED_LINE_WALL + LED_LINE_ROOF * 4 + x] = color;
-        break;
-    }
+  drawPixelCentral1(x: number, _color: any): void {
+    this.pixelData[x] = _color === -1 ? LED_OFF : _color;
   }
 
-  drawPixelWall(x: number, y: number, _color: any): void {
-    let color = _color === -1 ? LED_OFF : _color;
-    switch (y) {
-      case 0:
-        this.pixelData[x] = color;
-        break;
-      case 1:
-        this.pixelData[2 * LED_LINE_WALL + LED_LINE_ROOF * 5 - x - 1] = color;
-        break;
-    }
+  drawPixelCentral2(x: number, _color: any): void {
+    this.pixelData[x] = _color === -1 ? LED_OFF : _color;
   }
 
   render() {
-    this.ws281x.render(this.pixelData);
+    this.ws281xWrapper.render(this.pixelData);
   }
 
   reset() {
-    this.ws281x.reset();
+    this.ws281xWrapper.reset();
   }
 
   setTickerFunction(tickerFunction: (delta: number) => void): void {
