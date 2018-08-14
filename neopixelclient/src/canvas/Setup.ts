@@ -1,6 +1,6 @@
 const NUM_LED_CENTRAL_1: number = 100;
 const NUM_LED_CENTRAL_2: number = 100;
-const NUM_LED_CONE: number = 20;
+const NUM_LED_CONE: number = 24;
 const NUM_LED_BIG_BALL_1: number = 10;
 const NUM_LED_BIG_BALL_2: number = 10;
 const NUM_LED_BIG_BALL_3: number = 10;
