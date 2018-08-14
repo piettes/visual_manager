@@ -30,7 +30,6 @@ class Effect1 extends AnimationBase implements Animation {
       this.timeAcc -= this.animDuration;
       return 0;
     }
-    console.log(Math.floor(this.timeAcc / this.animDuration * this.numLED * 2) + 1);
     return Math.floor(this.timeAcc / this.animDuration * this.numLED * 2) + 1;
   }
 
