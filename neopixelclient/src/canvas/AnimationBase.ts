@@ -1,14 +1,12 @@
 import {Point} from "./Point";
 import Color from "./Color";
-import {Location, getNumLed} from "./Setup";
+import {Location, getNumLed, DEFAULT_BPM} from "./Setup";
 
 abstract class AnimationBase {
 
-  static DEFAULT_BPM: number = 125;
-
-  protected bpm: number = AnimationBase.DEFAULT_BPM;
+  protected bpm: number = DEFAULT_BPM;
   protected patternLength: number = 1;
-  protected animDuration: number = 60 * 1000 * this.patternLength / AnimationBase.DEFAULT_BPM;
+  protected animDuration: number = 60 * 1000 * this.patternLength / DEFAULT_BPM;
   protected location: Location = Location.CENTRAL_1;
 
   protected numLED: number = getNumLed(Location.CENTRAL_1);

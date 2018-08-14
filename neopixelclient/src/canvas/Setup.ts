@@ -1,4 +1,3 @@
-
 const NUM_LED_CENTRAL_1: number = 100;
 const NUM_LED_CENTRAL_2: number = 100;
 const NUM_LED_CONE: number = 20;
@@ -14,7 +13,9 @@ const NUM_LED_SMALL_BALL_3: number = 10;
 
 const LED_OFF: number = 0x000000;
 
-const TOTAL_LED = NUM_LED_CENTRAL_1;
+const TOTAL_LED = NUM_LED_CENTRAL_1 + NUM_LED_CENTRAL_2;
+
+const DEFAULT_BPM: number = 125;
 
 const getNumLed = (location: Location): number => {
   switch (location) {
@@ -63,4 +64,4 @@ enum Location {
   SMALL_BALL_3
 }
 
-export {Location, getNumLed, LED_OFF, TOTAL_LED}
+export {Location, getNumLed, LED_OFF, TOTAL_LED, DEFAULT_BPM};
