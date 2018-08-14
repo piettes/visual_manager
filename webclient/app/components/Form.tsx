@@ -1,7 +1,7 @@
 import * as React from "react";
 import {AnimationFactory} from "../../../neopixelclient/src/canvas/AnimationFactory";
-import {AnimationBase} from "../../../neopixelclient/src/canvas/AnimationBase";
 import FormEffect from "./FormEffect";
+import {DEFAULT_BPM} from "../../../neopixelclient/src/canvas/Setup";
 
 interface FormProps {
   changeAnimation1: (name: string) => void;
@@ -27,7 +27,7 @@ class Form extends React.Component<FormProps, any> {
       luminosity1: 0, luminosity2: 0, luminosity3: 0, luminosity4: 0,
       animation1: AnimationFactory.getDefaultArray()[0].getName(), animation2: AnimationFactory.getOff().getName(),
       animation3: AnimationFactory.getOff().getName(), animation4: AnimationFactory.getOff().getName(),
-      bpm: AnimationBase.DEFAULT_BPM
+      bpm: DEFAULT_BPM
     };
   }
 
