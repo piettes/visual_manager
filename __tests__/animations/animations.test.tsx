@@ -260,10 +260,6 @@ describe("Effect1 test", () => {
     canvasNeopixel.incTicker(230);
 
     expected = getEmptyLEDArray();
-    expected[104] = Color.DEEP_PINK.getShade(1);
-    expected[105] = Color.DEEP_PINK.getShade(1);
-    expected[106] = Color.DEEP_PINK.getShade(1);
-    expected[107] = Color.DEEP_PINK.getShade(1);
     expect(mockRender).toHaveBeenCalledWith(expect.objectContaining(expected));
 
     //

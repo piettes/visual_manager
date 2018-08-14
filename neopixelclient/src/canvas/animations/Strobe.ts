@@ -1,6 +1,6 @@
 import {Animation} from "../Animation";
-import {Point} from "../Point";
 import {AnimationBase} from "../AnimationBase";
+import {LED_OFF} from "../Setup";
 
 class Strobe extends AnimationBase implements Animation {
 
@@ -10,9 +10,9 @@ class Strobe extends AnimationBase implements Animation {
     return "Strobe";
   }
 
-  column: Array<Point> = [];
+  column: Array<number> = new Array<number>(this.numLED).fill(LED_OFF);
 
-  nextframe(frame: Array<Point>, tick: number): boolean {
+  nextframe(frame: Array<number>, tick: number): boolean {
     if (tick === 0) {
       this.currentColor = this.currentColor === this.getShade1() ? this.getShade2() : this.getShade1();
       if (this.currentColor === this.LED_OFF) {
@@ -21,9 +21,9 @@ class Strobe extends AnimationBase implements Animation {
       this.column = [];
       let r: number = Math.floor(Math.random() * (this.numLED - 16));
       for (let i = 0; i < 16; i++) {
-        this.column.push({x: r + i, c: this.currentColor});
+        this.column[r + i] = this.currentColor;
       }
-      frame.push(...this.column);
+      frame = this.column;
     }
     return true;
   }

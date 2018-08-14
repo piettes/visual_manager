@@ -13,12 +13,12 @@ class Rain extends AnimationBase implements Animation {
     return "Rain";
   }
 
-  nextframe(frame: Array<Point>, tick: number): boolean {
+  nextframe(frame: Array<number>, tick: number): boolean {
     if (tick === 0) {
       let color: Color = Math.random() > 0.5 ? this.color1 : this.color2;
       let shade: number = color.getShade(Math.floor(Math.random() * 6));
       let x: number = Math.floor(Math.random() * this.numLED);
-      frame.push({x: x, c: shade});
+      frame[x] = shade;
     }
     return true;
   }

@@ -5,7 +5,7 @@ interface Animation {
 
   getName(): string;
 
-  animate(frame: Array<Point>, timeDiff: number): boolean;
+  animate(frame: Array<number>, timeDiff: number): boolean;
 
   setBpm(bpm: number): void;
 

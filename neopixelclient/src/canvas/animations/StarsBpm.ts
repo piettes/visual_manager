@@ -1,5 +1,4 @@
 import {Animation} from "../Animation";
-import {Point} from "../Point";
 import {AnimationBase} from "../AnimationBase";
 
 class StarsBpm extends AnimationBase implements Animation {
@@ -28,42 +27,42 @@ class StarsBpm extends AnimationBase implements Animation {
   }
 
 
-  displayStar(tick: number, frame: Array<Point>): boolean {
+  displayStar(tick: number, frame: Array<number>): boolean {
     if (tick === 0) {
       this.star = this.initStar();
-      frame.push({...this.star.star_1});
+      frame[this.star.star_1.x] = this.star.star_1.c;
       return true;
     } else if (tick === 1) {
       this.star.star_1.x++;
-      frame.push({...this.star.star_1});
-      frame.push({...this.star.star_2});
+      frame[this.star.star_1.x] = this.star.star_1.c;
+      frame[this.star.star_2.x] = this.star.star_2.c;
       return true;
     } else if (tick === 2) {
       this.star.star_1.x++;
       this.star.star_2.x++;
-      frame.push({...this.star.star_1});
-      frame.push({...this.star.star_2});
-      frame.push({...this.star.star_3});
+      frame[this.star.star_1.x] = this.star.star_1.c;
+      frame[this.star.star_2.x] = this.star.star_2.c;
+      frame[this.star.star_3.x] = this.star.star_3.c;
       return true;
     } else if (tick === 3) {
       this.star.star_1.x++;
       this.star.star_2.x++;
       this.star.star_3.x++;
-      frame.push({...this.star.star_1});
-      frame.push({...this.star.star_2});
-      frame.push({...this.star.star_3});
-      frame.push({...this.star.star_4});
+      frame[this.star.star_1.x] = this.star.star_1.c;
+      frame[this.star.star_2.x] = this.star.star_2.c;
+      frame[this.star.star_3.x] = this.star.star_3.c;
+      frame[this.star.star_4.x] = this.star.star_4.c;
       return true;
     } else if (tick === 4) {
       this.star.star_1.x++;
       this.star.star_2.x++;
       this.star.star_3.x++;
       this.star.star_4.x++;
-      frame.push({...this.star.star_1});
-      frame.push({...this.star.star_2});
-      frame.push({...this.star.star_3});
-      frame.push({...this.star.star_4});
-      frame.push({...this.star.star_5});
+      frame[this.star.star_1.x] = this.star.star_1.c;
+      frame[this.star.star_2.x] = this.star.star_2.c;
+      frame[this.star.star_3.x] = this.star.star_3.c;
+      frame[this.star.star_4.x] = this.star.star_4.c;
+      frame[this.star.star_5.x] = this.star.star_5.c;
       return true;
     } else if (tick < this.limit * this.patternLength) {
       this.star.star_1.x++;
@@ -71,39 +70,39 @@ class StarsBpm extends AnimationBase implements Animation {
       this.star.star_3.x++;
       this.star.star_4.x++;
       this.star.star_5.x++;
-      frame.push({...this.star.star_1});
-      frame.push({...this.star.star_2});
-      frame.push({...this.star.star_3});
-      frame.push({...this.star.star_4});
-      frame.push({...this.star.star_5});
+      frame[this.star.star_1.x] = this.star.star_1.c;
+      frame[this.star.star_2.x] = this.star.star_2.c;
+      frame[this.star.star_3.x] = this.star.star_3.c;
+      frame[this.star.star_4.x] = this.star.star_4.c;
+      frame[this.star.star_5.x] = this.star.star_5.c;
       return true;
     } else if (tick === this.limit * this.patternLength - 4) {
       this.star.star_2.x++;
       this.star.star_3.x++;
       this.star.star_4.x++;
       this.star.star_5.x++;
-      frame.push({...this.star.star_2});
-      frame.push({...this.star.star_3});
-      frame.push({...this.star.star_4});
-      frame.push({...this.star.star_5});
+      frame[this.star.star_2.x] = this.star.star_2.c;
+      frame[this.star.star_3.x] = this.star.star_3.c;
+      frame[this.star.star_4.x] = this.star.star_4.c;
+      frame[this.star.star_5.x] = this.star.star_5.c;
       return true;
     } else if (tick === this.limit * this.patternLength - 3) {
       this.star.star_3.x++;
       this.star.star_4.x++;
       this.star.star_5.x++;
-      frame.push({...this.star.star_3});
-      frame.push({...this.star.star_4});
-      frame.push({...this.star.star_5});
+      frame[this.star.star_3.x] = this.star.star_3.c;
+      frame[this.star.star_4.x] = this.star.star_4.c;
+      frame[this.star.star_5.x] = this.star.star_5.c;
       return true;
     } else if (tick === this.limit * this.patternLength - 2) {
       this.star.star_4.x++;
       this.star.star_5.x++;
-      frame.push({...this.star.star_4});
-      frame.push({...this.star.star_5});
+      frame[this.star.star_4.x] = this.star.star_4.c;
+      frame[this.star.star_5.x] = this.star.star_5.c;
       return true;
     } else if (tick === this.limit * this.patternLength - 1) {
       this.star.star_5.x++;
-      frame.push({...this.star.star_5});
+      frame[this.star.star_5.x] = this.star.star_5.c;
       return true;
     } else if (tick === this.limit * this.patternLength) {
       return true;
@@ -111,7 +110,7 @@ class StarsBpm extends AnimationBase implements Animation {
     return false;
   }
 
-  nextframe(frame: Array<Point>, tick: number): boolean {
+  nextframe(frame: Array<number>, tick: number): boolean {
     let res = false;
     res = this.displayStar(tick, frame) || res;
     return res;

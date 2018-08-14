@@ -1,4 +1,3 @@
-import {Point} from "./Point";
 import Color from "./Color";
 import {Location, getNumLed, DEFAULT_BPM} from "./Setup";
 
@@ -51,7 +50,7 @@ abstract class AnimationBase {
     this.luminosity = luminosity;
   }
 
-  animate(frame: Array<Point>, timeDiff: number): boolean {
+  animate(frame: Array<number>, timeDiff: number): boolean {
     return this.nextframe(frame, this.tick(timeDiff));
   }
 
@@ -60,7 +59,7 @@ abstract class AnimationBase {
 
   protected abstract tick(timeDiff: number): number;
 
-  protected abstract nextframe(frame: Array<Point>, tick: number): boolean;
+  protected abstract nextframe(frame: Array<number>, tick: number): boolean;
 
   reset(): void {
     this.ticker = 0;

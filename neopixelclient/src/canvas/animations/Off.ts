@@ -8,7 +8,7 @@ class Off extends AnimationBase implements Animation {
     return "Off";
   }
 
-  nextframe(frame: Array<Point>, tick: number): boolean {
+  nextframe(frame: Array<number>, tick: number): boolean {
     if (tick === 1) {
       return true;
     }

@@ -1,5 +1,4 @@
 import {Animation} from "../Animation";
-import {Point} from "../Point";
 import {AnimationBase} from "../AnimationBase";
 
 class Effect1 extends AnimationBase implements Animation {
@@ -8,11 +7,11 @@ class Effect1 extends AnimationBase implements Animation {
     return "Effect1";
   }
 
-  nextframe(frame: Array<Point>, tick: number): boolean {
+  nextframe(frame: Array<number>, tick: number): boolean {
     if (tick < this.numLED) {
       let size = Math.min(4, this.numLED - tick);
       for (let i = 0; i < size; i++) {
-        frame.push({x: tick + i, c: this.getShade1()});
+        frame[tick + i] = this.getShade1();
       }
       return true;
     }

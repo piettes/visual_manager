@@ -1,6 +1,6 @@
 import {Animation} from "../Animation";
-import {Point} from "../Point";
 import {AnimationBase} from "../AnimationBase";
+import {LED_OFF} from "../Setup";
 
 class Random extends AnimationBase implements Animation {
 
@@ -10,9 +10,9 @@ class Random extends AnimationBase implements Animation {
     return "Random";
   }
 
-  colum: Array<Point> = [];
+  colum: Array<number> = new Array<number>(this.numLED).fill(LED_OFF);
 
-  nextframe(frame: Array<Point>, tick: number): boolean {
+  nextframe(frame: Array<number>, tick: number): boolean {
     if (tick === 0) {
       this.currentColor = this.currentColor === this.getShade1() ? this.getShade2() : this.getShade1();
       if (this.currentColor === this.LED_OFF) {
@@ -21,13 +21,13 @@ class Random extends AnimationBase implements Animation {
       this.colum = [];
       let r: number = Math.floor(Math.random() * (this.numLED - 7));
       for (let i = 0; i < 7; i++) {
-        this.colum.push({x: r + i, c: this.currentColor});
+        this.colum[r + i] = this.currentColor;
       }
     }
     if (this.currentColor === this.LED_OFF) {
       return true;
     }
-    frame.push(...this.colum);
+    frame = this.colum;
 
     return true;
   }
