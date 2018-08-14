@@ -1,5 +1,5 @@
 import {Canvas} from "./canvas/Canvas";
-import {Location, LED_OFF, TOTAL_LED} from "./canvas/Setup";
+import {Location, LED_OFF, TOTAL_LED, NUM_LED_CENTRAL_1} from "./canvas/Setup";
 import Ws281xWrapper from "./Ws281xWrapper";
 
 let NanoTimer = require("nanotimer");
@@ -31,7 +31,7 @@ class CanvasNeopixel extends Canvas {
   }
 
   drawPixelCentral2(x: number, _color: any): void {
-    this.pixelData[x] = _color === -1 ? LED_OFF : _color;
+    this.pixelData[x + NUM_LED_CENTRAL_1] = _color === -1 ? LED_OFF : _color;
   }
 
   render() {

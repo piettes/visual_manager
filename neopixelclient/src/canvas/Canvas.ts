@@ -149,6 +149,8 @@ abstract class Canvas {
     this.animation3 = anims[2] ? anims[2] : AnimationFactory.getOff();
     this.animation4 = anims[3] ? anims[3] : AnimationFactory.getOff();
     this.animation2.setLocation(Location.CENTRAL_2);
+    this.animation3.setLocation(Location.CONE);
+    this.animation3.setLocation(Location.CONE);
     this.resetAnimations();
   }
 
