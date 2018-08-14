@@ -5,11 +5,12 @@ import {AnimationFactory} from "./canvas/AnimationFactory";
 import {Express} from "express";
 import * as bodyParser from "body-parser";
 import {Animation} from "./canvas/Animation";
+import {Effect1} from "./canvas/animations/Effect1";
 
 const app: Express = express();
 
 const canvas: Canvas = new CanvasNeopixel();
-canvas.setAnimations(AnimationFactory.getDefaultArray());
+canvas.setAnimations([new Effect1()]);
 canvas.start();
 
 app.use(function (req, res, next) {

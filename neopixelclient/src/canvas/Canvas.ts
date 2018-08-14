@@ -74,49 +74,49 @@ abstract class Canvas {
 
   private step(timeDiffMs: number): void {
     let changed: boolean = this.animation1.animate(this.nextFrameList, timeDiffMs);
-    let changed2 = this.animation2.animate(this.nextFrameList, timeDiffMs);
-    let changed3 = this.animation3.animate(this.nextFrameList2, timeDiffMs);
-    let changed4 = this.animation4.animate(this.nextFrameList2, timeDiffMs);
+    // let changed2 = this.animation2.animate(this.nextFrameList, timeDiffMs);
+    // let changed3 = this.animation3.animate(this.nextFrameList2, timeDiffMs);
+    // let changed4 = this.animation4.animate(this.nextFrameList2, timeDiffMs);
     if (changed) {
       this.calculateFrameDiff(Location.CENTRAL_1);
     }
-    if (changed2) {
-      this.calculateFrameDiff(Location.CENTRAL_2);
-    }
-    if (changed || changed2 || changed3 || changed4) {
+    // if (changed2) {
+    //   this.calculateFrameDiff(Location.CENTRAL_2);
+    // }
+    // if (changed || changed2 || changed3 || changed4) {
       this.render();
-    }
+    // }
   }
 
   private calculateFrameDiff(location: Location): void {
     // TODO refactor that
     if (location === Location.CENTRAL_1) {
-      let nextFrameMap = new Map<number, number>();
+      // let nextFrameMap = new Map<number, number>();
       this.nextFrameList.forEach((p: Point) => {
         this.drawPixelCentral1(p.x, p.c);
-        nextFrameMap.set(p.x, p.c);
+        // nextFrameMap.set(p.x, p.c);
       });
-      this.lastFrameList.forEach((p: Point) => {
-        if (!nextFrameMap.get(p.x)) {
-          this.drawPixelCentral1(p.x, LED_OFF);
-        }
-      });
-      this.lastFrameList = this.nextFrameList.concat();
-      this.nextFrameList = [];
-    } else if (location === Location.CENTRAL_2) {
-      let nextFrameMap = new Map<number, number>();
-      this.nextFrameList2.forEach((p: Point) => {
-        this.drawPixelCentral2(p.x, p.c);
-        nextFrameMap.set(p.x, p.c);
-      });
-      this.lastFrameList2.forEach((p: Point) => {
-        if (!nextFrameMap.get(p.x)) {
-          this.drawPixelCentral2(p.x, LED_OFF);
-        }
-      });
-
-      this.lastFrameList2 = this.nextFrameList2.concat();
-      this.nextFrameList2 = [];
+      // this.lastFrameList.forEach((p: Point) => {
+        // if (!nextFrameMap.get(p.x)) {
+        //   this.drawPixelCentral1(p.x, LED_OFF);
+        // }
+      // });
+      // this.lastFrameList = this.nextFrameList.concat();
+      // this.nextFrameList = [];
+    // } else if (location === Location.CENTRAL_2) {
+    //   let nextFrameMap = new Map<number, number>();
+    //   this.nextFrameList2.forEach((p: Point) => {
+    //     this.drawPixelCentral2(p.x, p.c);
+    //     nextFrameMap.set(p.x, p.c);
+    //   });
+    //   this.lastFrameList2.forEach((p: Point) => {
+    //     if (!nextFrameMap.get(p.x)) {
+    //       this.drawPixelCentral2(p.x, LED_OFF);
+    //     }
+    //   });
+    //
+    //   this.lastFrameList2 = this.nextFrameList2.concat();
+    //   this.nextFrameList2 = [];
     }
   }
 
