@@ -100,11 +100,11 @@ class Stars extends AnimationBase implements Animation {
     } else if (tick === this.limit + 2) {
       this.star.star_4.x += this.star.inc;
       this.star.star_5.x += this.star.inc;
-      frame.push({...this.star.star_4});
+      frame[this.star.star_4.x] = this.star.star_4.c;
       frame[this.star.star_5.x] = this.star.star_5.c;
     } else if (tick === this.limit + 3) {
       this.star.star_5.x += this.star.inc;
-      frame.push({...this.star.star_5});
+      frame[this.star.star_5.x] = this.star.star_5.c;
     }
     return true;
   }
