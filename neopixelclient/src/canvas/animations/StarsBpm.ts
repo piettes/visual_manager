@@ -26,7 +26,6 @@ class StarsBpm extends AnimationBase implements Animation {
     return star;
   }
 
-
   displayStar(tick: number, frame: Array<number>): boolean {
     if (tick === 0) {
       this.star = this.initStar();

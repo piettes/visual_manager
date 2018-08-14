@@ -2,7 +2,7 @@ import {Animation} from "./Animation";
 import {Point} from "./Point";
 import {AnimationFactory} from "./AnimationFactory";
 import Color from "./Color";
-import {LED_OFF, Location, NUM_LED_CENTRAL_1, NUM_LED_CENTRAL_2} from "./Setup";
+import {LED_OFF, Location, NUM_LED_CENTRAL_1, NUM_LED_CENTRAL_2, NUM_LED_CONE} from "./Setup";
 
 abstract class Canvas {
 
@@ -35,6 +35,8 @@ abstract class Canvas {
   abstract drawCentral1(array: Array<number>): void;
 
   abstract drawCentral2(array: Array<number>): void;
+
+  abstract drawCone(array: Array<number>): void;
 
   abstract drawPixelCentral2(x: number, color: any): void;
 
@@ -75,15 +77,18 @@ abstract class Canvas {
   }
 
   private step(timeDiffMs: number): void {
-    const animArray1 = new Array<number>(NUM_LED_CENTRAL_1).fill(LED_OFF)
-    const animArray2 = new Array<number>(NUM_LED_CENTRAL_2).fill(LED_OFF)
+    const animArray1 = new Array<number>(NUM_LED_CENTRAL_1).fill(LED_OFF);
+    const animArray2 = new Array<number>(NUM_LED_CENTRAL_2).fill(LED_OFF);
+    const animArray3 = new Array<number>(NUM_LED_CONE).fill(LED_OFF);
     let changed: boolean = this.animation1.animate(animArray1, timeDiffMs);
     let changed2: boolean = this.animation2.animate(animArray2, timeDiffMs);
+    let changed3: boolean = this.animation3.animate(animArray3, timeDiffMs);
     // let changed2 = this.animation2.animate(this.nextFrameList, timeDiffMs);
     // let changed3 = this.animation3.animate(this.nextFrameList2, timeDiffMs);
     // let changed4 = this.animation4.animate(this.nextFrameList2, timeDiffMs);
       this.drawCentral1(animArray1);
       this.drawCentral2(animArray2);
+      this.drawCone(animArray3);
     // if (changed2) {
     //   this.calculateFrameDiff(Location.CENTRAL_2);
     // }

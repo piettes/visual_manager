@@ -28,9 +28,6 @@ class CanvasNeopixel extends Canvas {
     this.pixelData = new Uint32Array(this.num_led);
   }
 
-  drawPixelCentral1(x: number, _color: any): void {
-    this.pixelData[x] = _color === -1 ? LED_OFF : _color;
-  }
 
   drawCentral1(array: Array<number>) {
     this.tempArray = array;
@@ -38,6 +35,14 @@ class CanvasNeopixel extends Canvas {
 
   drawCentral2(array: Array<number>) {
     this.tempArray =  this.tempArray.concat(array);
+  }
+
+  drawCone(array: Array<number>) {
+    this.tempArray =  this.tempArray.concat(array);
+  }
+
+  drawPixelCentral1(x: number, _color: any): void {
+    this.pixelData[x] = _color === -1 ? LED_OFF : _color;
   }
 
   drawPixelCentral2(x: number, _color: any): void {

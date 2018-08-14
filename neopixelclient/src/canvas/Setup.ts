@@ -13,7 +13,7 @@ const NUM_LED_SMALL_BALL_3: number = 10;
 
 const LED_OFF: number = 0x000000;
 
-const TOTAL_LED = NUM_LED_CENTRAL_1 + NUM_LED_CENTRAL_2;
+const TOTAL_LED = NUM_LED_CENTRAL_1 + NUM_LED_CENTRAL_2 + NUM_LED_CONE;
 
 const DEFAULT_BPM: number = 125;
 
