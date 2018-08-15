@@ -21,7 +21,6 @@
     "jquery": "^3.2.1",
     "moment": "^2.17.1",
     "nanotimer": "^0.3.14",
-    "pixi.js": "^4.4.1",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "rpi-ws281x-native": "^0.8.2"
@@ -34,7 +33,6 @@
     "@types/jest": "^23.3.1",
     "@types/jquery": "^3.2.7",
     "@types/node": "^7.0.22",
-    "@types/pixi.js": "^4.4.0",
     "@types/react": "^15.0.38",
     "@types/react-dom": "^15.5.1",
     "babel-core": "^6.22.1",
