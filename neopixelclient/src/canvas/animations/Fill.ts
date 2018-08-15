@@ -4,7 +4,7 @@ import {AnimationBase} from "../AnimationBase";
 class Fill extends AnimationBase implements Animation {
 
   getName(): string {
-    return "Off";
+    return "Fill";
   }
 
   nextframe(frame: Array<number>, tick: number): boolean {
