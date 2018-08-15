@@ -6,15 +6,16 @@ import {Stars} from "./animations/Stars";
 import {StarsBpm} from "./animations/StarsBpm";
 import {Strobe} from "./animations/Strobe";
 import {Rain} from "./animations/Rain";
+import {Fill} from "./animations/Fill";
 
 class AnimationFactory {
 
   static get(name: string): Animation {
-    console.log("creating new Animation " + name);
-
     switch (name) {
       case "Effect1":
         return new Effect1();
+        case "Fill":
+        return new Fill();
       case "Stars":
         return new Stars();
       case "Rain":
@@ -34,7 +35,7 @@ class AnimationFactory {
     }
   }
 
-  static all: Array<Animation> = [new Random(), new Strobe(), new StarsBpm(), new Stars(), new Rain(), new Effect1(), new Off()];
+  static all: Array<Animation> = [new Random(), new Strobe(), new StarsBpm(), new Stars(), new Rain(), new Effect1(), new Off(), new Fill()];
 
 
   static getAll(): Array<Animation> {

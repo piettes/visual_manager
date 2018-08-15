@@ -2,14 +2,13 @@ import {Animation} from "./Animation";
 import {Point} from "./Point";
 import {AnimationFactory} from "./AnimationFactory";
 import Color from "./Color";
-import {LED_OFF, Location, NUM_LED_CENTRAL_1, NUM_LED_CENTRAL_2, NUM_LED_CONE} from "./Setup";
+import {
+  LED_OFF, Location, NUM_LED_BIG_BALL_1, NUM_LED_BIG_BALL_2, NUM_LED_BIG_BALL_3, NUM_LED_CENTRAL_1, NUM_LED_CENTRAL_2,
+  NUM_LED_CONE, NUM_LED_MEDIUM_BALL_1, NUM_LED_MEDIUM_BALL_2, NUM_LED_MEDIUM_BALL_3, NUM_LED_SMALL_BALL_1,
+  NUM_LED_SMALL_BALL_2, NUM_LED_SMALL_BALL_3, SECONDARY_NUM_LED
+} from "./Setup";
 
 abstract class Canvas {
-
-  nextFrameList: Array<Point> = [];
-  lastFrameList: Array<Point> = [];
-  nextFrameList2: Array<Point> = [];
-  lastFrameList2: Array<Point> = [];
 
   private manualMode: boolean;
   private animation1: Animation = AnimationFactory.getOff();
@@ -20,7 +19,6 @@ abstract class Canvas {
   private lastTimeCalled: number;
 
   constructor() {
-    console.log("New Canvas");
     this.initDraw();
     this.manualMode = false;
     this.lastTimeCalled = new Date().getTime();
@@ -30,15 +28,11 @@ abstract class Canvas {
     this.setTickerFunction(this.tickerFunction(this));
   }
 
-  abstract drawPixelCentral1(x: number, color: any): void;
-
   abstract drawCentral1(array: Array<number>): void;
 
   abstract drawCentral2(array: Array<number>): void;
 
-  abstract drawCone(array: Array<number>): void;
-
-  abstract drawPixelCentral2(x: number, color: any): void;
+  abstract drawSecondary(array: Array<number>): void;
 
   abstract initDraw(): void;
 
@@ -79,60 +73,20 @@ abstract class Canvas {
   private step(timeDiffMs: number): void {
     const animArray1 = new Array<number>(NUM_LED_CENTRAL_1).fill(LED_OFF);
     const animArray2 = new Array<number>(NUM_LED_CENTRAL_2).fill(LED_OFF);
-    const animArray3 = new Array<number>(NUM_LED_CONE).fill(LED_OFF);
-    let changed: boolean = this.animation1.animate(animArray1, timeDiffMs);
-    let changed2: boolean = this.animation2.animate(animArray2, timeDiffMs);
-    let changed3: boolean = this.animation3.animate(animArray3, timeDiffMs);
-    // let changed2 = this.animation2.animate(this.nextFrameList, timeDiffMs);
-    // let changed3 = this.animation3.animate(this.nextFrameList2, timeDiffMs);
-    // let changed4 = this.animation4.animate(this.nextFrameList2, timeDiffMs);
-      this.drawCentral1(animArray1);
-      this.drawCentral2(animArray2);
-      this.drawCone(animArray3);
-    // if (changed2) {
-    //   this.calculateFrameDiff(Location.CENTRAL_2);
-    // }
-    // if (changed || changed2 || changed3 || changed4) {
-      this.render();
-    // }
-  }
-
-  private calculateFrameDiff(location: Location): void {
-    // TODO refactor that
-    if (location === Location.CENTRAL_1) {
-      // let nextFrameMap = new Map<number, number>();
-      this.nextFrameList.forEach((p: Point) => {
-        this.drawPixelCentral1(p.x, p.c);
-        // nextFrameMap.set(p.x, p.c);
-      });
-      // this.lastFrameList.forEach((p: Point) => {
-        // if (!nextFrameMap.get(p.x)) {
-        //   this.drawPixelCentral1(p.x, LED_OFF);
-        // }
-      // });
-      // this.lastFrameList = this.nextFrameList.concat();
-      // this.nextFrameList = [];
-    // } else if (location === Location.CENTRAL_2) {
-    //   let nextFrameMap = new Map<number, number>();
-    //   this.nextFrameList2.forEach((p: Point) => {
-    //     this.drawPixelCentral2(p.x, p.c);
-    //     nextFrameMap.set(p.x, p.c);
-    //   });
-    //   this.lastFrameList2.forEach((p: Point) => {
-    //     if (!nextFrameMap.get(p.x)) {
-    //       this.drawPixelCentral2(p.x, LED_OFF);
-    //     }
-    //   });
-    //
-    //   this.lastFrameList2 = this.nextFrameList2.concat();
-    //   this.nextFrameList2 = [];
-    }
+    const animArray3 = new Array<number>(SECONDARY_NUM_LED).fill(LED_OFF);
+    this.animation1.animate(animArray1, timeDiffMs);
+    this.animation2.animate(animArray2, timeDiffMs);
+    this.animation3.animate(animArray3, timeDiffMs);
+    this.drawCentral1(animArray1);
+    this.drawCentral2(animArray2);
+    this.drawSecondary(animArray3);
+    this.render();
   }
 
   flash(num: number) {
     for (let j = 0; j < 20; j++) {
-      this.drawPixelCentral1(j * 5, Color.WHITE.value);
-      this.drawPixelCentral2(j * 5, Color.WHITE.value);
+      // this.drawPixelCentral1(j * 5, Color.WHITE.value);
+      // this.drawPixelCentral2(j * 5, Color.WHITE.value);
     }
     this.render();
     this.clearGrid();
@@ -159,8 +113,7 @@ abstract class Canvas {
     this.animation4 = anims[3] ? anims[3] : AnimationFactory.getOff();
     this.animation1.setLocation(Location.CENTRAL_1);
     this.animation2.setLocation(Location.CENTRAL_2);
-    this.animation3.setLocation(Location.CONE);
-    this.animation4.setLocation(Location.BIG_BALL_1);
+    this.animation3.setLocation(Location.SECONDARY);
     this.resetAnimations();
   }
 

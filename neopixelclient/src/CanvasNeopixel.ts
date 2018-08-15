@@ -1,13 +1,12 @@
 import {Canvas} from "./canvas/Canvas";
-import {Location, LED_OFF, TOTAL_LED, NUM_LED_CENTRAL_1} from "./canvas/Setup";
+import {TOTAL_LED} from "./canvas/Setup";
 import Ws281xWrapper from "./Ws281xWrapper";
 
 let NanoTimer = require("nanotimer");
 
 class CanvasNeopixel extends Canvas {
 
-  private pixelData: Uint32Array;
-  private tempArray: Array<number>;
+  private pixelData: Array<number>;
   private intervalId: any;
   private isRunning: boolean = false;
   private num_led: number;
@@ -16,41 +15,30 @@ class CanvasNeopixel extends Canvas {
   constructor() {
     super();
     this.num_led = TOTAL_LED;
-    this.pixelData = new Uint32Array(this.num_led);
     this.ws281xWrapper = new Ws281xWrapper(this.num_led);
-    this.tempArray = [];
+    this.pixelData = [];
   }
 
   initDraw(): void {
   }
 
   clearGrid(): void {
-    this.pixelData = new Uint32Array(this.num_led);
+    this.ws281xWrapper.clearGrid();
   }
 
-
   drawCentral1(array: Array<number>) {
-    this.tempArray = array;
+    this.pixelData = array;
   }
 
   drawCentral2(array: Array<number>) {
-    this.tempArray =  this.tempArray.concat(array);
+    this.pixelData =  this.pixelData.concat(array);
   }
 
-  drawCone(array: Array<number>) {
-    this.tempArray =  this.tempArray.concat(array);
-  }
-
-  drawPixelCentral1(x: number, _color: any): void {
-    this.pixelData[x] = _color === -1 ? LED_OFF : _color;
-  }
-
-  drawPixelCentral2(x: number, _color: any): void {
-    this.pixelData[x + NUM_LED_CENTRAL_1] = _color === -1 ? LED_OFF : _color;
+  drawSecondary(array: Array<number>) {
+    this.pixelData =  this.pixelData.concat(array);
   }
 
   render() {
-    this.pixelData = new Uint32Array(this.tempArray);
     this.ws281xWrapper.render(this.pixelData);
   }
 

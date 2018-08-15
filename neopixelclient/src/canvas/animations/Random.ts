@@ -24,10 +24,10 @@ class Random extends AnimationBase implements Animation {
         this.colum[r + i] = this.currentColor;
       }
     }
+    frame = this.colum;
     if (this.currentColor === this.LED_OFF) {
       return true;
     }
-    frame = this.colum;
 
     return true;
   }

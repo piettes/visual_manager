@@ -23,8 +23,8 @@ class Strobe extends AnimationBase implements Animation {
       for (let i = 0; i < 16; i++) {
         this.column[r + i] = this.currentColor;
       }
-      frame = this.column;
     }
+    frame = this.column;
     return true;
   }
 

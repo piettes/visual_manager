@@ -12,8 +12,12 @@ const NUM_LED_SMALL_BALL_2: number = 10;
 const NUM_LED_SMALL_BALL_3: number = 10;
 
 const LED_OFF: number = 0x000000;
-
-const TOTAL_LED = NUM_LED_CENTRAL_1 + NUM_LED_CENTRAL_2 + NUM_LED_CONE;
+//
+// const SECONDARY_NUM_LED = NUM_LED_CONE + NUM_LED_BIG_BALL_1 + NUM_LED_BIG_BALL_2 + NUM_LED_BIG_BALL_3
+//     + NUM_LED_MEDIUM_BALL_1 + NUM_LED_MEDIUM_BALL_2 + NUM_LED_MEDIUM_BALL_3
+//     + NUM_LED_SMALL_BALL_1 + NUM_LED_SMALL_BALL_2 + NUM_LED_SMALL_BALL_3
+const SECONDARY_NUM_LED = NUM_LED_CONE + NUM_LED_BIG_BALL_1;
+const TOTAL_LED = NUM_LED_CENTRAL_1 + NUM_LED_CENTRAL_2 + SECONDARY_NUM_LED;
 
 const DEFAULT_BPM: number = 125;
 
@@ -23,6 +27,8 @@ const getNumLed = (location: Location): number => {
       return NUM_LED_CENTRAL_1;
     case Location.CENTRAL_2:
       return NUM_LED_CENTRAL_2;
+    case Location.SECONDARY:
+      return SECONDARY_NUM_LED;
     case Location.CONE:
       return NUM_LED_CONE;
     case Location.BIG_BALL_1:
@@ -52,6 +58,7 @@ const getNumLed = (location: Location): number => {
 enum Location {
   CENTRAL_1,
   CENTRAL_2,
+  SECONDARY,
   CONE,
   BIG_BALL_1,
   BIG_BALL_2,
@@ -69,6 +76,7 @@ export {
   getNumLed,
   LED_OFF,
   TOTAL_LED,
+  SECONDARY_NUM_LED,
   DEFAULT_BPM,
   NUM_LED_CENTRAL_1,
   NUM_LED_CENTRAL_2,

@@ -8,12 +8,15 @@ class Ws281xWrapper {
     this.ws281x.init(num_led);
   }
 
-  render(array: Uint32Array) {
-    this.ws281x.render(array);
+  render(array: Array<number>) {
+    this.ws281x.render(new Uint32Array(array));
   }
 
   reset() {
     this.ws281x.reset();
+  }
+
+  clearGrid() {
   }
 }
 

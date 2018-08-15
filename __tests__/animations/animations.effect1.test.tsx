@@ -21,9 +21,8 @@ beforeEach(() => {
 });
 
 const getEmptyLEDArray = () => {
-  return new Uint32Array(TOTAL_LED).fill(0);
+  return new Array<number>(TOTAL_LED).fill(0);
 };
-
 
 describe("Effect1 test", () => {
 
@@ -51,7 +50,7 @@ describe("Effect1 test", () => {
     expected[1] = Color.BLUE.value;
     expected[2] = Color.BLUE.value;
     expected[3] = Color.BLUE.value;
-    expect(mockRender).toBeCalledWith(expect.objectContaining(expected));
+    expect(mockRender).toBeCalledWith(expected);
 
     //
     canvasNeopixel.incTicker();
@@ -61,7 +60,7 @@ describe("Effect1 test", () => {
     expected[15] = Color.BLUE.value;
     expected[16] = Color.BLUE.value;
     expected[17] = Color.BLUE.value;
-    expect(mockRender).toHaveBeenCalledWith(expect.objectContaining(expected));
+    expect(mockRender).toHaveBeenCalledWith(expected);
 
     //
     canvasNeopixel.incTicker();
@@ -71,7 +70,7 @@ describe("Effect1 test", () => {
     expected[22] = Color.BLUE.value;
     expected[23] = Color.BLUE.value;
     expected[24] = Color.BLUE.value;
-    expect(mockRender).toHaveBeenCalledWith(expect.objectContaining(expected));
+    expect(mockRender).toHaveBeenCalledWith(expected);
 
     //
     canvasNeopixel.incTicker();
@@ -81,7 +80,7 @@ describe("Effect1 test", () => {
     expected[28] = Color.BLUE.value;
     expected[29] = Color.BLUE.value;
     expected[30] = Color.BLUE.value;
-    expect(mockRender).toHaveBeenCalledWith(expect.objectContaining(expected));
+    expect(mockRender).toHaveBeenCalledWith(expected);
 
     //
     canvasNeopixel.incTicker(150);
@@ -92,19 +91,19 @@ describe("Effect1 test", () => {
     expected[97] = Color.BLUE.value;
     expected[98] = Color.BLUE.value;
     expected[99] = Color.BLUE.value;
-    expect(mockRender).toHaveBeenCalledWith(expect.objectContaining(expected));
+    expect(mockRender).toHaveBeenCalledWith(expected);
 
     //
     canvasNeopixel.incTicker();
 
     expected = getEmptyLEDArray();
-    expect(mockRender).toHaveBeenCalledWith(expect.objectContaining(expected));
+    expect(mockRender).toHaveBeenCalledWith(expected);
 
     //
     canvasNeopixel.incTicker(230);
 
     expected = getEmptyLEDArray();
-    expect(mockRender).toHaveBeenCalledWith(expect.objectContaining(expected));
+    expect(mockRender).toHaveBeenCalledWith(expected);
 
     // restart
     canvasNeopixel.incTicker();
@@ -114,7 +113,7 @@ describe("Effect1 test", () => {
     expected[1] = Color.BLUE.value;
     expected[2] = Color.BLUE.value;
     expected[3] = Color.BLUE.value;
-    expect(mockRender).toHaveBeenCalledWith(expect.objectContaining(expected));
+    expect(mockRender).toHaveBeenCalledWith(expected);
 
   });
 
@@ -136,7 +135,7 @@ describe("Effect1 test", () => {
     expected[1] = Color.BLUE.getShade(3);
     expected[2] = Color.BLUE.getShade(3);
     expected[3] = Color.BLUE.getShade(3);
-    expect(mockRender).toBeCalledWith(expect.objectContaining(expected));
+    expect(mockRender).toBeCalledWith(expected);
 
     //
     canvasNeopixel.incTicker();
@@ -146,7 +145,7 @@ describe("Effect1 test", () => {
     expected[8] = Color.BLUE.getShade(3);
     expected[9] = Color.BLUE.getShade(3);
     expected[10] = Color.BLUE.getShade(3);
-    expect(mockRender).toHaveBeenCalledWith(expect.objectContaining(expected));
+    expect(mockRender).toHaveBeenCalledWith(expected);
 
     //
     canvasNeopixel.incTicker();
@@ -156,7 +155,7 @@ describe("Effect1 test", () => {
     expected[12] = Color.BLUE.getShade(3);
     expected[13] = Color.BLUE.getShade(3);
     expected[14] = Color.BLUE.getShade(3);
-    expect(mockRender).toHaveBeenCalledWith(expect.objectContaining(expected));
+    expect(mockRender).toHaveBeenCalledWith(expected);
 
     //
     canvasNeopixel.incTicker();
@@ -166,7 +165,7 @@ describe("Effect1 test", () => {
     expected[15] = Color.BLUE.getShade(3);
     expected[16] = Color.BLUE.getShade(3);
     expected[17] = Color.BLUE.getShade(3);
-    expect(mockRender).toHaveBeenCalledWith(expect.objectContaining(expected));
+    expect(mockRender).toHaveBeenCalledWith(expected);
 
     //
     canvasNeopixel.incTicker(150);
@@ -176,7 +175,7 @@ describe("Effect1 test", () => {
     expected[46] = Color.BLUE.getShade(3);
     expected[47] = Color.BLUE.getShade(3);
     expected[48] = Color.BLUE.getShade(3);
-    expect(mockRender).toHaveBeenCalledWith(expect.objectContaining(expected));
+    expect(mockRender).toHaveBeenCalledWith(expected);
 
     //
     canvasNeopixel.incTicker(230);
@@ -186,13 +185,13 @@ describe("Effect1 test", () => {
     expected[94] = Color.BLUE.getShade(3);
     expected[95] = Color.BLUE.getShade(3);
     expected[96] = Color.BLUE.getShade(3);
-    expect(mockRender).toHaveBeenCalledWith(expect.objectContaining(expected));
+    expect(mockRender).toHaveBeenCalledWith(expected);
 
     //
     canvasNeopixel.incTicker(230);
 
     expected = getEmptyLEDArray();
-    expect(mockRender).toHaveBeenCalledWith(expect.objectContaining(expected));
+    expect(mockRender).toHaveBeenCalledWith(expected);
   });
 
   it("animation in patternLength = 2, color = deep_pink, lumi = 1, bpm = 140", () => {
@@ -214,7 +213,7 @@ describe("Effect1 test", () => {
     expected[1] = Color.DEEP_PINK.getShade(1);
     expected[2] = Color.DEEP_PINK.getShade(1);
     expected[3] = Color.DEEP_PINK.getShade(1);
-    expect(mockRender).toBeCalledWith(expect.objectContaining(expected));
+    expect(mockRender).toBeCalledWith(expected);
 
     //
     canvasNeopixel.incTicker();
@@ -224,7 +223,7 @@ describe("Effect1 test", () => {
     expected[9] = Color.DEEP_PINK.getShade(1);
     expected[10] = Color.DEEP_PINK.getShade(1);
     expected[11] = Color.DEEP_PINK.getShade(1);
-    expect(mockRender).toHaveBeenCalledWith(expect.objectContaining(expected));
+    expect(mockRender).toHaveBeenCalledWith(expected);
 
     //
     canvasNeopixel.incTicker();
@@ -234,7 +233,7 @@ describe("Effect1 test", () => {
     expected[13] = Color.DEEP_PINK.getShade(1);
     expected[14] = Color.DEEP_PINK.getShade(1);
     expected[15] = Color.DEEP_PINK.getShade(1);
-    expect(mockRender).toHaveBeenCalledWith(expect.objectContaining(expected));
+    expect(mockRender).toHaveBeenCalledWith(expected);
 
     //
     canvasNeopixel.incTicker();
@@ -244,7 +243,7 @@ describe("Effect1 test", () => {
     expected[16] = Color.DEEP_PINK.getShade(1);
     expected[17] = Color.DEEP_PINK.getShade(1);
     expected[18] = Color.DEEP_PINK.getShade(1);
-    // expect(mockRender).toHaveBeenCalledWith(expect.objectContaining(expected));
+    // expect(mockRender).toHaveBeenCalledWith(expected);
 
     //
     canvasNeopixel.incTicker(150);
@@ -254,18 +253,18 @@ describe("Effect1 test", () => {
     expected[51] = Color.DEEP_PINK.getShade(1);
     expected[52] = Color.DEEP_PINK.getShade(1);
     expected[53] = Color.DEEP_PINK.getShade(1);
-    expect(mockRender).toHaveBeenCalledWith(expect.objectContaining(expected));
+    expect(mockRender).toHaveBeenCalledWith(expected);
 
     //
     canvasNeopixel.incTicker(230);
 
     expected = getEmptyLEDArray();
-    expect(mockRender).toHaveBeenCalledWith(expect.objectContaining(expected));
+    expect(mockRender).toHaveBeenCalledWith(expected);
 
     //
     canvasNeopixel.incTicker(230);
 
     expected = getEmptyLEDArray();
-    expect(mockRender).toHaveBeenCalledWith(expect.objectContaining(expected));
+    expect(mockRender).toHaveBeenCalledWith(expected);
   });
 });

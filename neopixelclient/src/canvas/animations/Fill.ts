@@ -1,17 +1,15 @@
 import {Animation} from "../Animation";
 import {AnimationBase} from "../AnimationBase";
 
-class Off extends AnimationBase implements Animation {
+class Fill extends AnimationBase implements Animation {
 
   getName(): string {
     return "Off";
   }
 
   nextframe(frame: Array<number>, tick: number): boolean {
-    if (tick === 1) {
-      return true;
-    }
-    return false;
+    frame.fill(this.getShade1());
+    return true;
   }
 
   tick(timeDiff: number): number {
@@ -25,4 +23,4 @@ class Off extends AnimationBase implements Animation {
 
 }
 
-export {Off};
+export {Fill};
