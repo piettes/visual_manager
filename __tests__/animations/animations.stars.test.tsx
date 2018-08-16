@@ -45,69 +45,6 @@ describe("Stars test", () => {
     // expected[3] = Color.BLUE.value;
     expect(mockRender).toBeCalledWith(expected);
 
-    //
-    canvasNeopixel.incTicker(200);
-
-    expected = getEmptyLEDArray();
-    // expected[14] = Color.BLUE.value;
-    // expected[15] = Color.BLUE.value;
-    // expected[16] = Color.BLUE.value;
-    // expected[17] = Color.BLUE.value;
-    expect(mockRender).toHaveBeenCalledWith(expected);
-
-    //
-    canvasNeopixel.incTicker(200);
-
-    expected = getEmptyLEDArray();
-    // expected[21] = Color.BLUE.value;
-    // expected[22] = Color.BLUE.value;
-    // expected[23] = Color.BLUE.value;
-    // expected[24] = Color.BLUE.value;
-    expect(mockRender).toHaveBeenCalledWith(expected);
-
-    //
-    canvasNeopixel.incTicker(200);
-
-    expected = getEmptyLEDArray();
-    // expected[27] = Color.BLUE.value;
-    // expected[28] = Color.BLUE.value;
-    // expected[29] = Color.BLUE.value;
-    // expected[30] = Color.BLUE.value;
-    expect(mockRender).toHaveBeenCalledWith(expected);
-
-    //
-    canvasNeopixel.incTicker(150);
-    canvasNeopixel.incTicker();
-
-    expected = getEmptyLEDArray();
-    // expected[96] = Color.BLUE.value;
-    // expected[97] = Color.BLUE.value;
-    // expected[98] = Color.BLUE.value;
-    // expected[99] = Color.BLUE.value;
-    expect(mockRender).toHaveBeenCalledWith(expected);
-
-    //
-    canvasNeopixel.incTicker();
-
-    expected = getEmptyLEDArray();
-    expect(mockRender).toHaveBeenCalledWith(expected);
-
-    //
-    canvasNeopixel.incTicker(230);
-
-    expected = getEmptyLEDArray();
-    expect(mockRender).toHaveBeenCalledWith(expected);
-
-    // restart
-    canvasNeopixel.incTicker();
-
-    expected = getEmptyLEDArray();
-    // expected[0] = Color.BLUE.value;
-    // expected[1] = Color.BLUE.value;
-    // expected[2] = Color.BLUE.value;
-    // expected[3] = Color.BLUE.value;
-    expect(mockRender).toHaveBeenCalledWith(expected);
-
   });
 
 });

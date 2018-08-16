@@ -57,8 +57,10 @@ abstract class AnimationBase {
   protected ticker: number = 0;
   protected timeAcc: number = -1;
 
+  // TODO pure function
   protected abstract tick(timeDiff: number): number;
 
+  // TODO frame as returned value
   protected abstract nextframe(frame: Array<number>, tick: number): boolean;
 
   reset(): void {
