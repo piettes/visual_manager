@@ -137,11 +137,6 @@ describe("Stars test", () => {
     expected[61] = Color.BLUE.getShade(1);
     expect(mockRender).toBeCalledWith(expected);
 
-
-    for (let i = 0; i < 30000; i++) {
-      canvasNeopixel.incTicker();
-    }
-
   });
 
 });
