@@ -64,7 +64,7 @@ class StarsBpm extends AnimationBase implements Animation {
       frame[this.star.star_4.x] = this.star.star_4.c;
       frame[this.star.star_5.x] = this.star.star_5.c;
 
-    } else if (this.star.star_1 < this.numLED - 1) {
+    } else if (this.star.star_1.x < this.numLED - 1) {
       this.star.star_1.x++;
       this.star.star_2.x++;
       this.star.star_3.x++;
