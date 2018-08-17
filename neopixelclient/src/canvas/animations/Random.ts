@@ -3,23 +3,19 @@ import {AnimationBase} from "../AnimationBase";
 
 class Random extends AnimationBase implements Animation {
 
-  private currentColor: number = this.getShade1();
-
   getName(): string {
     return "Random";
   }
 
   randomPosition: number = 0;
+  pair: boolean = false;
 
   nextframe(frame: Array<number>, tick: number): boolean {
     if (tick === 0) {
-      this.currentColor = this.currentColor === this.getShade1() ? this.getShade2() : this.getShade1();
-      if (this.currentColor === this.LED_OFF) {
-        return true;
-      }
+      this.pair = !this.pair;
       this.randomPosition = Math.floor(this.random() * (this.numLED - 5));
     }
-    [0, 1, 2, 3, 4].forEach(i => frame[i + this.randomPosition] = this.currentColor);
+    [0, 1, 2, 3, 4].forEach(i => frame[i + this.randomPosition] = this.pair ? this.getShade1() : this.getShade2());
 
     return true;
   }
@@ -39,7 +35,6 @@ class Random extends AnimationBase implements Animation {
 
   reset(): void {
     super.reset();
-    this.currentColor = this.getShade1();
   }
 
 }

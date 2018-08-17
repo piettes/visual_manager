@@ -6,11 +6,10 @@ class Stars extends AnimationBase implements Animation {
   limit: number = 35;
   star: any = {};
   offset: number = 0;
+  init: boolean = false;
 
   constructor() {
     super();
-    this.star  = this.initStar();
-    this.initOffsets();
   }
 
   getName(): string {
@@ -106,19 +105,34 @@ class Stars extends AnimationBase implements Animation {
       this.star.star_5.x += this.star.inc;
       frame[this.star.star_5.x] = this.star.star_5.c;
     }
+    if (this.star.star_5.x >= 100) {
+      console.log("cest la guere1");
+    }
+    if (this.star.star_5.x < 0) {
+      console.log("cest la guere");
+    }
+    if (this.star.star_1.x >= 100) {
+      console.log("cest la guere2");
+    }
+    if (this.star.star_1.x < 0) {
+      console.log("cest la guere3");
+    }
+
     return true;
   }
 
   nextframe(frame: Array<number>, tick: number): boolean {
     let res = false;
-    if (tick - this.offset >= 0) {
-      res = this.displayStar(tick - this.offset, frame) || res;
-    }
+    // if (tick - this.offset >= 0) {
+    //   res = this.displayStar(tick - this.offset, frame) || res;
+      res = this.displayStar(tick , frame) || res;
+    // }
     return res;
   }
 
   tick(timeDiff: number): number {
-    if (this.ticker >= 80) {
+    if (this.ticker >= 80 || !this.init) {
+      this.init = true;
       this.ticker = 0;
       this.initOffsets();
       return this.ticker;

@@ -3,8 +3,7 @@ import CanvasNeopixel from "../../neopixelclient/src/CanvasNeopixel";
 import {Animation} from "../../neopixelclient/src/canvas/Animation";
 import {AnimationFactory} from "../../neopixelclient/src/canvas/AnimationFactory";
 import {
-  NUM_LED_CENTRAL_1, NUM_LED_CENTRAL_2, NUM_LED_CONE, SECONDARY_NUM_LED,
-  TOTAL_LED
+  NUM_LED_CENTRAL_1, NUM_LED_CENTRAL_2, SECONDARY_NUM_LED, TOTAL_LED
 } from "../../neopixelclient/src/canvas/Setup";
 import Color from "../../neopixelclient/src/canvas/Color";
 
@@ -26,7 +25,6 @@ beforeEach(() => {
 const getEmptyLEDArray = () => {
   return new Array<number>(TOTAL_LED).fill(0);
 };
-
 
 describe("Fill test", () => {
 

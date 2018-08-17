@@ -28,6 +28,7 @@ const getEmptyLEDArray = () => {
 describe("Stars test", () => {
 
   it("normal animation", () => {
+
     const canvasNeopixel: CanvasNeopixel = new CanvasNeopixel();
     const animation1 = AnimationFactory.get("Stars");
     animation1.setColor1("blue");
@@ -36,14 +37,110 @@ describe("Stars test", () => {
     canvasNeopixel.setAnimations(anims);
 
     //
-    canvasNeopixel.incTicker(2000);
+    canvasNeopixel.incTicker();
 
     let expected = getEmptyLEDArray();
-    // expected[0] = Color.BLUE.value;
-    // expected[1] = Color.BLUE.value;
-    // expected[2] = Color.BLUE.value;
-    // expected[3] = Color.BLUE.value;
+    expected[71] = Color.BLUE.getShade(1);
     expect(mockRender).toBeCalledWith(expected);
+
+    canvasNeopixel.incTicker();
+
+    expected = getEmptyLEDArray();
+    expected[71] = Color.BLUE.getShade(2);
+    expected[70] = Color.BLUE.getShade(1);
+    expect(mockRender).toBeCalledWith(expected);
+
+    canvasNeopixel.incTicker();
+
+    expected = getEmptyLEDArray();
+    expected[71] = Color.BLUE.getShade(3);
+    expected[70] = Color.BLUE.getShade(2);
+    expected[69] = Color.BLUE.getShade(1);
+    expect(mockRender).toBeCalledWith(expected);
+
+    canvasNeopixel.incTicker();
+
+    expected = getEmptyLEDArray();
+    expected[71] = Color.BLUE.getShade(4);
+    expected[70] = Color.BLUE.getShade(3);
+    expected[69] = Color.BLUE.getShade(2);
+    expected[68] = Color.BLUE.getShade(1);
+    expect(mockRender).toBeCalledWith(expected);
+
+    canvasNeopixel.incTicker();
+
+    expected = getEmptyLEDArray();
+    expected[71] = Color.BLUE.getShade(5);
+    expected[70] = Color.BLUE.getShade(4);
+    expected[69] = Color.BLUE.getShade(3);
+    expected[68] = Color.BLUE.getShade(2);
+    expected[67] = Color.BLUE.getShade(1);
+    expect(mockRender).toBeCalledWith(expected);
+
+    canvasNeopixel.incTicker();
+
+    expected = getEmptyLEDArray();
+    expected[70] = Color.BLUE.getShade(5);
+    expected[69] = Color.BLUE.getShade(4);
+    expected[68] = Color.BLUE.getShade(3);
+    expected[67] = Color.BLUE.getShade(2);
+    expected[66] = Color.BLUE.getShade(1);
+    expect(mockRender).toBeCalledWith(expected);
+
+    canvasNeopixel.incTicker();
+
+    expected = getEmptyLEDArray();
+    expected[69] = Color.BLUE.getShade(5);
+    expected[68] = Color.BLUE.getShade(4);
+    expected[67] = Color.BLUE.getShade(3);
+    expected[66] = Color.BLUE.getShade(2);
+    expected[65] = Color.BLUE.getShade(1);
+    expect(mockRender).toBeCalledWith(expected);
+
+    canvasNeopixel.incTicker();
+
+    expected = getEmptyLEDArray();
+    expected[68] = Color.BLUE.getShade(5);
+    expected[67] = Color.BLUE.getShade(4);
+    expected[66] = Color.BLUE.getShade(3);
+    expected[65] = Color.BLUE.getShade(2);
+    expected[64] = Color.BLUE.getShade(1);
+    expect(mockRender).toBeCalledWith(expected);
+
+    canvasNeopixel.incTicker();
+
+    expected = getEmptyLEDArray();
+    expected[67] = Color.BLUE.getShade(5);
+    expected[66] = Color.BLUE.getShade(4);
+    expected[65] = Color.BLUE.getShade(3);
+    expected[64] = Color.BLUE.getShade(2);
+    expected[63] = Color.BLUE.getShade(1);
+    expect(mockRender).toBeCalledWith(expected);
+
+    canvasNeopixel.incTicker();
+
+    expected = getEmptyLEDArray();
+    expected[66] = Color.BLUE.getShade(5);
+    expected[65] = Color.BLUE.getShade(4);
+    expected[64] = Color.BLUE.getShade(3);
+    expected[63] = Color.BLUE.getShade(2);
+    expected[62] = Color.BLUE.getShade(1);
+    expect(mockRender).toBeCalledWith(expected);
+
+    canvasNeopixel.incTicker();
+
+    expected = getEmptyLEDArray();
+    expected[65] = Color.BLUE.getShade(5);
+    expected[64] = Color.BLUE.getShade(4);
+    expected[63] = Color.BLUE.getShade(3);
+    expected[62] = Color.BLUE.getShade(2);
+    expected[61] = Color.BLUE.getShade(1);
+    expect(mockRender).toBeCalledWith(expected);
+
+
+    for (let i = 0; i < 30000; i++) {
+      canvasNeopixel.incTicker();
+    }
 
   });
 

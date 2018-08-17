@@ -1,6 +1,5 @@
 const NUM_LED_CENTRAL_1: number = 100;
 const NUM_LED_CENTRAL_2: number = 100;
-// const NUM_LED_CONE: number = 24;
 const NUM_LED_BIG_BALL_1: number = 10;
 const NUM_LED_BIG_BALL_2: number = 10;
 const NUM_LED_BIG_BALL_3: number = 10;
@@ -14,7 +13,7 @@ const NUM_LED_SMALL_BALL_2: number = 5;
 const NUM_LED_SMALL_BALL_3: number = -1;
 
 const LED_OFF: number = 0x000000;
-//
+
 const SECONDARY_NUM_LED = NUM_LED_MEDIUM_BALL_1 + NUM_LED_SMALL_BALL_1 + NUM_LED_BIG_BALL_1 + NUM_LED_MEDIUM_BALL_1 +
     NUM_LED_BIG_BALL_2 + NUM_LED_MEDIUM_BALL_3 + NUM_LED_SMALL_BALL_2 + NUM_LED_BIG_BALL_3 + NUM_LED_MEDIUM_BALL_4 + NUM_LED_MEDIUM_BALL_5;
 const TOTAL_LED = NUM_LED_CENTRAL_1 + NUM_LED_CENTRAL_2 + SECONDARY_NUM_LED;
@@ -29,8 +28,6 @@ const getNumLed = (location: Location): number => {
       return NUM_LED_CENTRAL_2;
     case Location.SECONDARY:
       return SECONDARY_NUM_LED;
-    // case Location.CONE:
-    //   return NUM_LED_CONE;
     case Location.BIG_BALL_1:
       return NUM_LED_BIG_BALL_1;
     case Location.BIG_BALL_2:
