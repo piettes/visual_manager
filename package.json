@@ -23,7 +23,8 @@
     "nanotimer": "^0.3.14",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
-    "rpi-ws281x-native": "^0.8.2"
+    "rpi-ws281x-native": "^0.8.2",
+    "seedrandom": "^2.4.4"
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",

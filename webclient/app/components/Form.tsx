@@ -21,11 +21,11 @@ class Form extends React.Component<FormProps, any> {
     super(props);
 
     this.state = {
-      color11: "purple", color12: "purple", color21: "purple", color22: "purple",
-      color31: "purple", color32: "purple", color41: "purple", color42: "purple",
+      color11: "deep_pink", color12: "blue", color21: "chartreuse", color22: "purple",
+      color31: "dodger_blue", color32: "purple", color41: "orange", color42: "purple",
       patternLength1: 1, patternLength2: 1, patternLength3: 1, patternLength4: 1,
       luminosity1: 0, luminosity2: 0, luminosity3: 0, luminosity4: 0,
-      animation1: AnimationFactory.getDefaultArray()[0].getName(), animation2: AnimationFactory.getOff().getName(),
+      animation1: AnimationFactory.getOff().getName(), animation2: AnimationFactory.getOff().getName(),
       animation3: AnimationFactory.getOff().getName(), animation4: AnimationFactory.getOff().getName(),
       bpm: DEFAULT_BPM
     };

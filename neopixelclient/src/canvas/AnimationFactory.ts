@@ -38,7 +38,7 @@ class AnimationFactory {
     }
   }
 
-  static all: Array<Animation> = [new Random(), new Strobe(), new StarsBpm(), new Stars(), new Rain(), new Effect1(), new Effect1Continue(), new Off(), new Fill()];
+  static all: Array<Animation> = [new Off(), new Random(), new Strobe(), new StarsBpm(), new Stars(), new Rain(), new Effect1(), new Effect1Continue(),  new Fill()];
 
 
   static getAll(): Array<Animation> {
