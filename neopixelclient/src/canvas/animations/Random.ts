@@ -17,7 +17,7 @@ class Random extends AnimationBase implements Animation {
       if (this.currentColor === this.LED_OFF) {
         return true;
       }
-      this.randomPosition = Math.floor(Math.random() * (this.numLED - 5));
+      this.randomPosition = Math.floor(this.random() * (this.numLED - 5));
     }
     [0, 1, 2, 3, 4].forEach(i => frame[i + this.randomPosition] = this.currentColor);
 

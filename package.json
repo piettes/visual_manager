@@ -36,6 +36,7 @@
     "@types/node": "^7.0.22",
     "@types/react": "^15.0.38",
     "@types/react-dom": "^15.5.1",
+    "@types/seedrandom": "^2.4.27",
     "babel-core": "^6.22.1",
     "babel-loader": "^6.2.10",
     "babel-plugin-syntax-async-functions": "^6.13.0",

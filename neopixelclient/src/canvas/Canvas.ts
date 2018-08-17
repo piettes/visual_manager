@@ -1,14 +1,16 @@
+import seedrandom = require("seedrandom");
 import {Animation} from "./Animation";
-import {Point} from "./Point";
 import {AnimationFactory} from "./AnimationFactory";
 import Color from "./Color";
 import {
   LED_OFF, Location, NUM_LED_BIG_BALL_1, NUM_LED_BIG_BALL_2, NUM_LED_BIG_BALL_3, NUM_LED_CENTRAL_1, NUM_LED_CENTRAL_2,
-  NUM_LED_CONE, NUM_LED_MEDIUM_BALL_1, NUM_LED_MEDIUM_BALL_2, NUM_LED_MEDIUM_BALL_3, NUM_LED_SMALL_BALL_1,
+  NUM_LED_MEDIUM_BALL_1, NUM_LED_MEDIUM_BALL_2, NUM_LED_MEDIUM_BALL_3, NUM_LED_SMALL_BALL_1,
   NUM_LED_SMALL_BALL_2, NUM_LED_SMALL_BALL_3, SECONDARY_NUM_LED
 } from "./Setup";
 
 abstract class Canvas {
+
+  private random = seedrandom("random");
 
   private manualMode: boolean;
   private animation1: Animation = AnimationFactory.getOff();
@@ -126,8 +128,8 @@ abstract class Canvas {
 
   randomizeColors(): void {
     [this.animation1, this.animation2, this.animation3, this.animation4].forEach(anim => {
-      anim.setColor1(Color.COLORS[Math.floor(Math.random() * Color.COLORS.length)].name);
-      anim.setColor2(Color.COLORS[Math.floor(Math.random() * Color.COLORS.length)].name);
+      anim.setColor1(Color.COLORS[Math.floor(this.random() * Color.COLORS.length)].name);
+      anim.setColor2(Color.COLORS[Math.floor(this.random() * Color.COLORS.length)].name);
     });
   }
 

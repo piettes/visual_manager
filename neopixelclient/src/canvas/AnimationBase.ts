@@ -1,8 +1,10 @@
+import seedrandom = require("seedrandom");
 import Color from "./Color";
 import {Location, getNumLed, DEFAULT_BPM} from "./Setup";
 
 abstract class AnimationBase {
 
+  protected random = seedrandom("hello");
   protected bpm: number = DEFAULT_BPM;
   protected patternLength: number = 1;
   protected animDuration: number = 60 * 1000 * this.patternLength / DEFAULT_BPM;

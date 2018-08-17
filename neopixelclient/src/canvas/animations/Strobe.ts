@@ -19,7 +19,7 @@ class Strobe extends AnimationBase implements Animation {
         return true;
       }
       this.column = [];
-      let r: number = Math.floor(Math.random() * (this.numLED - 16));
+      let r: number = Math.floor(this.random() * (this.numLED - 16));
       for (let i = 0; i < 16; i++) {
         this.column[r + i] = this.currentColor;
       }

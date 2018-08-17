@@ -16,7 +16,7 @@ class StarsBpm extends AnimationBase implements Animation {
   }
 
   initStar() {
-    let x = Math.floor(Math.random() * (this.numLED - this.limit * this.patternLength));
+    let x = Math.floor(this.random() * (this.numLED - this.limit * this.patternLength));
     let star = {star_1: {}, star_2: {}, star_3: {}, star_4: {}, star_5: {}};
     star.star_1 = {x: x, c: this.color1.getShade(1 + this.luminosity)};
     star.star_2 = {x: x, c: this.color1.getShade(2 + this.luminosity)};

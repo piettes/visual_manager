@@ -18,16 +18,16 @@ class Stars extends AnimationBase implements Animation {
   }
 
   initOffsets() {
-    this.offset = Math.floor(Math.random() * 30) + 10;
+    this.offset = Math.floor(this.random() * 30) + 10;
   }
 
   initStar() {
-    let inc = Math.random() < 0.5 ? -1 : 1;
+    let inc = this.random() < 0.5 ? -1 : 1;
     let x;
     if (inc === 1) {
-      x = Math.floor(Math.random() * (this.numLED - this.limit));
+      x = Math.floor(this.random() * (this.numLED - this.limit));
     } else {
-      x = Math.floor(Math.random() * (this.numLED - this.limit) + this.limit);
+      x = Math.floor(this.random() * (this.numLED - this.limit) + this.limit);
     }
     let star = {star_1: {}, star_2: {}, star_3: {}, star_4: {}, star_5: {}, inc: inc};
     star.star_1 = {x: x, c: this.color1.getShade(1 + this.luminosity)};

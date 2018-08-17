@@ -21,11 +21,11 @@ class Random2 extends AnimationBase implements Animation {
       if (this.currentColor === this.LED_OFF) {
         return true;
       }
-      this.randomPosition1 = Math.floor(Math.random() * (this.numLED - 5));
-      this.randomPosition2 = Math.floor(Math.random() * (this.numLED - 5));
-      this.randomPosition3 = Math.floor(Math.random() * (this.numLED - 5));
-      this.randomPosition4 = Math.floor(Math.random() * (this.numLED - 5));
-      // this.randomPosition5 = Math.floor(Math.random() * (this.numLED - 5));
+      this.randomPosition1 = Math.floor(this.random() * (this.numLED - 5));
+      this.randomPosition2 = Math.floor(this.random() * (this.numLED - 5));
+      this.randomPosition3 = Math.floor(this.random() * (this.numLED - 5));
+      this.randomPosition4 = Math.floor(this.random() * (this.numLED - 5));
+      // this.randomPosition5 = Math.floor(this.random() * (this.numLED - 5));
     }
     frame[this.randomPosition1] = this.currentColor;
     frame[this.randomPosition2] = this.currentColor;
