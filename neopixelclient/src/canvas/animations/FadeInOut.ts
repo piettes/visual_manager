@@ -24,11 +24,12 @@ class FadeInOut extends AnimationBase implements Animation {
       this.timeAcc -= this.animDuration;
       return 0;
     }
-    if (this.timeAcc < this.animDuration / 2) {
-      return 15 - Math.floor(this.timeAcc * 15 / this.animDuration) + 1;
-    } else {
-      return Math.floor(this.timeAcc * 15 / this.animDuration) + 1;
-    }
+    return 15 - Math.floor(this.timeAcc * 15 / this.animDuration) + 1;
+    // if (this.timeAcc < this.animDuration / 2) {
+    //   return 15 - Math.floor(this.timeAcc * 15 / this.animDuration) + 1;
+    // } else {
+    //   return Math.floor(this.timeAcc * 15 / this.animDuration) + 1;
+    // }
   }
 
   reset(): void {
