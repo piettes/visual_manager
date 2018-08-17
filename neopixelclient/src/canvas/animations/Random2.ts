@@ -13,7 +13,7 @@ class Random2 extends AnimationBase implements Animation {
   randomPosition2: number = 0;
   randomPosition3: number = 0;
   randomPosition4: number = 0;
-  randomPosition5: number = 0;
+  // randomPosition5: number = 0;
 
   nextframe(frame: Array<number>, tick: number): boolean {
     if (tick === 0) {
@@ -25,13 +25,13 @@ class Random2 extends AnimationBase implements Animation {
       this.randomPosition2 = Math.floor(Math.random() * (this.numLED - 5));
       this.randomPosition3 = Math.floor(Math.random() * (this.numLED - 5));
       this.randomPosition4 = Math.floor(Math.random() * (this.numLED - 5));
-      this.randomPosition5 = Math.floor(Math.random() * (this.numLED - 5));
+      // this.randomPosition5 = Math.floor(Math.random() * (this.numLED - 5));
     }
     frame[this.randomPosition1] = this.currentColor;
     frame[this.randomPosition2] = this.currentColor;
     frame[this.randomPosition3] = this.currentColor;
     frame[this.randomPosition4] = this.currentColor;
-    frame[this.randomPosition5] = this.currentColor;
+    // frame[this.randomPosition5] = this.currentColor;
 
     return true;
   }
