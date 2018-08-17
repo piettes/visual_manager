@@ -1,4 +1,3 @@
-import {Point} from "./Point";
 import {Location} from "./Setup";
 
 interface Animation {

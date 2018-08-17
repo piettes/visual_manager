@@ -9,6 +9,7 @@ import {Rain} from "./animations/Rain";
 import {Fill} from "./animations/Fill";
 import {Effect1Continue} from "./animations/Effect1Continue";
 import {Random2} from "./animations/Random2";
+import {FadeIn} from "./animations/FadeIn";
 
 class AnimationFactory {
 
@@ -20,6 +21,8 @@ class AnimationFactory {
         return new Effect1Continue();
       case "Fill":
         return new Fill();
+      case "FadeIn":
+        return new FadeIn();
       case "Stars":
         return new Stars();
       case "Rain":
@@ -28,7 +31,7 @@ class AnimationFactory {
         return new StarsBpm();
       case "Random":
         return new Random();
-        case "Random2":
+      case "Random2":
         return new Random2();
       case "Strobe":
         return new Strobe();
@@ -41,7 +44,8 @@ class AnimationFactory {
     }
   }
 
-  static all: Array<Animation> = [new Off(), new Random(), new Random2(), new Strobe(), new StarsBpm(), new Stars(), new Rain(), new Effect1(), new Effect1Continue(), new Fill()];
+  static all: Array<Animation> = [new Off(), new Random(), new Random2(), new Strobe(), new StarsBpm(), new Stars(),
+    new Rain(), new Effect1(), new Effect1Continue(), new FadeIn(), new Fill()];
 
 
   static getAll(): Array<Animation> {
