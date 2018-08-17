@@ -1,6 +1,5 @@
 import {Animation} from "../Animation";
 import {AnimationBase} from "../AnimationBase";
-import {LED_OFF} from "../Setup";
 
 class Random extends AnimationBase implements Animation {
 
