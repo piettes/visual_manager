@@ -27,7 +27,7 @@ class AnimationFactory {
         return new FadeOut();
       case "FadeIn":
         return new FadeIn();
-      case "FadeIntOut":
+      case "FadeInOut":
         return new FadeInOut();
       case "Stars":
         return new Stars();
