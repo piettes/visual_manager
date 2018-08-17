@@ -17,7 +17,7 @@ class StarsBpm extends AnimationBase implements Animation {
 
   initStar() {
     // console.log("init star")
-    let x = Math.floor(this.random() * (this.numLED - this.limit * this.patternLength));
+    let x = Math.floor(this.random() * (this.numLED - this.limit));
     let star = {star_1: {}, star_2: {}, star_3: {}, star_4: {}, star_5: {}};
     star.star_1 = {x: x, c: this.color1.getShade(1 + this.luminosity)};
     star.star_2 = {x: x, c: this.color1.getShade(2 + this.luminosity)};
@@ -64,7 +64,7 @@ class StarsBpm extends AnimationBase implements Animation {
       frame[this.star.star_4.x] = this.star.star_4.c;
       frame[this.star.star_5.x] = this.star.star_5.c;
 
-    } else if (tick < this.limit * this.patternLength) {
+    } else if (this.star.star_1 < this.numLED - 1) {
       this.star.star_1.x++;
       this.star.star_2.x++;
       this.star.star_3.x++;
@@ -76,41 +76,41 @@ class StarsBpm extends AnimationBase implements Animation {
       frame[this.star.star_4.x] = this.star.star_4.c;
       frame[this.star.star_5.x] = this.star.star_5.c;
 
-    } else if (tick === this.limit * this.patternLength - 4) {
-      this.star.star_2.x++;
-      this.star.star_3.x++;
-      this.star.star_4.x++;
-      this.star.star_5.x++;
-      frame[this.star.star_2.x] = this.star.star_2.c;
-      frame[this.star.star_3.x] = this.star.star_3.c;
-      frame[this.star.star_4.x] = this.star.star_4.c;
-      frame[this.star.star_5.x] = this.star.star_5.c;
-
-    } else if (tick === this.limit * this.patternLength - 3) {
-      this.star.star_3.x++;
-      this.star.star_4.x++;
-      this.star.star_5.x++;
-      frame[this.star.star_3.x] = this.star.star_3.c;
-      frame[this.star.star_4.x] = this.star.star_4.c;
-      frame[this.star.star_5.x] = this.star.star_5.c;
-
-    } else if (tick === this.limit * this.patternLength - 2) {
-      this.star.star_4.x++;
-      this.star.star_5.x++;
-      frame[this.star.star_4.x] = this.star.star_4.c;
-      frame[this.star.star_5.x] = this.star.star_5.c;
-    } else if (tick === this.limit * this.patternLength - 1) {
-      this.star.star_5.x++;
-      frame[this.star.star_5.x] = this.star.star_5.c;
+    // } else if (tick === this.limit * this.patternLength - 4) {
+    //   this.star.star_2.x++;
+    //   this.star.star_3.x++;
+    //   this.star.star_4.x++;
+    //   this.star.star_5.x++;
+    //   frame[this.star.star_2.x] = this.star.star_2.c;
+    //   frame[this.star.star_3.x] = this.star.star_3.c;
+    //   frame[this.star.star_4.x] = this.star.star_4.c;
+    //   frame[this.star.star_5.x] = this.star.star_5.c;
+    //
+    // } else if (tick === this.limit * this.patternLength - 3) {
+    //   this.star.star_3.x++;
+    //   this.star.star_4.x++;
+    //   this.star.star_5.x++;
+    //   frame[this.star.star_3.x] = this.star.star_3.c;
+    //   frame[this.star.star_4.x] = this.star.star_4.c;
+    //   frame[this.star.star_5.x] = this.star.star_5.c;
+    //
+    // } else if (tick === this.limit * this.patternLength - 2) {
+    //   this.star.star_4.x++;
+    //   this.star.star_5.x++;
+    //   frame[this.star.star_4.x] = this.star.star_4.c;
+    //   frame[this.star.star_5.x] = this.star.star_5.c;
+    // } else if (tick === this.limit * this.patternLength - 1) {
+    //   this.star.star_5.x++;
+    //   frame[this.star.star_5.x] = this.star.star_5.c;
     }
     if (this.star.star_5.x >= 100) {
-      console.log("cest la guere1");
+      console.log("cest la guere1 ---" , this.star.star_5.x );
     }
     if (this.star.star_5.x < 0) {
       console.log("cest la guere");
     }
     if (this.star.star_1.x >= 100) {
-      console.log("cest la guere2");
+      console.log("cest la guere 2 ------ ", this.star.star_1.x);
     }
     if (this.star.star_1.x < 0) {
       console.log("cest la guere3");

@@ -136,7 +136,7 @@ describe("StarsBpm test", () => {
     // expect(mockRender).toBeCalledWith(expected);
 
 
-    for (let i = 0; i < 700000; i++) {
+    for (let i = 0; i < 200; i++) {
       canvasNeopixel.incTicker();
     }
 
