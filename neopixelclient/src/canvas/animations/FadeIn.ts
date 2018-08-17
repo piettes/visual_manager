@@ -24,7 +24,7 @@ class FadeIn extends AnimationBase implements Animation {
       this.timeAcc -= this.animDuration;
       return 0;
     }
-    return Math.floor(this.timeAcc * 7 / this.animDuration) + 1;
+    return Math.floor(this.timeAcc * 15 / this.animDuration) + 1;
   }
 
   reset(): void {
