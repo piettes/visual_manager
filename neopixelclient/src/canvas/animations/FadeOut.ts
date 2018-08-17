@@ -1,10 +1,10 @@
 import {Animation} from "../Animation";
 import {AnimationBase} from "../AnimationBase";
 
-class FadeIn extends AnimationBase implements Animation {
+class FadeOut extends AnimationBase implements Animation {
 
   getName(): string {
-    return "FadeIn";
+    return "FadeOut";
   }
 
   nextframe(frame: Array<number>, tick: number): boolean {
@@ -24,7 +24,7 @@ class FadeIn extends AnimationBase implements Animation {
       this.timeAcc -= this.animDuration;
       return 0;
     }
-    return 15 - Math.floor(this.timeAcc * 15 / this.animDuration) + 1;
+    return Math.floor(this.timeAcc * 15 / this.animDuration) + 1;
   }
 
   reset(): void {
@@ -33,4 +33,4 @@ class FadeIn extends AnimationBase implements Animation {
 
 }
 
-export {FadeIn};
+export {FadeOut};
