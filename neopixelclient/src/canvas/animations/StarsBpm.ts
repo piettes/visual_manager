@@ -76,44 +76,6 @@ class StarsBpm extends AnimationBase implements Animation {
       frame[this.star.star_4.x] = this.star.star_4.c;
       frame[this.star.star_5.x] = this.star.star_5.c;
 
-    // } else if (tick === this.limit * this.patternLength - 4) {
-    //   this.star.star_2.x++;
-    //   this.star.star_3.x++;
-    //   this.star.star_4.x++;
-    //   this.star.star_5.x++;
-    //   frame[this.star.star_2.x] = this.star.star_2.c;
-    //   frame[this.star.star_3.x] = this.star.star_3.c;
-    //   frame[this.star.star_4.x] = this.star.star_4.c;
-    //   frame[this.star.star_5.x] = this.star.star_5.c;
-    //
-    // } else if (tick === this.limit * this.patternLength - 3) {
-    //   this.star.star_3.x++;
-    //   this.star.star_4.x++;
-    //   this.star.star_5.x++;
-    //   frame[this.star.star_3.x] = this.star.star_3.c;
-    //   frame[this.star.star_4.x] = this.star.star_4.c;
-    //   frame[this.star.star_5.x] = this.star.star_5.c;
-    //
-    // } else if (tick === this.limit * this.patternLength - 2) {
-    //   this.star.star_4.x++;
-    //   this.star.star_5.x++;
-    //   frame[this.star.star_4.x] = this.star.star_4.c;
-    //   frame[this.star.star_5.x] = this.star.star_5.c;
-    // } else if (tick === this.limit * this.patternLength - 1) {
-    //   this.star.star_5.x++;
-    //   frame[this.star.star_5.x] = this.star.star_5.c;
-    }
-    if (this.star.star_5.x >= 100) {
-      console.log("cest la guere1 ---" , this.star.star_5.x );
-    }
-    if (this.star.star_5.x < 0) {
-      console.log("cest la guere");
-    }
-    if (this.star.star_1.x >= 100) {
-      console.log("cest la guere 2 ------ ", this.star.star_1.x);
-    }
-    if (this.star.star_1.x < 0) {
-      console.log("cest la guere3");
     }
     return true;
   }

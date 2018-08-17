@@ -10,21 +10,16 @@ class Strobe extends AnimationBase implements Animation {
     return "Strobe";
   }
 
-  column: Array<number> = new Array<number>(this.numLED).fill(LED_OFF);
+  randomPosition: number = 0;
+  pair: boolean = false;
+
 
   nextframe(frame: Array<number>, tick: number): boolean {
     if (tick === 0) {
-      this.currentColor = this.currentColor === this.getShade1() ? this.getShade2() : this.getShade1();
-      if (this.currentColor === this.LED_OFF) {
-        return true;
-      }
-      this.column = [];
-      let r: number = Math.floor(this.random() * (this.numLED - 16));
-      for (let i = 0; i < 16; i++) {
-        this.column[r + i] = this.currentColor;
-      }
+      this.pair = !this.pair;
+      this.randomPosition = Math.floor(this.random() * (this.numLED - 5));
+      [0, 1, 2, 3, 4].forEach(i => frame[i + this.randomPosition] = this.pair ? this.getShade1() : this.getShade2());
     }
-    frame = this.column;
     return true;
   }
 

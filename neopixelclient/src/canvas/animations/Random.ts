@@ -16,7 +16,6 @@ class Random extends AnimationBase implements Animation {
       this.randomPosition = Math.floor(this.random() * (this.numLED - 5));
     }
     [0, 1, 2, 3, 4].forEach(i => frame[i + this.randomPosition] = this.pair ? this.getShade1() : this.getShade2());
-
     return true;
   }
 
