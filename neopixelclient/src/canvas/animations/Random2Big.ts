@@ -17,13 +17,14 @@ class Random2Big extends AnimationBase implements Animation {
       if (this.currentColor === this.LED_OFF) {
         return true;
       }
-      this.randomPositions = Array.from(Array(40).keys()).map(x => Math.floor(this.random() * (this.numLED - 5)));
+      this.randomPositions = Array.from(Array(40).keys()).map(x => Math.floor(this.random() * (this.numLED - 1)));
       // this.randomPosition1 = Math.floor(this.random() * (this.numLED - 5));
       // this.randomPosition2 = Math.floor(this.random() * (this.numLED - 5));
       // this.randomPosition3 = Math.floor(this.random() * (this.numLED - 5));
       // this.randomPosition4 = Math.floor(this.random() * (this.numLED - 5));
       // this.randomPosition5 = Math.floor(this.random() * (this.numLED - 5));
     }
+    this.randomPositions.forEach(p => frame[p] = this.currentColor);
     // frame[this.randomPosition1] = this.currentColor;
     // frame[this.randomPosition2] = this.currentColor;
     // frame[this.randomPosition3] = this.currentColor;

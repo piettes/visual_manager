@@ -13,7 +13,7 @@ class RandomBig extends AnimationBase implements Animation {
   nextframe(frame: Array<number>, tick: number): boolean {
     if (tick === 0) {
       this.pair = !this.pair;
-      this.randomPosition = Math.floor(this.random() * (this.numLED - 5));
+      this.randomPosition = Math.floor(this.random() * (this.numLED - 40));
     }
     Array.from(Array(40).keys()).forEach(i => frame[i + this.randomPosition] = this.pair ? this.getShade1() : this.getShade2());
     return true;

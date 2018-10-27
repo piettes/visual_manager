@@ -4,6 +4,8 @@ import {AnimationFactory} from "../../../neopixelclient/src/canvas/AnimationFact
 import Form from "./Form";
 import {Animation} from "../../../neopixelclient/src/canvas/Animation";
 
+declare const stasilo: any;
+
 class Main extends React.Component<any, any> {
 
   private manualMode: boolean = false;
@@ -19,6 +21,32 @@ class Main extends React.Component<any, any> {
     this.currentAnimations = AnimationFactory.getDefaultArray();
 
     this.host = props.hostUrl;
+
+    // this.startBeatDetection();
+  }
+
+  private lastBpm = 0;
+
+  startBeatDetection() {
+    let song = new stasilo.BeatDetector({
+      sens: 5.0,
+      visualizerFFTSize: 256,
+      analyserFFTSize: 256,
+      passFreq: 600
+    });
+
+    let loop = (timestamp: number) => {
+      // song.isOnBeat();
+      // console.log(song.getBPMGuess());
+      if (song.getBPMGuess().all !== this.lastBpm) {
+        this.lastBpm = song.getBPMGuess().all;
+        console.log(this.lastBpm);
+      }
+      // console.log(song.getAudioFreqData() );
+      requestAnimationFrame(loop);
+    };
+
+    requestAnimationFrame(loop);
   }
 
   applyChanges(animJson: any): void {
