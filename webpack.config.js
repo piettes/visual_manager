@@ -24,10 +24,7 @@ const config = {
       {
         test: /.jsx?$/,
         loader: 'babel-loader',
-        exclude: /node_modules/,
-        query: {
-          presets: ['es2015', 'react']
-        }
+        exclude: /node_modules/
       },
       {test: /\.tsx?$/, exclude: /__tests__/, loader: "ts-loader"},
       {test: /\.css$/, loader: 'style-loader!css-loader'},
