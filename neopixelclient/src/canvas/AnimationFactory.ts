@@ -3,7 +3,6 @@ import {Effect1} from "./animations/Effect1";
 import {Random} from "./animations/Random";
 import {Off} from "./animations/Off";
 import {Stars} from "./animations/Stars";
-import {StarsBpm} from "./animations/StarsBpm";
 import {Strobe} from "./animations/Strobe";
 import {Rain} from "./animations/Rain";
 import {Fill} from "./animations/Fill";
@@ -14,6 +13,7 @@ import {FadeInOut} from "./animations/FadeInOut";
 import {FadeIn} from "./animations/FadeIn";
 import {RandomBig} from "./animations/RandomBig";
 import {Random2Big} from "./animations/Random2Big";
+import {FadeInOutSmall} from "./animations/FadeInOutSmall";
 
 class AnimationFactory {
 
@@ -31,12 +31,14 @@ class AnimationFactory {
         return new FadeIn();
       case "FadeInOut":
         return new FadeInOut();
+      case "FadeInOutSmall":
+        return new FadeInOutSmall();
       case "Stars":
         return new Stars();
       case "Rain":
         return new Rain();
-      case "StarsBpm":
-        return new StarsBpm();
+      // case "StarsBpm":
+      //   return new StarsBpm();
       case "Random":
         return new Random();
       case "Random2":
@@ -56,8 +58,8 @@ class AnimationFactory {
     }
   }
 
-  static all: Array<Animation> = [new Off(), new Random(), new Random2(), new Strobe(), new StarsBpm(), new Stars(),
-    new Rain(), new Effect1(), new Effect1Continue(), new FadeOut(), new FadeIn(), new FadeInOut(), new Fill(), new RandomBig(), new Random2Big()];
+  static all: Array<Animation> = [new Off(), new Random(), new Random2(), new Strobe(), new Stars(),
+    new Rain(), new Effect1(), new Effect1Continue(), new FadeOut(), new FadeIn(), new FadeInOut(), new FadeInOutSmall(), new Fill(), new RandomBig(), new Random2Big()];
 
 
   static getAll(): Array<Animation> {
@@ -65,7 +67,7 @@ class AnimationFactory {
   }
 
   static getDefaultArray(): Array<Animation> {
-    return [new Random(), new StarsBpm(), new Off(), new Off()];
+    return [new Random(), new Off(), new Off(), new Off()];
   }
 
   static getOff(): Animation {

@@ -5,7 +5,7 @@
   "author": "",
   "license": "",
   "scripts": {
-    "test": "jest --watch ",
+    "test": "jest ",
     "start": "npm run build:live",
     "build:live": "nodemon --exec ./node_modules/.bin/ts-node -- ./neopixelclient/src/index.ts",
     "buildserver": "./node_modules/.bin/webpack --config webpack.config.js",
