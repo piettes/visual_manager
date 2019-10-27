@@ -14,9 +14,10 @@ import {FadeIn} from "./animations/FadeIn";
 import {RandomBig} from "./animations/RandomBig";
 import {Random2Big} from "./animations/Random2Big";
 import {FadeInOutSmall} from "./animations/FadeInOutSmall";
-import {FadeInOutSmall2Half} from "./animations/FadeInOutSmall2Half_";
+import {FadeInOutSmall2Half} from "./animations/FadeInOutSmall2Half";
 import {FadeInOutSmall2} from "./animations/FadeInOutSmall2";
-import {FadeInOutSmallHalf} from "./animations/FadeInOutSmallHalf_";
+import {FadeInOutSmallHalf} from "./animations/FadeInOutSmallHalf";
+import {FadeInOutRandomHalf} from "./animations/FadeInOutRandomHalf";
 
 class AnimationFactory {
 
@@ -42,6 +43,8 @@ class AnimationFactory {
         return new FadeInOutSmall2Half();
       case "FadeInOutSmallHalf":
         return new FadeInOutSmallHalf();
+        case "FadeInOutRandomHalf":
+        return new FadeInOutRandomHalf();
       case "Stars":
         return new Stars();
       case "Rain":
@@ -68,7 +71,7 @@ class AnimationFactory {
   }
 
   static all: Array<Animation> = [new Off(), new Random(), new Random2(), new Strobe(), new Stars(),
-    new Rain(), new Effect1(), new Effect1Continue(), new FadeOut(), new FadeIn(), new FadeInOut(), new FadeInOutSmall(),
+    new Rain(), new Effect1(), new Effect1Continue(), new FadeInOutRandomHalf(), new FadeOut(), new FadeIn(), new FadeInOut(), new FadeInOutSmall(),
     new FadeInOutSmall2(), new FadeInOutSmallHalf(), new FadeInOutSmall2Half(), new Fill(), new RandomBig(), new Random2Big()];
 
 

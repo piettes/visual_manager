@@ -2,10 +2,10 @@ import {Animation} from "../Animation";
 import {AnimationBase} from "../AnimationBase";
 import Color from "../Color";
 
-class FadeInOutSmallHalf extends AnimationBase implements Animation {
+class FadeInOutRandomHalf extends AnimationBase implements Animation {
 
   getName(): string {
-    return "FadeInOutSmallHalf";
+    return "FadeInOutRandomHalf";
   }
 
   private isOff: boolean = false;
@@ -62,4 +62,4 @@ class FadeInOutSmallHalf extends AnimationBase implements Animation {
 
 }
 
-export {FadeInOutSmallHalf};
+export {FadeInOutRandomHalf};
