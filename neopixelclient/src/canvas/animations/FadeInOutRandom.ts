@@ -39,13 +39,13 @@ class FadeInOutRandom extends AnimationBase implements Animation {
   tick(timeDiff: number): number {
     if (this.timeAcc === -1) {
       this.timeAcc = timeDiff;
-      return 0;
+      return -1;
     }
     this.timeAcc += timeDiff;
 
     if (this.timeAcc >= this.animDuration) {
       this.timeAcc -= this.animDuration;
-      return 0;
+      return -1;
     }
     if (this.timeAcc < this.animDuration / 2) {
       return Math.floor(this.timeAcc * 32 / this.animDuration);
