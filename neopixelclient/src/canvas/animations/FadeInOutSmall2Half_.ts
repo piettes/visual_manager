@@ -7,7 +7,18 @@ class FadeInOutSmall2Half extends AnimationBase implements Animation {
     return "FadeInOutSmall2Half";
   }
 
+  isOff: boolean = false;
+
   nextframe(frame: Array<number>, tick: number): boolean {
+    if (tick === -1) {
+      if (!this.isOff) {
+        this.isOff = true;
+        return true;
+      } else {
+        return false;
+      }
+    }
+    this.isOff = false;
     this.setLuminosity(tick);
     for (let i = 0; i < this.numLED / 4 - 3; i++) {
       frame[4 * i] = this.getShade1();
@@ -29,13 +40,13 @@ class FadeInOutSmall2Half extends AnimationBase implements Animation {
     }
     console.log(this.timeAcc)
     if (this.timeAcc < this.animDuration / 4) {
-      console.log("this.timeAcc < this.animDuration / 4 " +  Math.floor(this.timeAcc * 32 / this.animDuration));
-      return Math.floor(this.timeAcc * 32 / this.animDuration);
+      console.log("this.timeAcc < this.animDuration / 4 " +  Math.floor(this.timeAcc * 16 / this.animDuration));
+      return Math.floor(this.timeAcc * 16 / this.animDuration);
     } else if (this.timeAcc < this.animDuration / 2) {
-      console.log("this.timeAcc < this.animDuration / 2 " + Math.floor(32 - (this.timeAcc * 32 / this.animDuration)));
-      return Math.floor(32 - (this.timeAcc * 32 / this.animDuration));
+      console.log("this.timeAcc < this.animDuration / 2 " + Math.floor(32 - (this.timeAcc * 16 / this.animDuration)));
+      return Math.floor(16 - (this.timeAcc * 16 / this.animDuration));
     } else {
-      return 0;
+      return -1;
     }
   }
 
