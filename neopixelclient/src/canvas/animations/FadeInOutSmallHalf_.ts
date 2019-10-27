@@ -1,10 +1,10 @@
 import {Animation} from "../Animation";
 import {AnimationBase} from "../AnimationBase";
 
-class FadeInOutSmall2Half extends AnimationBase implements Animation {
+class FadeInOutSmallHalf extends AnimationBase implements Animation {
 
   getName(): string {
-    return "FadeInOutSmall2Half";
+    return "FadeInOutSmallHalf";
   }
 
   isOff: boolean = false;
@@ -20,9 +20,8 @@ class FadeInOutSmall2Half extends AnimationBase implements Animation {
     }
     this.isOff = false;
     this.setLuminosity(tick);
-    for (let i = 0; i < this.numLED / 4; i++) {
-      frame[4 * i] = this.getShade1();
-      frame[4 * i + 1] = this.getShade1();
+    for (let i = 0; i < this.numLED / 2 - 1; i++) {
+      frame[2 * i] = this.getShade1();
     }
     return true;
   }
@@ -53,4 +52,4 @@ class FadeInOutSmall2Half extends AnimationBase implements Animation {
 
 }
 
-export {FadeInOutSmall2Half};
+export {FadeInOutSmallHalf};
