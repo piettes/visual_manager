@@ -26,7 +26,7 @@ const getEmptyLEDArray = () => {
   return new Array<number>(TOTAL_LED).fill(0);
 };
 
-describe("FadeInOutRandomHalf test", () => {
+describe("FadeInOutRandom test", () => {
 
   it("central1 ", () => {
     const canvasNeopixel: CanvasNeopixel = new CanvasNeopixel();
