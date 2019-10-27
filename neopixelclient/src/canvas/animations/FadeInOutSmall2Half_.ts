@@ -20,7 +20,7 @@ class FadeInOutSmall2Half extends AnimationBase implements Animation {
     }
     this.isOff = false;
     this.setLuminosity(tick);
-    for (let i = 0; i < this.numLED / 4 - 3; i++) {
+    for (let i = 0; i < this.numLED / 4 - 1; i++) {
       frame[4 * i] = this.getShade1();
       frame[4 * i + 1] = this.getShade1();
     }
