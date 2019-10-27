@@ -48,9 +48,13 @@ class FadeInOutRandom extends AnimationBase implements Animation {
       return -1;
     }
     if (this.timeAcc < this.animDuration / 2) {
-      return Math.floor(32 - (this.timeAcc * 32 / this.animDuration));
+      let val = Math.floor(32 - (this.timeAcc * 32 / this.animDuration));
+      console.log(val);
+      return val;
     } else {
-      return Math.floor(this.timeAcc * 32 / this.animDuration);
+      let val = Math.floor(this.timeAcc * 32 / this.animDuration);
+      console.log(val);
+      return val;
     }
   }
 
