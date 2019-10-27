@@ -30,16 +30,16 @@ class FadeInOutSmall2Half extends AnimationBase implements Animation {
   tick(timeDiff: number): number {
     if (this.timeAcc === -1) {
       this.timeAcc = timeDiff;
-      return 0;
+      return -1;
     }
     this.timeAcc += timeDiff;
 
     if (this.timeAcc >= this.animDuration) {
       this.timeAcc -= this.animDuration;
-      return 0;
+      return -1;
     }
     console.log(this.timeAcc)
-    if (this.timeAcc < this.animDuration / 4) {
+    if (this.timeAcc > this.animDuration / 4) {
       console.log("this.timeAcc < this.animDuration / 2 " + Math.floor(32 - (this.timeAcc * 16 / this.animDuration)));
       return Math.floor(16 - (this.timeAcc * 16 / this.animDuration));
     } else if (this.timeAcc < this.animDuration / 2) {
