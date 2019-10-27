@@ -16,6 +16,8 @@ abstract class AnimationBase {
 
   protected color1: Color = Color.PURPLE;
   protected color2: Color = Color.PURPLE;
+  protected currentColor: Color = this.color1;
+
   protected luminosity: number = 0;
 
   setBpm(bpm: number): void {
@@ -38,6 +40,14 @@ abstract class AnimationBase {
 
   setColor2(name: string): void {
     this.color2 = Color.fromName(name);
+  }
+
+  protected switchCurrentColor(): void {
+    this.currentColor = this.currentColor === this.color2 ? this.color1 : this.color2;
+  }
+
+  protected getCurrentShade(): number {
+    return this.currentColor.getShade(this.luminosity);
   }
 
   protected getShade1(): number {
