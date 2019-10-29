@@ -30,13 +30,16 @@ class Cerise extends AnimationBase implements Animation {
       frame[30] = 0x3edde6;
       frame[31] = 0x3edde6;
       frame[32] = 0x3edde6;
+      frame[45] = Color.ORANGE.value;
+      frame[46] = Color.ORANGE.value;
+      frame[47] = Color.ORANGE.value;
+      frame[48] = Color.ORANGE.value;
     }
     return true;
   }
 
   tick(timeDiff: number): number {
     this.timeAcc += timeDiff;
-
 
     let vanille = 1;
 
