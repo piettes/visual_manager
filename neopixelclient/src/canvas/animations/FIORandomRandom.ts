@@ -17,9 +17,9 @@ class FIORandomRandom extends AnimationBase implements Animation {
       if (!this.isOff) {
         this.isOff = true;
         this.switchCurrentColor();
-        this.randomPosition1 = Math.floor(this.random() * (this.numLED - 5));
-        this.randomPosition2 = Math.floor(this.random() * (this.numLED - 5));
-        this.randomPosition3 = Math.floor(this.random() * (this.numLED - 5));
+        this.randomPosition1 = Math.floor(this.random() * (this.numLED - 1));
+        this.randomPosition2 = Math.floor(this.random() * (this.numLED - 1));
+        this.randomPosition3 = Math.floor(this.random() * (this.numLED - 1));
         return true;
       } else {
         return false;
