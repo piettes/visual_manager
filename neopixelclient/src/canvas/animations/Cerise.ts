@@ -10,8 +10,14 @@ class Cerise extends AnimationBase implements Animation {
 
   nextframe(frame: Array<number>, tick: number): boolean {
 
-
-    frame[0] = Color.BLUE.value;
+    frame[0] = Color.RED.value;
+    frame[1] = Color.RED.value;
+    frame[2] = Color.DEEP_PINK.value;
+    frame[3] = Color.RED.value;
+    frame[4] = Color.RED.value;
+    frame[5] = Color.CYAN.value;
+    frame[6] = 0x1256f9;
+    frame[7] = Color.DODGER_BLUE.value;
 
     return true;
   }
