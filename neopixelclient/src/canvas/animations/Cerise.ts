@@ -1,5 +1,6 @@
 import {Animation} from "../Animation";
 import {AnimationBase} from "../AnimationBase";
+import Color from "../Color";
 
 class Cerise extends AnimationBase implements Animation {
 
@@ -9,6 +10,8 @@ class Cerise extends AnimationBase implements Animation {
 
   nextframe(frame: Array<number>, tick: number): boolean {
 
+
+    frame[0] = Color.BLUE.value;
 
     return true;
   }
