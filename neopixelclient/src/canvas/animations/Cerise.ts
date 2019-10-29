@@ -11,30 +11,30 @@ class Cerise extends AnimationBase implements Animation {
   nextframe(frame: Array<number>, tick: number): boolean {
 
     if (tick === 1) {
-    frame[0] = Color.RED.value;
-    frame[1] = Color.RED.value;
-    frame[2] = Color.DEEP_PINK.value;
-    frame[3] = Color.RED.value;
-    frame[4] = Color.RED.value;
-    frame[5] = Color.CYAN.value;
-    frame[6] = 0x1256f9;
-    frame[7] = Color.DODGER_BLUE.value;
+      frame[0] = Color.RED.value;
+      frame[1] = Color.RED.value;
+      frame[2] = Color.DEEP_PINK.value;
+      frame[3] = Color.RED.value;
+      frame[4] = Color.RED.value;
+      frame[5] = Color.CYAN.value;
+      frame[6] = 0x1256f9;
+      frame[7] = Color.DODGER_BLUE.value;
     }
     if (tick === 2) {
-      frame[0] = Color.PURPLE.value;
-      frame[20] = Color.DODGER_BLUE.value;
-      frame[21] = Color.GREEN.value;
-      frame[22] = Color.CHARTREUSE.value;
-      frame[23] = Color.ORANGE.value;
-      frame[24] = 0x3edde6;
-      frame[30] = 0x3edde6;
-      frame[31] = 0x3edde6;
-      frame[32] = 0x3edde6;
-      frame[45] = Color.ORANGE.value;
-      frame[46] = Color.ORANGE.value;
-      frame[47] = Color.ORANGE.value;
-      frame[48] = Color.ORANGE.value;
+
+      for (let i = 1; i < 4; i++) {
+        frame[10 * i] = Color.RED.value;
+        frame[10 * i + 1] = Color.RED.value;
+        frame[10 * i + 2] = Color.DEEP_PINK.value;
+        frame[10 * i + 3] = Color.RED.value;
+        frame[10 * i + 4] = Color.RED.value;
+        frame[10 * i + 5] = Color.CYAN.value;
+        frame[10 * i + 6] = 0x1256f9;
+        frame[10 * i + 7] = Color.DODGER_BLUE.value;
+      }
     }
+
+
     return true;
   }
 
