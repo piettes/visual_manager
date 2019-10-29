@@ -23,6 +23,7 @@ class Cerise extends AnimationBase implements Animation {
   }
 
   tick(timeDiff: number): number {
+    console.log(timeDiff)
     return 1;
   }
 
