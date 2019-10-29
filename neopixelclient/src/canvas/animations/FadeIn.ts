@@ -9,7 +9,9 @@ class FadeIn extends AnimationBase implements Animation {
 
   nextframe(frame: Array<number>, tick: number): boolean {
     this.setLuminosity(tick);
-    frame.fill(this.getShade1());
+    for (let i = 0; i < this.numLED / 2 - 1; i++) {
+      frame[2 * i] = this.getShade1();
+    }
     return true;
   }
 
