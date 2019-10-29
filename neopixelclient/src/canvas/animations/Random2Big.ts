@@ -3,7 +3,7 @@ import {AnimationBase} from "../AnimationBase";
 
 class Random2Big extends AnimationBase implements Animation {
 
-  private currentColor: number = this.getShade1();
+  private currentColor_: number = this.getShade1();
 
   getName(): string {
     return "Random2Big";
@@ -13,8 +13,8 @@ class Random2Big extends AnimationBase implements Animation {
 
   nextframe(frame: Array<number>, tick: number): boolean {
     if (tick === 0) {
-      this.currentColor = this.currentColor === this.getShade1() ? this.getShade2() : this.getShade1();
-      if (this.currentColor === this.LED_OFF) {
+      this.currentColor_ = this.currentColor_ === this.getShade1() ? this.getShade2() : this.getShade1();
+      if (this.currentColor_ === this.LED_OFF) {
         return true;
       }
       this.randomPositions = Array.from(Array(40).keys()).map(x => Math.floor(this.random() * (this.numLED - 1)));
@@ -24,7 +24,7 @@ class Random2Big extends AnimationBase implements Animation {
       // this.randomPosition4 = Math.floor(this.random() * (this.numLED - 5));
       // this.randomPosition5 = Math.floor(this.random() * (this.numLED - 5));
     }
-    this.randomPositions.forEach(p => frame[p] = this.currentColor);
+    this.randomPositions.forEach(p => frame[p] = this.currentColor_);
     // frame[this.randomPosition1] = this.currentColor;
     // frame[this.randomPosition2] = this.currentColor;
     // frame[this.randomPosition3] = this.currentColor;
@@ -49,7 +49,7 @@ class Random2Big extends AnimationBase implements Animation {
 
   reset(): void {
     super.reset();
-    this.currentColor = this.getShade1();
+    this.currentColor_ = this.getShade1();
   }
 
 }

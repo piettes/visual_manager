@@ -1,10 +1,7 @@
 import {Animation} from "../Animation";
 import {AnimationBase} from "../AnimationBase";
-import {LED_OFF} from "../Setup";
 
 class Strobe extends AnimationBase implements Animation {
-
-  private currentColor: number = this.getShade1();
 
   getName(): string {
     return "Strobe";
@@ -38,7 +35,6 @@ class Strobe extends AnimationBase implements Animation {
 
   reset(): void {
     super.reset();
-    this.currentColor = this.getShade1();
   }
 
 }
