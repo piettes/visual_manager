@@ -79,6 +79,7 @@ abstract class Canvas {
     this.animation1.animate(animArray1, timeDiffMs);
     this.animation2.animate(animArray2, timeDiffMs);
     this.animation3.animate(animArray3, timeDiffMs);
+    this.animation4.animate(animArray3, timeDiffMs);
     this.drawCentral1(animArray1);
     this.drawCentral2(animArray2);
     this.drawSecondary(animArray3);
@@ -116,6 +117,7 @@ abstract class Canvas {
     this.animation1.setLocation(Location.CENTRAL_1);
     this.animation2.setLocation(Location.CENTRAL_2);
     this.animation3.setLocation(Location.SECONDARY);
+    this.animation4.setLocation(Location.SECONDARY);
     this.resetAnimations();
   }
 
