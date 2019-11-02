@@ -75,8 +75,8 @@ class Color {
         return Color.ORANGE;
       case Color.PURPLE.name :
         return Color.PURPLE;
-      case Color.WHITE.name :
-        return Color.WHITE;
+      // case Color.WHITE.name :
+      //   return Color.WHITE;
       case Color.BLUE.name :
         return Color.BLUE;
       case Color.GREEN.name :
@@ -110,10 +110,10 @@ class Color {
   static DODGER_BLUE: Color =    new Color("dodger_blue", 0x0088FF, "#0088FF", 0x0080EE, 0x0078DD, 0x0070CC, 0x0068BB, 0x0060AA, 0x005899, 0x005088, 0x004877,  0x004066, 0x003855, 0x003044, 0x002833, 0x002022, 0x000811, 0x000000);
   static CHARTREUSE: Color =     new Color("chartreuse",  0x88FF00, "#88FF00", 0x80EE00, 0x78DD00, 0x70CC00, 0x68BB00, 0x60AA00, 0x589900, 0x508800, 0x487700,  0x406600, 0x385500, 0x304400, 0x283300, 0x202200, 0x081100, 0x000000);
   static DEEP_PINK: Color =      new Color("deep_pink",   0xFF0088, "#FF0088", 0xEE0080, 0xDD0078, 0xCC0070, 0xBB0068, 0xAA0060, 0x990058, 0x880050, 0x770048,  0x660040, 0x660038, 0x440030, 0x330028, 0x220020, 0x110008, 0x000000);
-  static WHITE: Color =          new Color("white",       0xFFFFFF, "#FFFFFF", 0xEEEEEE, 0xDDDDDD, 0xCCCCCC, 0xBBBBBB, 0xAAAAAA, 0x999999, 0x888888, 0x777777,  0x666666, 0x555555, 0x444444, 0x333333, 0x222222, 0x111111, 0x000000);
+  // static WHITE: Color =          new Color("white",       0xFFFFFF, "#FFFFFF", 0xEEEEEE, 0xDDDDDD, 0xCCCCCC, 0xBBBBBB, 0xAAAAAA, 0x999999, 0x888888, 0x777777,  0x666666, 0x555555, 0x444444, 0x333333, 0x222222, 0x111111, 0x000000);
   static BLACK: Color =          new Color("black",       0x000000, "#000000", 0x000000, 0x000000, 0x000000, 0x000000, 0x000000, 0x000000, 0x000000, 0x000000,  0x000000, 0x000000, 0x000000, 0x000000, 0x000000, 0x000000, 0x000000);
 
-  static COLORS: Array<Color> = [Color.BLUE, Color.RED, Color.GREEN, Color.PURPLE, Color.YELLOW, Color.CYAN, Color.ORANGE, Color.DODGER_BLUE, Color.CHARTREUSE, Color.DEEP_PINK, Color.WHITE, Color.BLACK];
+  static COLORS: Array<Color> = [Color.BLUE, Color.RED, Color.GREEN, Color.PURPLE, Color.YELLOW, Color.CYAN, Color.ORANGE, Color.DODGER_BLUE, Color.CHARTREUSE, Color.DEEP_PINK];
 
 }
 
