@@ -23,10 +23,10 @@ class Form extends React.Component<FormProps, any> {
     this.state = {
       color11: "deep_pink", color12: "blue", color21: "chartreuse", color22: "purple",
       color31: "dodger_blue", color32: "purple", color41: "orange", color42: "purple",
-      patternLength1: 1, patternLength2: 1, patternLength3: 1, patternLength4: 1,
+      patternLength1: 1, patternLength2: 1, patternLength3: 4, patternLength4: 1,
       luminosity1: 0, luminosity2: 0, luminosity3: 0, luminosity4: 0,
-      animation1: AnimationFactory.getOff().getName(), animation2: AnimationFactory.getOff().getName(),
-      animation3: AnimationFactory.getOff().getName(), animation4: AnimationFactory.getOff().getName(),
+      animation1: AnimationFactory.get("Random").getName(), animation2: AnimationFactory.get("Random2").getName(),
+      animation3: AnimationFactory.get("FadeInOutRandom").getName(), animation4: AnimationFactory.getOff().getName(),
       bpm: DEFAULT_BPM
     };
   }
@@ -120,6 +120,8 @@ class Form extends React.Component<FormProps, any> {
                             changeAnimation={(name: string) => this.changeAnimation(name, 1)}
                             changeColor={(name: string, pos: number) => this.changeColor(name, pos, 1)}
                             color1={this.state.color11} color2={this.state.color12}
+                            animation={this.state.animation1}
+                            patternLength={this.state.patternLength1}
                             changePatternLength={(value: number) => this.changePatternLength(1, value)}
                             changeLuminosity={(value: number) => this.changeLuminosity(1, value)}
                 />
@@ -128,6 +130,8 @@ class Form extends React.Component<FormProps, any> {
                             changeAnimation={(name: string) => this.changeAnimation(name, 2)}
                             changeColor={(name: string, pos: number) => this.changeColor(name, pos, 2)}
                             color1={this.state.color21} color2={this.state.color22}
+                            animation={this.state.animation2}
+                            patternLength={this.state.patternLength2}
                             changePatternLength={(value: number) => this.changePatternLength(2, value)}
                             changeLuminosity={(value: number) => this.changeLuminosity(2, value)}
                 />
@@ -137,6 +141,8 @@ class Form extends React.Component<FormProps, any> {
                             changeAnimation={(name: string) => this.changeAnimation(name, 3)}
                             changeColor={(name: string, pos: number) => this.changeColor(name, pos, 3)}
                             color1={this.state.color31} color2={this.state.color32}
+                            animation={this.state.animation3}
+                            patternLength={this.state.patternLength3}
                             changePatternLength={(value: number) => this.changePatternLength(3, value)}
                             changeLuminosity={(value: number) => this.changeLuminosity(3, value)}
                 />
@@ -145,6 +151,8 @@ class Form extends React.Component<FormProps, any> {
                             changeAnimation={(name: string) => this.changeAnimation(name, 4)}
                             changeColor={(name: string, pos: number) => this.changeColor(name, pos, 4)}
                             color1={this.state.color41} color2={this.state.color42}
+                            animation={this.state.animation4}
+                            patternLength={this.state.patternLength4}
                             changePatternLength={(value: number) => this.changePatternLength(4, value)}
                             changeLuminosity={(value: number) => this.changeLuminosity(4, value)}
                 />

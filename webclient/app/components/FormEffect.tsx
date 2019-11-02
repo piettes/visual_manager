@@ -10,6 +10,8 @@ interface FormProps {
   number: number;
   color1: string;
   color2: string;
+  animation: string;
+  patternLength: number;
 }
 
 class FormEffect extends React.Component<FormProps, any> {
@@ -76,7 +78,6 @@ class FormEffect extends React.Component<FormProps, any> {
     const animOptions = this.props.animationList.map((anim: string) =>
         <option key={anim} value={anim}>{anim}</option>
     );
-
     return (
 
         <div className="col-lg-3">
@@ -86,7 +87,7 @@ class FormEffect extends React.Component<FormProps, any> {
           <div className="form-group">
             <label htmlFor="selectEffect" className="col-lg-4 control-label">Animation</label>
             <div className="col-lg-8">
-              <select className="form-control" id="selectEffect"
+              <select className="form-control" id="selectEffect" value={this.props.animation}
                       onChange={(event: any) => this.onChangeAnimation(event)}>
                 {animOptions}
               </select>
@@ -99,7 +100,7 @@ class FormEffect extends React.Component<FormProps, any> {
           <div className="form-group">
             <label htmlFor="selectPatternLength" className="col-lg-4 control-label">Pattern Length</label>
             <div className="col-lg-8">
-              <select className="form-control" id="selectPatternLength"
+              <select className="form-control" id="selectPatternLength" value={this.props.patternLength}
                       onChange={(event: any) => this.onChangePatternLength(event)}>
                 <option>1</option>
                 <option>2</option>
