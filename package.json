@@ -13,7 +13,7 @@
     "pi": "./node_modules/.bin/webpack-dev-server -d"
   },
   "dependencies": {
-    "axios": "^0.15.3",
+    "axios": "^0.18.1",
     "body-parser": "^1.18.3",
     "bootstrap": "^3.3.7",
     "bootswatch": "^3.3.7",
