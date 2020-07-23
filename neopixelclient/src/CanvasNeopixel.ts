@@ -1,6 +1,9 @@
 import {Canvas} from "./canvas/Canvas";
 import {TOTAL_LED} from "./canvas/Setup";
 import Ws281xWrapper from "./Ws281xWrapper";
+import {Random} from "./canvas/animations/Random";
+import {Random2} from "./canvas/animations/Random2";
+import {FadeInOutRandom} from "./canvas/animations/FadeInOutRandom";
 
 let NanoTimer = require("nanotimer");
 
@@ -17,6 +20,15 @@ class CanvasNeopixel extends Canvas {
     this.num_led = TOTAL_LED;
     this.ws281xWrapper = new Ws281xWrapper(this.num_led);
     this.pixelData = [];
+
+    this.initAnimations();
+  }
+
+  initAnimations(): void {
+    let anim3 = new FadeInOutRandom();
+    anim3.setPatternLength(4);
+    this.setAnimations([new Random(), new Random2(), anim3]);
+    this.randomizeColors();
   }
 
   initDraw(): void {

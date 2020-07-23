@@ -5,15 +5,10 @@ import {AnimationFactory} from "./canvas/AnimationFactory";
 import {Express} from "express";
 import * as bodyParser from "body-parser";
 import {Animation} from "./canvas/Animation";
-import {Random} from "./canvas/animations/Random";
-import {Random2} from "./canvas/animations/Random2";
-import {FadeInOutRandom} from "./canvas/animations/FadeInOutRandom";
 
 const app: Express = express();
 
 const canvas: Canvas = new CanvasNeopixel();
-canvas.setAnimations([new Random(), new Random2(), new FadeInOutRandom()]);
-canvas.randomizeColors();
 canvas.start();
 
 app.use(function (req, res, next) {

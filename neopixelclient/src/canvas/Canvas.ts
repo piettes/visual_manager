@@ -51,7 +51,7 @@ abstract class Canvas {
   tickerCalled: number = 0;
   lastTickerCalled: number = new Date().getTime();
   autoColorChangeTime: number = new Date().getTime();
-  autoColorChange: boolean = false;
+  autoColorChange: boolean = true;
 
   tickerFunction(_that: Canvas): (delta: number) => void {
     return (delta: number) => {
