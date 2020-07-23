@@ -27,7 +27,7 @@ class CanvasNeopixel extends Canvas {
   initAnimations(): void {
     let anim3 = new FadeInOutRandom();
     anim3.setPatternLength(4);
-    this.setAnimations([new Random(), new Random2(), anim3]);
+    this.setAnimations([new Random(), new Random(), anim3]);
     this.randomizeColors();
   }
 
